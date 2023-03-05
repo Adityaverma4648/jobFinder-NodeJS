@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require('express');
 const hbs = require('hbs');
 const path =  require('path');
+const apiRoutes = require('./routes/apiRoutes');
 
 // express instance
 const app = express();
@@ -12,12 +13,11 @@ const PORT = process.env.PORT||5000;
 
 
 //  path to static directory-----------------------------------------------------------------------------------------------------------------------------------------
-// const staticPath  = path.join(__dirname, './public');
+const staticPath  = path.join(__dirname, './public');
 
 //  serving static files using built in middleware;
-          // app.use(express.static(staticPath));
+        //   app.use(express.static(staticPath));
 // -------------------------------------------------------------------------------------------------------------------------------------------------
-
 
 
 //  handle bars template engine - dynamic sites are served.............................. --------------------------------------------------------------------------------
@@ -29,13 +29,24 @@ const partials = path.join(__dirname,'./views/partials');
 hbs.registerPartials(partials);
 
 //  block ends here-----------------------------------------------------------------------------
-const jsn = [{id:1,name:"Aditya verma"},{id:2,name:"name2"}]
 
 app.get("/",(req,res)=>{
     res.render('index.hbs')
 })
 
-// app.use('/api',apiRoutes);
+app.get("/login",(req,res)=>{
+    res.render('login.hbs')
+})
+
+app.get("/signUp",(req,res)=>{
+    res.render('login.hbs')
+})
+//  App api Route-----------------------------------------------------------------------------------------------
+app.use('/api',apiRoutes);
+
+app.get("/data",(req,res)=>{
+    res.send(company);
+});
 
 
 

@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.Navbar{
+     background-color: rgb(71, 192, 133);
+}
+.Navbar li{
+    list-style: none;
+}

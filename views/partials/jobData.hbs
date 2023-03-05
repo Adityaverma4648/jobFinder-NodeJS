@@ -1,0 +1,14 @@
+<div class="bg-danger py-4 " id="myJobCont">
+</div>
+<script>
+
+    async function getter(){
+        const res = await fetch('http://localhost:7000/api');
+        const data = await res.json()
+         var myJobCont = document.getElementById('myJobCont');
+        data?.forEach((d)=>{
+                 myJobCont.innerHTML = d.id
+             }):console.log('e')
+    }
+    getter()
+</script>

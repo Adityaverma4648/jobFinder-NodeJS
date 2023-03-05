@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require('express');
-const exphbs = require('express-handlebars');
+const hbs = require('hbs');
 const path =  require('path');
 
 // express instance
@@ -12,7 +12,7 @@ const PORT = process.env.PORT||5000;
 
 
 //  path to static directory-----------------------------------------------------------------------------------------------------------------------------------------
-const staticPath  = path.join(__dirname, '../backend/public');
+// const staticPath  = path.join(__dirname, './public');
 
 //  serving static files using built in middleware;
           // app.use(express.static(staticPath));
@@ -21,15 +21,18 @@ const staticPath  = path.join(__dirname, '../backend/public');
 
 
 //  handle bars template engine - dynamic sites are served.............................. --------------------------------------------------------------------------------
-const handlebars = exphbs.create({ extname: '.hbs',});
-app.engine('.hbs', handlebars.engine);
+//   engine set to hbs it may be pug,handlebars
 app.set('view engine','hbs');
 
-//  block ends here-----------------------------------------------------------------------------
+//  rendering partials - compoenents in node js 
+const partials = path.join(__dirname,'./views/partials');
+hbs.registerPartials(partials);
 
+//  block ends here-----------------------------------------------------------------------------
+const jsn = [{id:1,name:"Aditya verma"},{id:2,name:"name2"}]
 
 app.get("/",(req,res)=>{
-    res.send("Hello from backend")
+    res.render('index.hbs')
 })
 
 // app.use('/api',apiRoutes);

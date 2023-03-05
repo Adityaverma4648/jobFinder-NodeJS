@@ -1,14 +1,38 @@
-<div class="bg-danger py-4 " id="myJobCont">
+<div class="container bg-danger py-4 d-flex flex-wrap" id="myJobCont">
+      
 </div>
 <script>
-
     async function getter(){
-        const res = await fetch('http://localhost:7000/api');
-        const data = await res.json()
-         var myJobCont = document.getElementById('myJobCont');
-        data?.forEach((d)=>{
-                 myJobCont.innerHTML = d.id
-             }):console.log('e')
+        fetch('http://localhost:7000/api', 
+          { method: 'POST',headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+           },
+            body: JSON.stringify({
+               "id": 1,
+               "stipend": 12676,
+               "email": "gasuwgo@email.com",
+               "companyName": "Unisys Corporation",
+               "address": "416 Etufo Blvd",
+               "jobType": "Inside Sales",
+               "description": "Vena madwub lak cin ro ocais buc he vacemmuv ibu navrube so jej samid zilne zumcucor. Tokem lirri gutkopmam ra uvo gugovub rec zuzisjej ep nuvife esicus non. Jetmewpil buite zasecid gil vuc sasuluku ari agemizak uh ubotusuw ovpov oflobsol vi.",
+               "duration": 4
+           })
+        })
+        .then((response) => response.json())
+        .then((data)=>{
+             console.log(data);
+             function DataFetcher(data){
+                var myJobCont = document.getElementById('myJobCont');
+                myJobCont.innerHTML = "";
+                var content = data?.forEach((d)=>{
+                      {d.companyName}
+                })
+                myJobCont.innerHTML += content;
+             }
+             DataFetcher();
+         }).catch((error)=>{
+            console.error('Error Gathering Data',error);
+         })
     }
-    getter()
+    getter();
 </script>

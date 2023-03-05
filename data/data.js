@@ -22,7 +22,7 @@ function dataGenerator(dataLength){
           var object = {
               id : i+1,
               stipend : obj.integer({ min: 5000, max: 45000 }),
-              email : obj.email({domain: 'org.com'}),
+              email : obj.email({domain: 'email.com'}),
               companyName : obj.company(),
               address : obj.address({short_suffix: true}),
               jobType : obj.profession(),

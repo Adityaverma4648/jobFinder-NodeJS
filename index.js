@@ -14,6 +14,12 @@ const PORT = process.env.PORT||5000;
 
 //  path to static directory-----------------------------------------------------------------------------------------------------------------------------------------
 const staticPath  = path.join(__dirname, './public');
+//  using css in my files - css import
+
+app.use(express.static(staticPath));
+
+// --------------------------------------------------------------------------
+
 
 //  serving static files using built in middleware;
         //   app.use(express.static(staticPath));

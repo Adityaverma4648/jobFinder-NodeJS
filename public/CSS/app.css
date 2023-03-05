@@ -8,9 +8,6 @@
     box-sizing: border-box;
 }
 
-.Navbar{
-     background-color: rgb(71, 192, 133);
-}
-.Navbar li{
+li {
     list-style: none;
 }

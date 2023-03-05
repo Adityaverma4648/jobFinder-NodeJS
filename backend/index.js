@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require('express');
 const exphbs = require('express-handlebars');
+const path =  require('path');
 
 // express instance
 const app = express();
@@ -9,12 +10,19 @@ const connectDB = require("./config/connect");
 // PORT decision
 const PORT = process.env.PORT||5000;
 
-//  handle bars engine --------------------------------------------------------------------------------
-app.engine('hbs',exphbs({
-    defaultLayout : 'main',
-    extname : '.hbs'
-}));
 
+//  path to static directory-----------------------------------------------------------------------------------------------------------------------------------------
+const staticPath  = path.join(__dirname, '../backend/public');
+
+//  serving static files using built in middleware;
+          // app.use(express.static(staticPath));
+// -------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+//  handle bars template engine - dynamic sites are served.............................. --------------------------------------------------------------------------------
+const handlebars = exphbs.create({ extname: '.hbs',});
+app.engine('.hbs', handlebars.engine);
 app.set('view engine','hbs');
 
 //  block ends here-----------------------------------------------------------------------------

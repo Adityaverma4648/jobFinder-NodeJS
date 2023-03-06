@@ -3,6 +3,7 @@ const express = require('express');
 const hbs = require('hbs');
 const path =  require('path');
 const apiRoutes = require('./routes/apiRoutes');
+const jobData = require('./data/JobData.json')
 
 // express instance
 const app = express();
@@ -47,10 +48,14 @@ app.get("/login",(req,res)=>{
 app.get("/signUp",(req,res)=>{
     res.render('login.hbs')
 })
-app.get("/viewMore:id",(req,res)=>{
-    res.render('viewMore.hbs')
-})
 
+jobData?.forEach((d) => { 
+   var _id = d.id;
+   app.get(`/viewMore/:${_id}`,(req,res)=>{
+        res.render('viewMore.hbs')
+    })
+});
+  
 //  App api Route-----------------------------------------------------------------------------------------------
 app.use('/api',apiRoutes);
 

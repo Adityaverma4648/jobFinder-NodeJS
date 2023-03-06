@@ -15,21 +15,23 @@
     {{!--  block ends here --}}
 </head>
 <body>
-    <div id="myJobCont"></div>
-</body>
-<script>
+    {{>header}}
+    <div id="myJobCont" class="d-flex justify-content-center align-items-center bg-danger py-4 my-2" style="height: 100vh ;">
+    </div>
+
+    <script>
    async function getterSingle(){
 
          var fullUrl = window.location.href;
-          {{!--  Removed hostName and PortName --}}
+          
          var strippedUrl = fullUrl.replace(/^[a-z]{4,5}\:\/{2}[a-z]{1,}\:[0-9]{1,4}.(.*)/, '$1');
-         {{!-- removing character to get ID --}}
+        
          console.log(strippedUrl.replace(/[^\d.-]/g, ''));
          const curr_id = strippedUrl.replace(/[^\d.-]/g, '');
          var URL = `http://localhost:7000/api/:${curr_id}`; 
          console.log(URL)
           fetch(URL, 
-          { method: 'GET',headers: {
+          { method: 'POST',headers: {
             'Content-type': 'application/json; charset=UTF-8',
            },
             body: JSON.stringify({
@@ -47,12 +49,13 @@
         })
         .then((response) => response.json())
         .then((data)=>{
-                console.log(data)
-                {{!-- var myJobCont = document.getElementById('myJobCont');
-                myJobCont.innerHTML = "";
-                console.log(data)
-                var content = `${data.companyName}`;
-                myJobCont.innerHTML += content; --}}
+                  var singleData = data;
+                  console.log(singleData.email)
+                  var myJobCont = document.getElementById('myJobCont');
+                  myJobCont.innerHTML = '';
+                  var content = `<h1>${singleData.email
+                    }<h1>`
+                  myJobCont.innerHTML = content;
                 })
         .catch((error)=>{
             console.error('Error Gathering Data',error);
@@ -60,4 +63,6 @@
    }
    getterSingle();
 </script>
+</body>
+
 </html>

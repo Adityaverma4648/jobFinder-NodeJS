@@ -1,10 +1,25 @@
 <div class="container py-4 mt-5 d-flex flex-row justify-content-center align-items-center">
 
 <div class="container py-4 mt-5 d-flex flex-row justify-content-center align-items-center" id="jobContainer" >
-      <div class="filters col-sm-3 bg-light">
-        orum, adipisci, deserunt soluta ab molestiae sapiente quis dolore aspror alias consequuntur consectetur a explicabo odit voluptatibus! Rem aliquid iusto aliquam ea incidunt a reprehenderit, eius neque enim quas ex facere qui accusantium nemo ipsam commodi omnis blanditiis modi quam illo ut! Libero tenetur doloribus iusto, beatae neque distinctio dicta exercitationem cum, pariatur voluptatum architecto, sapiente consectetur sunt! Rerum suscipit laborum eligendi fugiat vitae vel consectetur quos error nostrum? At quibusdam officia voluptatem quasi maxime facere sapiente esse ut, perspiciatis, architecto sequi tempora ab iste nemo impedit vel iure voluptates expedita nihil ratione aut. Fugiat, placeat fugit voluptate ipsam aliquam aspernatur? Vitae vero quia hic aliquam, dignissimos labore. Quod ipsam suscipit, neque tempora vitae quaerat quasi labore!
+      <div class="filters col-sm-3 bg-light border border-secondary border-opacity-50">
+        <div class="container border-bottom border-end border-secondary border-opacity-50 d-flex justify-content-between align-items-center">
+          <div class="h5" >
+              Filters
+          </div>
+          <div>
+              
+          </div>
+        </div>
+        orum, adipisci, deserunt soluta ab molestiae sapiente quis dolore aspror alias consequuntur consectetur a explicabo odit voluptatibus! Rem aliquid iusto aliquam ea incidunt a reprehenderit, eius neque enim quas ex facere qui accusantium nemo ipsam commodi omnis blanditiis modi quam illo ut! Libero tenetur doloribus iusto, beatae neque distinctio dicta exercitationem cum, pariatur voluptatum architecto, sapiente consectetur sunt! Rerum suscipit laborum eligendi fugiat vitae vel consectetur quos error nostrum? At quibusdam officia 
       </div>
-      <div id="myJobCont" class="col-sm-9 py-4"></div>
+      <div class="col-sm-9" >
+        <div class="col-sm-12 my-1">
+              <div class="d-flex justify-content-between align-items-center container">
+                 
+              </div>
+        </div>
+      <div id="myJobCont" class="col-sm-12 py-4"></div>
+      </div>
 </div>
 </div>
 <script>
@@ -52,7 +67,7 @@
                              <div class="container border-bottom border-top border-secondary border-opacity-50  py-2 px-3 d-flex flex-row justify-content-between align-items-center text-secondary" >
                                    <div class="text-start">
                                     <span>
-                                       an offer by
+                                       An offer by :
                                     </span>
                                     <h5>
                                       ${d.companyName}
@@ -69,7 +84,7 @@
                             </div>
 
                             <div class="container py-2 px-3 d-flex flex-column justify-content-between align-items-center" >
-                                 <h5 class="text-start container d-flex">
+                                 <h5 class="text-start text-secondary container d-flex">
                                     Job Description
                                  </h5>
                                  <p>
@@ -78,9 +93,32 @@
                                   </small>
                                  </p>
                             </div>
-                            <div>
-                                <div class="px-3 bg-danger container d-flex justify-content-between align-items-center text-dark">
+                            <div class="px-3 container d-flex  justify-content-between align-items-center text-dark border-bottom border-top border-secondary py-2">
+                                <div class="d-flex flex-column">
+                                   <span class="text-dark" >
+                                     Visit us on following address :
+                                </span>
+                                <strong class="text-secondary">
+                                   ${d.address}
+                                </strong>
+                                </div>
+                              <div class="dflex flex-column text-end">
+                                  <div>
+                                     Job Type : 
+                                  </div>
+                                   <div>
+                                       <strong class="text-secondary">
+                                         ${d.jobCategory}
+                                       </strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-3 container d-flex justify-content-between align-items-center text-dark py-2">
+                                <div class="text-dark">
                                   Seats Available :
+                                  <strong>
+                                    ${d.seats}
+                                  </strong>
                                 </div>
                                 <div>
                                   <a href="http://localhost:7000/viewMore/:${d.id}"class="text-decoration-none btn btn-outline-primary">
@@ -88,8 +126,6 @@
                                 </a>
                                 </div>
                             </div>
-                         
-                              
                           </div>`;
                         myJobCont.innerHTML += content;
                 })

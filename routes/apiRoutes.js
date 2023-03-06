@@ -8,7 +8,7 @@ router.post('/',(req,res)=>{
 })
 
 
-router.get(`/:id`,(req,res)=>{
+router.post(`/:id`,(req,res)=>{
         var curr_id = req.params.id;
         var strippedCurrId = curr_id.replace(/[^\d.-]/g,'')
         res.send(jobData[strippedCurrId-1]);

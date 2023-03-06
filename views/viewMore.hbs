@@ -1,15 +1,29 @@
-<div class="container py-4 mt-5 d-flex flex-row justify-content-center align-items-center" id="jobContainer" >
-      <div class="filters col-sm-3 bg-light">
-        orum, adipisci, deserunt soluta ab molestiae sapiente quis dolore aspror alias consequuntur consectetur a explicabo odit voluptatibus! Rem aliquid iusto aliquam ea incidunt a reprehenderit, eius neque enim quas ex facere qui accusantium nemo ipsam commodi omnis blanditiis modi quam illo ut! Libero tenetur doloribus iusto, beatae neque distinctio dicta exercitationem cum, pariatur voluptatum architecto, sapiente consectetur sunt! Rerum suscipit laborum eligendi fugiat vitae vel consectetur quos error nostrum? At quibusdam officia voluptatem quasi maxime facere sapiente esse ut, perspiciatis, architecto sequi tempora ab iste nemo impedit vel iure voluptates expedita nihil ratione aut. Fugiat, placeat fugit voluptate ipsam aliquam aspernatur? Vitae vero quia hic aliquam, dignissimos labore. Quod ipsam suscipit, neque tempora vitae quaerat quasi labore!
-      </div>
-      <div id="myJobCont" class="col-sm-9 py-4"></div>
-</div>
-<div class="mt-1 container bg-light d-flex justify-content-center align-items-center py-2 border border-dark">
-     pagination
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewMore</title>
+      <link rel="stylesheet" href="CSS/app.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <div id="myJobCont"></div>
+</body>
 <script>
-    async function getter(){
-        fetch('http://localhost:7000/api', 
+   async function getterSingle(){
+
+         var fullUrl = window.location.href;
+         console.log(fullUrl)
+
+         var strippedUrl = fullUrl.replace(/[^\d.-]/g, '');
+         console.log(strippedUrl)
+
+
+        fetch('http://localhost:7000/api/:id', 
           { method: 'POST',headers: {
             'Content-type': 'application/json; charset=UTF-8',
            },
@@ -31,14 +45,13 @@
                 var myJobCont = document.getElementById('myJobCont');
                 myJobCont.innerHTML = "";
                 console.log(data)
-                data?.slice(0,10).forEach((d)=>{
-                        var content = `<div class="bg-light jobCard p-2" id=${d.id} >
+                        var content = `<div class="bg-light jobCard p-2" id=${data.id} >
                             <div class="container JobInfo d-flex justify-content-between align-items-center py-3">
                                   <div>
                                     <h5>
                                       Employee Required for :
                                       <strong class="text-info" >
-                                         ${d.jobType} 
+                                         ${data.jobType} 
                                       </strong>
                                       's Role 
                                     <h5>
@@ -53,7 +66,7 @@
                                        Offered by
                                      </small>
                                     <h5>
-                                      ${d.companyName}
+                                      ${data.companyName}
                                     </h5>
                                 </div>
                                 <div class="text-end">
@@ -61,22 +74,22 @@
                                      To Contact :
                                   </small>
                                   <h5>
-                                    ${d.email}
+                                    ${data.email}
                                   </h5>
                                 <div>
                             </div>
                             <div class="px-3" ></div>
                             <div class="px-3" >
-                                <a href="http://localhost:7000/viewMore:${d.id}" class="text-decoration-none btn btn-outline-primary">
+                                <a href="http://localhost:7000/viewMore:${data.id}" class="text-decoration-none btn btn-outline-primary">
                                     View Details
                                 </a>
                             </div>
                           </div>`;
                         myJobCont.innerHTML += content;
-                })
          }).catch((error)=>{
             console.error('Error Gathering Data',error);
          })
     }
-    getter();
+    getterSingle();
 </script>
+</html>

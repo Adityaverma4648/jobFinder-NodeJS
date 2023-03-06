@@ -47,6 +47,10 @@ app.get("/login",(req,res)=>{
 app.get("/signUp",(req,res)=>{
     res.render('login.hbs')
 })
+app.get("/viewMore:id",(req,res)=>{
+    res.render('viewMore.hbs')
+})
+
 //  App api Route-----------------------------------------------------------------------------------------------
 app.use('/api',apiRoutes);
 

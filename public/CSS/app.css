@@ -7,7 +7,50 @@
     padding: 0px;
     box-sizing: border-box;
 }
+body::-webkit-scrollbar{
+      display: none;
+}
 
+
+/*  Navbar styles begins------------------------------------------------------------ */
 li {
     list-style: none;
 }
+.Navbar{
+     height: 80px;
+}
+
+/*  Navbar styles Ends here------------------------------------------------------------- */
+
+
+
+
+
+
+
+/*  JObDataFetcher hbs Styles---------------------------------------------------------------------------------------------------------------------- */
+#jobContainer{
+    height: 60vh;
+    overflow: hidden;
+    padding: 5vh 0px;
+}
+.jobCard{
+    margin: 2px 0px;
+    width: 85%;
+    min-height: 45vh;
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.3), -1em 0 20px rgba(0,0,0,0.1);
+}
+#myJobCont{
+    height:60vh;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.filters{
+     height: 60vh;
+     overflow: hidden;
+}
+
+/* block ends here ------------------------------------------------------------------------------------------------------------------------- */

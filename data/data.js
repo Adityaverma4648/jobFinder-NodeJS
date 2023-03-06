@@ -6,19 +6,10 @@ var dataLength = 500;
 
 function dataGenerator(dataLength){
     var array = [];
-   
-    const skillStack = ['']
-
-   
-
     for (var i = 0; i < dataLength; i++) {
-
-         function skillGetter(){
-            const array = [['Node JS','React JS','Mongo DB','Express JS'],['PHP','Laravel'],['HTML','CSS','JS'],['Flask','Angular JS'],['Photoshop','illustrator','AfterEffects']]
-              var randomIndex = Math.random()*array.length;
-             return array[randomIndex];
-          }
-
+            const categoryFetcher = (i)=>{
+                  return i%2?'Work From Home':'Office';
+            } 
           var object = {
               id : i+1,
               stipend : obj.integer({ min: 5000, max: 45000 }),
@@ -28,11 +19,13 @@ function dataGenerator(dataLength){
               jobType : obj.profession(),
               description :    obj.paragraph(),
               duration : obj.integer({min:3,max:12}),
-              skillsReq :  skillGetter()
+              seats : obj.integer({min:1,max:15}),
+              jobCategory : categoryFetcher(i),
             }
           array.push(object)
-    }
-  return array;
+}
+return array;
+
 }
 
 const data = dataGenerator(dataLength);

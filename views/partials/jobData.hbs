@@ -1,13 +1,14 @@
+<div class="container py-4 mt-5 d-flex flex-row justify-content-center align-items-center">
+
 <div class="container py-4 mt-5 d-flex flex-row justify-content-center align-items-center" id="jobContainer" >
       <div class="filters col-sm-3 bg-light">
         orum, adipisci, deserunt soluta ab molestiae sapiente quis dolore aspror alias consequuntur consectetur a explicabo odit voluptatibus! Rem aliquid iusto aliquam ea incidunt a reprehenderit, eius neque enim quas ex facere qui accusantium nemo ipsam commodi omnis blanditiis modi quam illo ut! Libero tenetur doloribus iusto, beatae neque distinctio dicta exercitationem cum, pariatur voluptatum architecto, sapiente consectetur sunt! Rerum suscipit laborum eligendi fugiat vitae vel consectetur quos error nostrum? At quibusdam officia voluptatem quasi maxime facere sapiente esse ut, perspiciatis, architecto sequi tempora ab iste nemo impedit vel iure voluptates expedita nihil ratione aut. Fugiat, placeat fugit voluptate ipsam aliquam aspernatur? Vitae vero quia hic aliquam, dignissimos labore. Quod ipsam suscipit, neque tempora vitae quaerat quasi labore!
       </div>
       <div id="myJobCont" class="col-sm-9 py-4"></div>
 </div>
-<div class="mt-1 container bg-light d-flex justify-content-center align-items-center py-2 border border-dark">
-     pagination
 </div>
 <script>
+
     async function getter(){
         fetch('http://localhost:7000/api', 
           { method: 'POST',headers: {
@@ -47,30 +48,48 @@
                                     helperICons
                                   </div>
                             </div>
-                            <div class="border-top border-secondary border-opacity-50 companyInfo text-secondary px-3 d-flex justify-content-between align-items-center">
-                                <div>
-                                     <small>
-                                       Offered by
-                                     </small>
+
+                             <div class="container border-bottom border-top border-secondary border-opacity-50  py-2 px-3 d-flex flex-row justify-content-between align-items-center text-secondary" >
+                                   <div class="text-start">
+                                    <span>
+                                       an offer by
+                                    </span>
                                     <h5>
                                       ${d.companyName}
                                     </h5>
-                                </div>
-                                <div class="text-end">
-                                  <small>
-                                     To Contact :
-                                  </small>
-                                  <h5>
-                                    ${d.email}
-                                  </h5>
-                                <div>
+                                   </div>
+                                   <div class="text-end">
+                                        <span>
+                                           To Contact :
+                                        </span>
+                                       <h5 >
+                                        ${d.email}
+                                       </h5>
+                                   </div>
                             </div>
-                            <div class="px-3" ></div>
-                            <div class="px-3" >
-                                <a href="http://localhost:7000/viewMore:${d.id}" class="text-decoration-none btn btn-outline-primary">
+
+                            <div class="container py-2 px-3 d-flex flex-column justify-content-between align-items-center" >
+                                 <h5 class="text-start container d-flex">
+                                    Job Description
+                                 </h5>
+                                 <p>
+                                  <small>
+                                      ${d.description}
+                                  </small>
+                                 </p>
+                            </div>
+                            <div>
+                                <div class="px-3 bg-danger container d-flex justify-content-between align-items-center text-dark">
+                                  Seats Available :
+                                </div>
+                                <div>
+                                  <a href="http://localhost:7000/viewMore/:${d.id}"class="text-decoration-none btn btn-outline-primary">
                                     View Details
                                 </a>
+                                </div>
                             </div>
+                         
+                              
                           </div>`;
                         myJobCont.innerHTML += content;
                 })
@@ -79,4 +98,7 @@
          })
     }
     getter();
+
+
+ 
 </script>

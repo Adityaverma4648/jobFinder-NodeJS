@@ -1,30 +1,65 @@
-<div class="container py-4 mt-5 d-flex flex-row justify-content-center align-items-center">
+<div class="container py-4 mt-5 d-flex flex-column justify-content-center align-items-center">
 
-<div class="container py-4 mt-5 d-flex flex-row justify-content-center align-items-center" id="jobContainer" >
+<div class="container py-4 mt-5 d-flex flex-row justify-content-center align-items-center border-end border-top border-bottom border-secondary border-opacity-50" id="jobContainer" >
       <div class="filters col-sm-3 bg-light border border-secondary border-opacity-50">
-        <div class="container border-bottom border-end border-secondary border-opacity-50 d-flex justify-content-between align-items-center">
-          <div class="h5" >
-              Filters
-          </div>
-          <div>
-              
-          </div>
-        </div>
-        orum, adipisci, deserunt soluta ab molestiae sapiente quis dolore aspror alias consequuntur consectetur a explicabo odit voluptatibus! Rem aliquid iusto aliquam ea incidunt a reprehenderit, eius neque enim quas ex facere qui accusantium nemo ipsam commodi omnis blanditiis modi quam illo ut! Libero tenetur doloribus iusto, beatae neque distinctio dicta exercitationem cum, pariatur voluptatum architecto, sapiente consectetur sunt! Rerum suscipit laborum eligendi fugiat vitae vel consectetur quos error nostrum? At quibusdam officia 
+           
       </div>
-      <div class="col-sm-9" >
-        <div class="col-sm-12 my-1">
-              <div class="d-flex justify-content-between align-items-center container">
-                 
-              </div>
+
+{{!-- jobCont --}}
+      <div class="col-sm-9 jobDataContParent" >
+
+        {{!--  static ad cont --}}
+        <div class="col-sm-12 d-flex justify-content-center align-items-center my-2 text-danger">
+                     <div class="col-sm-10 px-2 text-center">
+                         <span class="h5 font-weight-bold" >
+                            Get 100% Guaranteed Internship At Something You Love !
+                         </span>
+                        <ul class="d-flex justify-content-evenly">
+                          <li>
+                            Learn New Skills
+                          </li>
+                          <li>
+                            Experience the real world 
+                          </li>
+                        </ul>
+                         <span class="h5 flashy">
+                               Around 500 Jobs Availlable
+                         </span>
+                     </div>
         </div>
-      <div id="myJobCont" class="col-sm-12 py-4"></div>
+
+        {{!--  job fetcher Cont --}}
+      <div id="myJobCont" class="col-sm-12 mt-1"></div>
       </div>
 </div>
+    
+{{!--  pagination --}}
+   <div id="paginationCont" class="container d-flex justify-content-center align-items-center border border-secondary border-opacity-50 mt-2 py-2 px-1">
+       <span class="paginationButton" id="1" >1</span>
+       <span class="paginationButton" id="2" >2</span>
+       <span class="paginationButton" id="3" >3</span>
+       <span class="paginationButton" id="4" >4</span>
+       <span class="paginationButton" id="5" >5</span>
+       <span class="paginationButton" id="6" >6</span>
+       <span class="paginationButton" id="7" >7</span>
+       <span class="paginationButton" id="8" >8</span>
+       <span class="paginationButton" id="9" >9</span>
+       <span class="paginationButton" id="10" >10</span>
+   </div>
+
 </div>
 <script>
 
-    async function getter(){
+      var paginationCont = document.getElementById('paginationCont');
+      var pageIndex = 1;
+      paginationCont.addEventListener("click",(e)=>{
+      if(e.target.tagName === 'SPAN'){
+         this.pageIndex =  e.target.innerHTML;
+      }
+      getter(pageIndex);
+    })
+
+    async function getter(pageIndex){
         fetch('http://localhost:7000/api', 
           { method: 'POST',headers: {
             'Content-type': 'application/json; charset=UTF-8',
@@ -46,8 +81,7 @@
         .then((data)=>{
                 var myJobCont = document.getElementById('myJobCont');
                 myJobCont.innerHTML = "";
-                console.log(data)
-                data?.slice(0,10).forEach((d)=>{
+                data?.slice((pageIndex-1)*50,(pageIndex-1)*50 +50).forEach((d)=>{
                         var content = `<div class="bg-light jobCard p-2" id=${d.id} >
                             <div class="container JobInfo d-flex justify-content-between align-items-center py-3">
                                   <div>
@@ -84,9 +118,9 @@
                             </div>
 
                             <div class="container py-2 px-3 d-flex flex-column justify-content-between align-items-center" >
-                                 <h5 class="text-start text-secondary container d-flex">
+                                 <div class="h5 text-start text-secondary container d-flex">
                                     Job Description
-                                 </h5>
+                                 </div>
                                  <p>
                                   <small>
                                       ${d.description}
@@ -133,8 +167,7 @@
             console.error('Error Gathering Data',error);
          })
     }
-    getter();
+      getter(1);
 
 
- 
 </script>

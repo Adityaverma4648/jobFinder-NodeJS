@@ -1,48 +1,37 @@
 <nav class="Navbar top-0 position-fixed Navbar container-fluid d-flex justify-content-center align-items-center bg-light py-2">
     <div class="container d-flex justify-content-center align-items-center">
          <div class="col-sm-2 h5 text-center my-auto text-dark">
-      JobShala
-   </div>
-   <div class="nav-links col-sm-10 d-flex justify-content-center align-items-center px-1" >
-        {{!--  serach bar  --}}
-      <div class="col-sm-3 mx-1 d-flex justify-content-center align-items-center" >
-             <button type="button">
-                 mic
-             </button>
-           <form action="" class="d-flex justify-content-center align-items-center">
-              <input type="text" class="bg-transparent border border-3 rounded-1 px-2 py-1  border-dark border-opacity-50" placeholder="search bar">
-              <input type="submit" class="btn btn-outline-success" value="search" >
-           </form>
-            
-      </div>
+            JobShala
+          </div>
+         <div class="nav-links col-sm-10 d-flex justify-content-center align-items-center px-1" >
 {{!--  navigation link begins --}}
-       <div class="col-sm-6 d-flex justify-content-end align-items-center">
-         <li class="nav-lists mx-2 px-1" style="list-style-none text-black" >
-         <a href="http://localhost:7000" class="link text-decoration-none text-dark">
-             HOME
-         </a>
-      </li>
-       <li class="nav-lists mx-2 px-1" style="list-style-none text-black" >
-         <a href="#" class="link text-decoration-none text-dark">
-             ABOUT
-         </a>
-      </li>
-       <li class="nav-lists mx-2 px-1" style="list-style-none text-black" >
-         <a href="#" class="link text-decoration-none text-dark">
-            OTHER 
-         </a>
-      </li>
-       </div>
+            <div class="col-sm-6 d-flex justify-content-end align-items-center">
+               <li class="nav-lists mx-2 px-1" style="list-style-none text-black " >
+                 <a href="http://localhost:7000" class="link text-decoration-none text-dark font-weight-bold" style="font-weight: 700;">
+                  JOBS
+                 </a>
+               </li>
+               <li class="nav-lists mx-2 px-1" style="list-style-none text-black" >
+                 <a href="#" class="link text-decoration-none text-dark font-weight-bold" style="font-weight: 700;">
+                     INTERNSHIPS
+                 </a>
+              </li>
+               <li class="nav-lists mx-2 px-1" style="list-style-none text-black" >
+                 <a href="#" class="link text-decoration-none text-dark font-weight-bold" style="font-weight: 700;">
+                      COURSES
+                 </a>
+              </li>
+            </div>
     
-      {{!--  auth button group --}}
-       <div class="button-group col-sm-3 mx-1"> 
-        <a href="login" class="btn btn-primary" >
-            Login
-        </a>
-        <a href="signUp" class="btn btn-danger" >
-            signUp
-        </a>
-       </div>
-     </div>
+            {{!--  auth button group --}}
+             <div class="button-group col-sm-3 mx-1"> 
+              <a href="login" class="authButtons">
+                  Login
+              </a>
+              <a href="signUp" class="authButtons btnGreen" >
+                  signUp
+              </a>
+             </div>
+        </div>
    </div>
 </nav>

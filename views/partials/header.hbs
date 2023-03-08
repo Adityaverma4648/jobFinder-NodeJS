@@ -1,11 +1,11 @@
 <nav class="Navbar top-0 position-fixed Navbar container-fluid d-flex justify-content-center align-items-center bg-light py-2">
-    <div class="container d-flex justify-content-center align-items-center">
-         <div class="col-sm-2 h5 text-center my-auto text-dark">
+    <div class="container d-flex justify-content-center align-items-center ">
+         <div class="col-sm-2 h5 text-center my-auto font-weight-bold text-primary">
             JobShala
           </div>
          <div class="nav-links col-sm-10 d-flex justify-content-center align-items-center px-1" >
 {{!--  navigation link begins --}}
-            <div class="col-sm-6 d-flex justify-content-end align-items-center">
+            <div class="col-sm-6 d-flex justify-content-end align-items-center" id="resNav1" >
                <li class="nav-lists mx-2 px-1" style="list-style-none text-black " >
                  <a href="http://localhost:7000" class="link text-decoration-none text-dark font-weight-bold" style="font-weight: 700;">
                   JOBS
@@ -24,14 +24,24 @@
             </div>
     
             {{!--  auth button group --}}
-             <div class="button-group col-sm-3 mx-1"> 
-              <a href="login" class="authButtons">
+             <div class="button-group col-sm-3 mx-1" id="resNav2" > 
+              <a href="http://localhost:7000/login" class="authButtons">
                   Login
               </a>
-              <a href="signUp" class="authButtons btnGreen" >
+              <a href="http://localhost:7000/signUp" class="authButtons btnGreen" >
                   signUp
               </a>
+             </div>
+             <div class="p-1 toggleMenu" style="cursor:pointer" onclick="resNav()" >
+                  <i class="fa fa-bars fa-2x text-dark"></i>
              </div>
         </div>
    </div>
 </nav>
+<script>
+       function resNav(){
+         var resNavElem1 = document.getElementById('resNav1')
+         var resNavElem2 = document.getElementById('resNav2')
+       }
+</script>
+

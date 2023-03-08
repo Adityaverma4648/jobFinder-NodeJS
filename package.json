@@ -11,6 +11,7 @@
   "email": "adityaverma4648@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "chance": "^1.1.11",
     "cheerio": "^1.0.0-rc.12",
     "dotenv": "^16.0.3",
@@ -18,8 +19,9 @@
     "express-handlebars": "^7.0.1",
     "handlebars": "^4.7.7",
     "hbs": "^4.2.0",
+    "jsonwebtoken": "^9.0.0",
     "mongodb": "^5.0.1",
-    "mongoose": "^6.9.2",
+    "mongoose": "^6.10.2",
     "nodemon": "^2.0.21",
     "pug": "^3.0.2",
     "puppeteer": "^19.7.2",

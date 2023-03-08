@@ -11,7 +11,6 @@ body::-webkit-scrollbar{
       display: none;
 }
 
-
 /*  Navbar styles begins------------------------------------------------------------ */
 .Navbar li {
     list-style: none;
@@ -30,6 +29,10 @@ body::-webkit-scrollbar{
 }
 .btnGreen{
     border: 2px solid rgba(36, 126, 1, 0.822);
+}
+
+.toggleMenu{
+    display: none;
 }
 
 /*  Navbar styles Ends here------------------------------------------------------------- */
@@ -93,9 +96,34 @@ body::-webkit-scrollbar{
 
  /* responsiveness--------------------------------------------------------------------------------------------------------- */
 
+
+
+ @media only screen and (max-width : 1400px){
+      .jobCard{
+           min-height: 60vh;
+      }
+      /* #resNav2{
+        display: none;
+      } */
+      .toggleMenu{
+        display: block;
+      }
+     
+}
+
+
  @media only screen and (max-width : 900px){
       #jobContainer{
         display: flex;
           flex-direction: column;
+      }
+      #resNav1{
+        display: none;
+      }
+      #resNav2{
+        display: none;
+      }
+      .toggleMenu{
+        display: block;
       }
  }

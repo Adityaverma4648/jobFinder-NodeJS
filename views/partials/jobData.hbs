@@ -2,7 +2,10 @@
 
 <div class="container py-4 mt-5 d-flex flex-row justify-content-center align-items-center border-end border-top border-bottom border-secondary border-opacity-50" id="jobContainer" >
       <div class="filters col-sm-3 bg-light border border-secondary border-opacity-50">
-           
+            <span class="text-center h5">
+                Filter
+                <i class="fa fa-filter"></i>
+            </span>
       </div>
 
 {{!-- jobCont --}}
@@ -49,7 +52,7 @@
 
 </div>
 <script>
-
+      {{!-- paginationLogic and index getter--}}
       var paginationCont = document.getElementById('paginationCont');
       var pageIndex = 1;
       paginationCont.addEventListener("click",(e)=>{
@@ -58,7 +61,7 @@
       }
       getter(pageIndex);
     })
-
+    {{!--  myJobDataFetcher --}}
     async function getter(pageIndex){
         fetch('http://localhost:7000/api', 
           { method: 'POST',headers: {
@@ -98,12 +101,12 @@
                                   </div>
                             </div>
 
-                             <div class="container border-bottom border-top border-secondary border-opacity-50  py-2 px-3 d-flex flex-row justify-content-between align-items-center text-secondary" >
+                             <div class="container border-bottom border-top border-secondary border-opacity-50 py-2 px-3 d-flex flex-row justify-content-between align-items-center text-secondary" >
                                    <div class="text-start">
                                     <span>
                                        An offer by :
                                     </span>
-                                    <h5>
+                                    <h5 class="text-info" >
                                       ${d.companyName}
                                     </h5>
                                    </div>
@@ -111,23 +114,23 @@
                                         <span>
                                            To Contact :
                                         </span>
-                                       <h5 >
+                                       <h5 class="text-info">
                                         ${d.email}
                                        </h5>
                                    </div>
                             </div>
 
-                            <div class="container py-2 px-3 d-flex flex-column justify-content-between align-items-center" >
-                                 <div class="h5 text-start text-secondary container d-flex">
+                            <div class="container py-2 px-3 d-flex flex-column justify-content-center align-items-center" >
+                                 <span class="text-start h5 container-fluid">
                                     Job Description
-                                 </div>
-                                 <p>
+                                 </span>
+                                 <div>
                                   <small>
                                       ${d.description}
                                   </small>
-                                 </p>
+                                 </div>
                             </div>
-                            <div class="px-3 container d-flex  justify-content-between align-items-center text-dark border-bottom border-top border-secondary py-2">
+                            <div class="px-2 container d-flex  justify-content-between align-items-center text-dark border-bottom border-top border-secondary py-2">
                                 <div class="d-flex flex-column">
                                    <span class="text-dark" >
                                      Visit us on following address :
@@ -167,7 +170,8 @@
             console.error('Error Gathering Data',error);
          })
     }
-      getter(1);
 
+    {{!--  default render --}}
+      getter(1);
 
 </script>

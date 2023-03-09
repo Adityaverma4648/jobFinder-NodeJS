@@ -3,6 +3,8 @@ const express = require('express');
 const hbs = require('hbs');
 const path =  require('path');
 const apiRoutes = require('./routes/apiRoutes');
+const userRoutes = require('./routes/userRoutes');
+
 const jobData = require('./data/JobData.json')
 
 // express instance
@@ -46,7 +48,7 @@ app.get("/login",(req,res)=>{
 })
 
 app.get("/signUp",(req,res)=>{
-    res.render('login.hbs')
+    res.render('signUp.hbs')
 })
 
 jobData?.forEach((d) => { 
@@ -58,10 +60,8 @@ jobData?.forEach((d) => {
   
 //  App api Route-----------------------------------------------------------------------------------------------
 app.use('/api',apiRoutes);
+app.use('/user',userRoutes);
 
-app.get("/data",(req,res)=>{
-    res.send(company);
-});
 
 
 

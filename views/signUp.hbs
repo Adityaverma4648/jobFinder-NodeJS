@@ -13,8 +13,20 @@
        <script src="https://kit.fontawesome.com/8dc03a4776.js" crossorigin="anonymous"></script>
     {{!--  block ends here --}}
 </head>
-<body>
-    {{>header}}
-    signUp
+<body class="SignUp">
+          {{>header}}
+          <form action="" class="bg-light d-flex flex-column justify-content-center align-items-center"  method="post" style="height:60vh;width:40vw">
+              <label for="first_name" class="container d-flex justify-content-center align-items-center" >
+                  <input type="text" name="first_name" placeholder="Enter your first Name" class="container-fluid py-1 px-2 my-1">
+              </label>
+              <label for="last_name" class="container d-flex justify-content-center align-items-center" >
+                  <input type="text" name="last_name" placeholder="Enter your Last Name" class="container-fluid py-1 px-2 my-1">
+              </label>
+              <label for="email" class="container d-flex justify-content-center align-items-center" >
+                  <input type="email" name="email" placeholder="Enter your Email" class="container-fluid py-1 px-2 my-1">
+              </label>
+              <input type="submit" class="col-sm-3 py-1 my-1">
+          </form> 
+
 </body>
 </html>

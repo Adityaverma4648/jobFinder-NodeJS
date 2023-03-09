@@ -87,6 +87,7 @@ body::-webkit-scrollbar{
     padding: 0.5rem 1rem;
     border: 1px solid rgba(63, 63, 63,0.5);
     cursor: pointer;
+    user-select: none;
 }
 
 
@@ -111,7 +112,9 @@ body::-webkit-scrollbar{
 /* -------------block ends----------------------------------------------------------------------------------------------------------------------------------------- */
 
 
-
+.Footer{
+  height: 30vh;
+}
 
 
 
@@ -120,25 +123,10 @@ body::-webkit-scrollbar{
  /* responsiveness--------------------------------------------------------------------------------------------------------- */
 
 
-
+/* 
  @media only screen and (max-width : 1400px){
       .jobCard{
            min-height: 60vh;
-      }
-      /* #resNav2{
-        display: none;
-      } */
-      .toggleMenu{
-        display: block;
-      }
-     
-}
-
-
- @media only screen and (max-width : 900px){
-      #jobContainer{
-        display: flex;
-          flex-direction: column;
       }
       #resNav1{
         display: none;
@@ -149,4 +137,46 @@ body::-webkit-scrollbar{
       .toggleMenu{
         display: block;
       }
+      .jobDataContParent{
+        width: 100vw;
+      }
+      
+} */
+
+
+ @media only screen and (max-width : 700px){
+      #jobContainer{
+        display: flex;
+        flex-direction: column;
+      }
+      #resNav1{
+        display: none;
+      }
+      .toggleMenu{
+        display: block;
+      }
+      .jobCard{
+        /* width: 85vw; */
+         min-height: 70vh;
+      }
+      .jobDataContParent{
+        min-width: 100%;
+      }
+      #jobContainer{
+        height: 125vh;
+      }
+      .filters{
+        min-width: 100%;
+        height: 40vh;
+      }
+      #formContainer{
+        width: 85vw;
+      }
+       #studentFormSignUp{
+        width: 85vw;
+      }
+      /*
+      #companyFormSignUp{
+        width: 85vw;
+      } */
  }

@@ -53,7 +53,7 @@ app.get("/signUp",(req,res)=>{
 
 jobData?.forEach((d) => { 
    var _id = d.id;
-   app.get(`/viewMore/:${_id}`,(req,res)=>{
+   app.get(`/viewMore:${_id}`,(req,res)=>{
         res.render('viewMore.hbs')
     })
 });

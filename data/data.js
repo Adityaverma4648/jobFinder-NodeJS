@@ -10,6 +10,9 @@ function dataGenerator(dataLength){
             const categoryFetcher = (i)=>{
                   return i%2?'Work From Home':'Office';
             } 
+            const jobTimingFetcher = (i)=>{
+              return i%2?'Full':'Part';
+        } 
           var object = {
               id : i+1,
               stipend : obj.integer({ min: 5000, max: 45000 }),
@@ -21,6 +24,7 @@ function dataGenerator(dataLength){
               duration : obj.integer({min:3,max:12}),
               seats : obj.integer({min:1,max:15}),
               jobCategory : categoryFetcher(i),
+              jobTimingFetcher : jobTimingFetcher(i)
             }
           array.push(object)
 }

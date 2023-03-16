@@ -1,10 +1,10 @@
 //  tokenizer function ------------------
 // const jwt = require('jsonwebtokens')
 
+const generateToken = (id) => {
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+      expiresIn: "30d",
+    });
+  };
 
-const generateTokens = () =>{
-
-
-}
-
-module.exports = generateTokens;
+module.exports = generateToken;

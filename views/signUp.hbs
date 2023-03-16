@@ -31,23 +31,66 @@
 
 
 <script>
+    
+     async function collegeListFetcher(){
+
+      const res = await fetch("http://localhost:7000/api/collegeList")
+      const data = await res.json();
+      console.log(data)
+          
+              {{!--  DOM --}}
+            CollegeList = document.getElementById('collegeList');
+            var options = data?.map((d)=>{
+              return `<option value="${d.college},${d.district},${d.state}">
+                             ${d.college},${d.district},${d.state}
+                      </option>`
+            })
+            CollegeList.innerHTML = options;
+        
+     }
+     {{!-- collegeListFetcher(); --}}
+
+       
+
     function studentFetcher(){
         var formContainer = document.getElementById('formContainer');
         var content = `<form class="container-fluid bg-light d-flex flex-column justify-content-center align-items-center border-end border-bottom border-start border-secondary border-opacity-50 py-5"  method="post" id="studentFormSignUp" >
-              <label for="first_name" class="container-fluid d-flex flex-column justify-content-center align-items-center" >
-                  <input type="text" name="first_name" placeholder="Enter your first Name" class="container-fluid py-1 px-2 my-1">
+              <h5>
+                  Student SignUp 
+                  <i class="fa fa-sign-in" ></i>
+              </h5>
+              <label for="first_name" class="container-fluid d-flex flex-column" >
+                   <span>
+                      first Name : 
+                   </span>
+                  <input type="text" name="firstName" placeholder="Enter your first Name" class="container-fluid py-1 px-2 my-1">
               </label>
-              <label for="last_name" class="container-fluid d-flex flex-column justify-content-center align-items-center" >
-                  <input type="text" name="last_name" placeholder="Enter your Last Name" class="container-fluid py-1 px-2 my-1">
+              <label for="last_name" class="container-fluid d-flex flex-column" >
+                   <span>
+                      last Name : 
+                   </span>
+                  <input type="text" name="lastName" placeholder="Enter your Last Name" class="container-fluid py-1 px-2 my-1">
               </label>
-              <label for="email" class="container-fluid d-flex flex-column justify-content-center align-items-center" >
+              <label for="email" class="container-fluid d-flex flex-column" >
+                   <span>
+                      Email : 
+                   </span>
                   <input type="email" name="email" placeholder="Enter your Email" class="container-fluid py-1 px-2 my-1">
               </label>
-              <label for="email" class="container-fluid d-flex flex-column justify-content-center align-items-center" >
+               <label for="College" class="container-fluid d-flex flex-column" >
+                   <span>
+                      College : 
+                   </span>
+                  <input name="college" placeholder="Enter your College" class="container-fluid py-1 px-2 my-1" id="collegeList" >
+              </label>
+              <label for="password" class="container-fluid d-flex flex-column" >
+                   <span>
+                      Password : 
+                   </span>
                   <input type="password" name="password" placeholder="Enter your Password" class="container-fluid py-1 px-2 my-1">
               </label>
-              <input type="submit" class="col-sm-5 py-1 my-1">
-          </form> `;
+              <input type="submit" value="signUp" class="col-sm-5 py-1 my-1" onsubmit="onStudentRegsiterationFormSub()" >
+          </form>`;
           formContainer.innerHTML = content;
     }
 
@@ -86,7 +129,35 @@
           </form> `;
           formContainer.innerHTML = content;
     }
-    studentFetcher()
+    studentFetcher();
+
+    const onStudentRegsiterationFormSub = async () =>{
+       var form = document.getElementById("studentFormSignUp");
+       var formData = new FormData(form);
+       const values = [...formData.values()];
+       alert(values)
+       try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      const { values } = await axios.post(
+        "http://localhost:7000/user/",
+        {
+          firstName,
+          lastName,
+          email,
+          college,
+          password,
+        },
+        config
+      );
+      console.log(formData); 
+    }catch(error){
+        console.log("Error :",error);
+       } 
+    };
 </script>
 </body>
 </html>

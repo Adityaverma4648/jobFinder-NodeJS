@@ -4,8 +4,16 @@ const hbs = require('hbs');
 const path =  require('path');
 const apiRoutes = require('./routes/apiRoutes');
 const userRoutes = require('./routes/userRoutes');
-
 const jobData = require('./data/JobData.json')
+const collegeList = require('./data/college.json');
+
+//  calling controllers
+const registerUser = require("./controllers/userController");
+
+
+// ------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 // express instance
 const app = express();
@@ -38,7 +46,7 @@ const partials = path.join(__dirname,'./views/partials');
 hbs.registerPartials(partials);
 
 //  block ends here-----------------------------------------------------------------------------
-
+// https://www.youtube.com/shorts/VTw2cUVFl1c
 app.get("/",(req,res)=>{
     res.render('index.hbs')
 })
@@ -61,9 +69,6 @@ jobData?.forEach((d) => {
 //  App api Route-----------------------------------------------------------------------------------------------
 app.use('/api',apiRoutes);
 app.use('/user',userRoutes);
-
-
-
 
 const start = async ()=>{
    try {

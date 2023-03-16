@@ -1,7 +1,11 @@
 const express = require('express');
 const router  = express.Router();
-const jobData = require('../data/jobData.json')
+const jobData = require('../data/jobData.json');
+const collegeList = require('../data/college.json');
 
+router.get('/collegeList',(req,res)=>{
+    res.send(collegeList);
+})
 
 router.post('/',(req,res)=>{
     res.send(jobData);

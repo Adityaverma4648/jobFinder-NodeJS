@@ -65,9 +65,9 @@ body::-webkit-scrollbar{
     align-items: center;
 }
 
-#myJobCont::-webkit-scrollbar{
+/* #myJobCont::-webkit-scrollbar{
      display: none;
-}
+} */
 
 #myJobCont{
     height:65vh;
@@ -105,7 +105,10 @@ body::-webkit-scrollbar{
   align-items: center;
 
 }
-
+#formContainer{
+  width: 50vw;
+  /* padding: 10px 0px; */
+}
 
 
 
@@ -149,9 +152,6 @@ body::-webkit-scrollbar{
         display: flex;
         flex-direction: column;
       }
-      #resNav1{
-        display: none;
-      }
       .toggleMenu{
         display: block;
       }
@@ -175,8 +175,7 @@ body::-webkit-scrollbar{
        #studentFormSignUp{
         width: 85vw;
       }
-      /*
-      #companyFormSignUp{
-        width: 85vw;
-      } */
+      .resNav1{
+        display: none;
+      }
  }

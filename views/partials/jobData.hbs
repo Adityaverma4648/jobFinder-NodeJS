@@ -40,12 +40,23 @@
                           </span>
                        </label>
                         </div>
-                        <div class="container-fluid py-2" >
+                        <div class="container-fluid py-2 border border-secondary" >
+                               <div class="container-fluid d-flex align-items-center justify-content-between px-1" >
+                                     <span>
+                                       5K
+                                     </span>
+                                     <span>
+                                      45K
+                                     </span>
+                               </div>
                              <label for="stipend" class="container-fluid" >
-                                <input type="range" min = "5000" and max = "45000" value="5000"  id="StipendRange" class="container" >
+                                <input type="range" min = "5000" and max = "45000" value="25000"  id="StipendRange" class="container-fluid" onchange="renderValue(event)" >
+                                <div class="container-fluid px-1" id="renderStipend">
+                                     
+                                </div>
                              </label> 
                         </div>
-                       <div class="container d-flex justify-content-between align-items-center mt-1 py-2" >
+                       <div class="container d-flex flex-wrap justify-content-between align-items-center mt-1 py-2" >
                            <input type="reset" class="btn border-0 bg-transparent" name="Clear All" >
                            <input type="submit" class="btn border-0 bg-info rounded-0"  value="Apply Changes" >
                        </div>
@@ -166,7 +177,7 @@
 
                             <div class="container py-2 px-3 d-flex flex-column justify-content-center align-items-center" >
                                  <span class="text-start h5 container-fluid">
-                                    Job Description
+                                    Internship Description
                                  </span>
                                  <div>
                                   <small>
@@ -217,5 +228,11 @@
 
     {{!--  default render --}}
       getter(1);
-
+  
+     {{!--  rendering stipend --}}
+           function renderValue(event){
+              var renderStipend = document.getElementById('renderStipend') 
+              renderStipend.innerHTML = `${event.target.value} K`;
+           }
+     {{!-- block ends here --}}
 </script>

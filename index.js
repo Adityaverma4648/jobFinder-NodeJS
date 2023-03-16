@@ -1,15 +1,16 @@
 require("dotenv").config();
 const express = require('express');
+const asyncHandler = require('express-async-handler');
 const hbs = require('hbs');
 const path =  require('path');
 const apiRoutes = require('./routes/apiRoutes');
-const userRoutes = require('./routes/userRoutes');
 const jobData = require('./data/JobData.json')
 const collegeList = require('./data/college.json');
 
-//  calling controllers
-const registerUser = require("./controllers/userController");
 
+//  calling mongo models
+
+const User = require("./model/User");
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -17,11 +18,11 @@ const registerUser = require("./controllers/userController");
 
 // express instance
 const app = express();
+app.use(express.json()); // to accept json data
 // DB connect 
 const connectDB = require("./config/connect");
 // PORT decision
 const PORT = process.env.PORT||5000;
-
 
 //  path to static directory-----------------------------------------------------------------------------------------------------------------------------------------
 const staticPath  = path.join(__dirname, './public');
@@ -30,12 +31,6 @@ const staticPath  = path.join(__dirname, './public');
 app.use(express.static(staticPath));
 
 // --------------------------------------------------------------------------
-
-
-//  serving static files using built in middleware;
-        //   app.use(express.static(staticPath));
-// -------------------------------------------------------------------------------------------------------------------------------------------------
-
 
 //  handle bars template engine - dynamic sites are served.............................. --------------------------------------------------------------------------------
 //   engine set to hbs it may be pug,handlebars
@@ -58,6 +53,19 @@ app.get("/login",(req,res)=>{
 app.get("/signUp",(req,res)=>{
     res.render('signUp.hbs')
 })
+//  user controller - post data gathering-- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+app.post("/signUp", async (req,res)=>{
+    const user = await User.create({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        college: req.body.college,
+        password: req.body.password
+      });
+      
+      return res.status(200).json(user);
+});
+
 
 jobData?.forEach((d) => { 
    var _id = d.id;
@@ -68,7 +76,7 @@ jobData?.forEach((d) => {
   
 //  App api Route-----------------------------------------------------------------------------------------------
 app.use('/api',apiRoutes);
-app.use('/user',userRoutes);
+// app.use('/user',userRoutes);
 
 const start = async ()=>{
    try {

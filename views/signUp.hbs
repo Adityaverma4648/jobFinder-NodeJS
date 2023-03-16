@@ -21,7 +21,7 @@
                   <button type="button" class="btn btn-outline-primary rounded-0 col-sm-6" onclick="studentFetcher()" >
                      Student
                   </button>
-                  <button type="button" class="btn btn-outline-danger rounded-0 col-sm-6" onclick="companyFetcher()">
+                  <button type="button" class="btn btn-outline-danger rounded-0 col-sm-6">
                      Company
                   </button>
             </div>
@@ -48,24 +48,23 @@
             CollegeList.innerHTML = options;
         
      }
-     {{!-- collegeListFetcher(); --}}
+             {{!-- collegeListFetcher(); --}}
 
        
-
     function studentFetcher(){
         var formContainer = document.getElementById('formContainer');
-        var content = `<form class="container-fluid bg-light d-flex flex-column justify-content-center align-items-center border-end border-bottom border-start border-secondary border-opacity-50 py-5"  method="post" id="studentFormSignUp" >
+        var content = `<form action="/signUp" class="container-fluid bg-light d-flex flex-column justify-content-center align-items-center border-end border-bottom border-start border-secondary border-opacity-50 py-5"  method="POST" id="studentFormSignUp" >
               <h5>
                   Student SignUp 
                   <i class="fa fa-sign-in" ></i>
               </h5>
-              <label for="first_name" class="container-fluid d-flex flex-column" >
+              <label for="firstName" class="container-fluid d-flex flex-column" >
                    <span>
                       first Name : 
                    </span>
                   <input type="text" name="firstName" placeholder="Enter your first Name" class="container-fluid py-1 px-2 my-1">
               </label>
-              <label for="last_name" class="container-fluid d-flex flex-column" >
+              <label for="lastName" class="container-fluid d-flex flex-column" >
                    <span>
                       last Name : 
                    </span>
@@ -81,7 +80,7 @@
                    <span>
                       College : 
                    </span>
-                  <input name="college" placeholder="Enter your College" class="container-fluid py-1 px-2 my-1" id="collegeList" >
+                  <input type="text" name="college" placeholder="Enter your College" class="container-fluid py-1 px-2 my-1" id="collegeList" >
               </label>
               <label for="password" class="container-fluid d-flex flex-column" >
                    <span>
@@ -89,7 +88,7 @@
                    </span>
                   <input type="password" name="password" placeholder="Enter your Password" class="container-fluid py-1 px-2 my-1">
               </label>
-              <input type="submit" value="signUp" class="col-sm-5 py-1 my-1" onsubmit="onStudentRegsiterationFormSub()" >
+              <input type="submit" value="signUp" class="col-sm-5 py-1 my-1">
           </form>`;
           formContainer.innerHTML = content;
     }
@@ -101,7 +100,7 @@
                   Company SignUp 
                   <i class="fa fa-sign-in" ></i>
               </h5>
-              <label for="first_name" class="container-fluid d-flex flex-column" >
+              <label for="firstName" class="container-fluid d-flex flex-column" >
                    <span>
                       first Name : 
                    </span>
@@ -130,34 +129,6 @@
           formContainer.innerHTML = content;
     }
     studentFetcher();
-
-    const onStudentRegsiterationFormSub = async () =>{
-       var form = document.getElementById("studentFormSignUp");
-       var formData = new FormData(form);
-       const values = [...formData.values()];
-       alert(values)
-       try {
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
-      const { values } = await axios.post(
-        "http://localhost:7000/user/",
-        {
-          firstName,
-          lastName,
-          email,
-          college,
-          password,
-        },
-        config
-      );
-      console.log(formData); 
-    }catch(error){
-        console.log("Error :",error);
-       } 
-    };
 </script>
 </body>
 </html>

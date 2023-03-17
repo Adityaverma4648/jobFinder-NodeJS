@@ -54,11 +54,6 @@ hbs.registerPartials(partials);
 //  block ends here-----------------------------------------------------------------------------
 
 
-
-
-
-
-
 // https://www.youtube.com/shorts/VTw2cUVFl1c
 app.get("/",(req,res)=>{
     res.render('index.hbs')
@@ -71,6 +66,13 @@ app.get("/login",(req,res)=>{
 
 app.get("/signUp",(req,res)=>{
     res.render('signUp.hbs')
+})
+
+app.get("/profile",(req,res)=>{
+    res.render('profile.hbs')
+})
+app.get("/resume",(req,res)=>{
+  res.render('resume.hbs')
 })
 
 app.get("/userError",(req,res)=>{

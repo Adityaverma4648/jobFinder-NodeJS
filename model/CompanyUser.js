@@ -2,26 +2,23 @@ const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 const bcrypt = require("bcryptjs");
 
-const userSchema = new mongoose.Schema({
-    firstName : {
-          type : String,
-          required : true
-    },
-    lastName : {
+
+const companyUserSchema = new mongoose.Schema({
+   
+    companyName : {
         type : String,
         required : true
        
+    },
+    companyAddress : {
+        type : String,
+        required : true
     },
     email : {
         type : String,
         unique : true,
         required : true
         
-    },
-    college : {
-        type : String,
-        required : true
-
     },
     password : {
          type : String,
@@ -32,13 +29,12 @@ const userSchema = new mongoose.Schema({
      timestamps: true,
 }
 )
-
-userSchema.methods.matchPassword = async function (enteredPassword) {
+companyUserSchema.methods.matchPassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
   };
 
 //  protecting password
-userSchema.pre("save", async function (next) {
+companyUserSchema.pre("save", async function (next) {
     if (!this.isModified) {
       next();
     }
@@ -48,7 +44,6 @@ userSchema.pre("save", async function (next) {
   });
   
 
+companyUserSchema.plugin(passportLocalMongoose);
 
-userSchema.plugin(passportLocalMongoose);
-
-module.exports= mongoose.model("User",userSchema);
+module.exports= mongoose.model("companyUser",companyUserSchema);

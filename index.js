@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require('express');
-const asyncHandler = require('express-async-handler');
 const hbs = require('hbs');
 const path =  require('path');
 const apiRoutes = require('./routes/apiRoutes');
@@ -11,6 +10,7 @@ const generateToken = require("./config/Jwt");
 //  calling mongo models
 
 const User = require("./model/User");
+const companyUser = require("./model/CompanyUser");
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -51,6 +51,7 @@ app.get("/login",(req,res)=>{
     res.render('login.hbs')
 })
 
+
 app.get("/signUp",(req,res)=>{
     res.render('signUp.hbs')
 })
@@ -86,7 +87,70 @@ app.post("/signUp", async (req,res)=>{
 
 });
 
+app.get("/companySignUp",(req,res)=>{
+    res.render('companySignUp.hbs')
+})
+// company user controller - post data gathering-- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+app.post("/companySignUp", async (req,res)=>{
+    const {companyName, companyAddress  , email, password} = req.body;
 
+    if(!companyName || !companyAddress || !email || !password){
+        res.status(400);
+        throw new Error("Please Enter All Fields");
+    }
+    const userExists = await companyUser.findOne({ email });
+
+    if (userExists) {
+      res.status(400);
+      throw new Error("User already exists");
+    }
+    const company = await companyUser.create({
+        companyName,
+        companyAddress,
+        email,
+        password,
+      });
+    
+      if (company) {
+        res.status(201).redirect('login')
+        //  redirected on login 
+      } else {
+        res.status(400);
+        throw new Error("Company User Not Found");
+      }
+
+});
+
+
+
+//  LOGIN
+
+app.post("/login",(async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (user && (await user.matchPassword(password))) {
+    res.status(200).redirect('/');
+  } else {
+    res.status(401);
+    throw new Error("Invalid Email or Password");
+  }
+}))
+
+app.get("/companyLogin",(req,res)=>{
+     res.render("companyLogin.hbs");
+})
+
+app.post("/companyLogin",async(req,res)=>{
+    const {email,password} = req.body;
+
+    const company = await companyUser.findOne({email});
+
+    if(company && (await company.matchPassword(password))){
+        res.status(200).redirect('/');
+    }
+})
 
 jobData?.forEach((d) => { 
    var _id = d.id;

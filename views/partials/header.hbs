@@ -65,7 +65,9 @@
            }
          }
        var UserEmail = getCookie("UserEmail")
+       var userDesignation = getCookie("userDesignation");
        var decodedValue = decodeURIComponent(UserEmail);
+       var decodedDesignation = decodeURIComponent(userDesignation);
        var checkToken = checkCookie();
        var authButton = document.getElementById('authButton');
         if(checkToken){

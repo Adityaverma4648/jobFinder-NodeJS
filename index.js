@@ -14,7 +14,7 @@ const session = require('express-session');
 //  calling mongo models
 
 const User = require("./model/User");
-const companyUser = require("./model/CompanyUser");
+
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -79,11 +79,11 @@ app.get("/userError",(req,res)=>{
 })
 //  user controller - post data gathering-- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 app.post("/signUp", async (req,res)=>{
-    const {firstName, lastName, email, college, password} = req.body;
+    const {userName, email, designation , password} = req.body;
 
-    if(!firstName || !lastName || !email || !college || !password){
+    if(!userName || !email || !designation || !password){
         res.status(400);
-        throw new Error("Please Enter All Fields");
+        throw new Error("Fill all the entries!");
     }
     const userExists = await User.findOne({ email });
 
@@ -92,15 +92,13 @@ app.post("/signUp", async (req,res)=>{
       throw new Error("User already exists");
     }
     const user = await User.create({
-        firstName,
-        lastName,
+        userName,
         email,
-        college,
+        designation,
         password,
       });
     
       if (user) {
-        
         res.status(201).redirect('login');
         //  redirected on login 
       } else {
@@ -109,41 +107,6 @@ app.post("/signUp", async (req,res)=>{
       }
 
 });
-
-app.get("/companySignUp",(req,res)=>{
-    res.render('companySignUp.hbs')
-})
-// company user controller - post data gathering-- -- -- -- -- -- -- -- -- -- -- -- -- -- 
-app.post("/companySignUp", async (req,res)=>{
-    const {companyName, companyAddress  , email, password} = req.body;
-
-    if(!companyName || !companyAddress || !email || !password){
-        res.status(400);
-        throw new Error("Please Enter All Fields");
-    }
-    const userExists = await companyUser.findOne({ email });
-
-    if (userExists) {
-      res.status(400);
-      throw new Error("User already exists");
-    }
-    const company = await companyUser.create({
-        companyName,
-        companyAddress,
-        email,
-        password,
-      });
-    
-      if (company) {
-        res.status(201).redirect('login')
-        //  redirected on login 
-      } else {
-        res.status(400);
-        throw new Error("Company User Not Found");
-      }
-
-});
-
 
 
 //  LOGIN  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -155,6 +118,8 @@ app.post("/login",(async (req, res) => {
 
   if (user && (await user.matchPassword(password))) {
     const token  = generateToken(user._id);
+    const userData  = await User.find({email});
+    res.cookie("userDesignation" ,userData[0].designation);
     res.cookie("token",token);
     res.cookie("UserEmail" , email);
         //  requires cookies to be stored cookie will store jwt Token
@@ -163,26 +128,6 @@ app.post("/login",(async (req, res) => {
     res.status(200).redirect('UserError')
   }
 }))
-
-app.get("/companyLogin",(req,res)=>{
-     res.render("companyLogin.hbs");
-})
-
-app.post("/companyLogin",async(req,res)=>{
-    const {email,password} = req.body;
-
-    const company = await companyUser.findOne({email});
-
-    if(company && (await company.matchPassword(password))){
-         const token = generateToken(company._id);
-         res.cookie("token",token);
-         res.cookie("companyEmail",email);
-        res.status(200).redirect('/');
-    }else{
-       res.status(400);
-       throw new Error("Company couldn't login...");
-    }
-})
 
 
 //  Logout--------------------------------------------------------------------------------------------------------------

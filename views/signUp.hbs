@@ -19,20 +19,14 @@
           <div class="d-flex flex-column justify-content-center align-items-center py-2" id="formContainer">
                 <form action="/signUp" class="container-fluid bg-light d-flex flex-column justify-content-center align-items-center border border-secondary border-opacity-50 py-5 shadow-lg shadow-slate-500"  method="POST" id="studentFormSignUp" >
               <h5>
-                  Student SignUp 
+                  SignUp 
                   <i class="fa fa-sign-in" ></i>
               </h5>
-              <label for="firstName" class="container-fluid d-flex flex-column" >
+              <label for="userName" class="container-fluid d-flex flex-column" >
                    <span>
-                      first Name : 
+                      user Name : 
                    </span>
-                  <input type="text" name="firstName" placeholder="Enter your first Name" class="container-fluid py-1 px-2 my-1">
-              </label>
-              <label for="lastName" class="container-fluid d-flex flex-column" >
-                   <span>
-                      last Name : 
-                   </span>
-                  <input type="text" name="lastName" placeholder="Enter your Last Name" class="container-fluid py-1 px-2 my-1">
+                  <input type="text" name="userName" placeholder="Enter your user Name" class="container-fluid py-1 px-2 my-1">
               </label>
               <label for="email" class="container-fluid d-flex flex-column" >
                    <span>
@@ -40,11 +34,14 @@
                    </span>
                   <input type="email" name="email" placeholder="Enter your Email" class="container-fluid py-1 px-2 my-1">
               </label>
-               <label for="College" class="container-fluid d-flex flex-column" >
+              <label for="designation" class="container-fluid d-flex flex-column" >
                    <span>
-                      College : 
+                      Select Designation : 
                    </span>
-                  <input type="text" name="college" placeholder="Enter your College" class="container-fluid py-1 px-2 my-1" id="collegeList" >
+                  <select name="designation" class="container-fluid py-1 px-2 my-1">
+                      <option value="student">Student</option>
+                      <option value="company">Company</option>
+                  </select>
               </label>
               <label for="password" class="container-fluid d-flex flex-column" >
                    <span>
@@ -52,11 +49,6 @@
                    </span>
                   <input type="password" name="password" placeholder="Enter your Password" class="container-fluid py-1 px-2 my-1">
               </label>
-              <div class="w-full flex justify-center items-center text-center my-2">
-                     <a href="http://localhost:7000/companySignUp" class="text-decoration-none text-red-400" >
-                         Company SignUp
-                     </a>
-              </div>
               <input type="submit" value="signUp" class="col-sm-5 py-1 my-1">
           </form>
           </div>

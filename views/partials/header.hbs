@@ -1,11 +1,5 @@
 <nav class="Navbar top-0 position-fixed Navbar container-fluid d-flex justify-content-center align-items-center bg-light py-2">
     <div class="container d-flex justify-content-center align-items-center ">
-
-      {{!--  responsive navbar --}}
-             <div class="p-1 toggleMenu text-dark" style="cursor:pointer" onclick="resNav()" >
-                  <i class="fa fa-bars" style="font-size:23px" ></i>
-             </div>
-
          <div class="col-sm-2 h5 text-center my-auto font-weight-bold text-primary">
             Jobfinder
           </div>
@@ -30,13 +24,12 @@
             </div>
     
             {{!--  auth button group --}}
-             <div class="button-group col-sm-5 mx-1"> 
-              <a href="http://localhost:7000/login" class="authButtons">
-                  Login
-              </a>
-              <a href="http://localhost:7000/signUp" class="authButtons btnGreen" >
-                  signUp
-              </a>
+             <div class="button-group col-sm-5 mx-1 hidden md:block" id="authButton"> 
+             
+             </div>
+              {{!--  responsive navbar --}}
+             <div class="p-1 toggleMenu text-dark block md:hidden" style="cursor:pointer" >
+                  <i class="fa fa-bars" style="font-size:23px" ></i>
              </div>
         </div>
    </div>
@@ -45,5 +38,51 @@
        function resNav(){
            {{!--  offcanvas --}}
        }
-</script>
+       
+       const cookie = document.cookie;
+
+       function getCookie(cname) {
+           let name = cname + "=";
+           let ca = document.cookie.split(';');
+           for(let i = 0; i < ca.length; i++) {
+             let c = ca[i];
+             while (c.charAt(0) == ' ') {
+               c = c.substring(1);
+             }
+             if (c.indexOf(name) == 0) {
+               return c.substring(name.length, c.length);
+             }
+           }
+           return "";
+         }
+
+         function checkCookie() {
+           let token = getCookie("token");
+           if (token != "") {
+                return 1;
+           } else {
+                return 0;
+           }
+         }
+       var UserEmail = getCookie("UserEmail")
+       var decodedValue = decodeURIComponent(UserEmail);
+       var checkToken = checkCookie();
+       var authButton = document.getElementById('authButton');
+        if(checkToken){
+               authButton.innerHTML = `<button class="flex authButtons btnGreen" >
+                ${decodedValue[0].toUpperCase()}
+                <small class="mx-1"><i class="fa fa-caret-down"></i></small>
+               </button><a href="http://localhost:7000/logout" class="authButtons">
+                  Logout
+              </a>`;
+              }
+        else{
+              authButton.innerHTML = `<a href="http://localhost:7000/login" class="authButtons">
+                  Login
+              </a>
+              <a href="http://localhost:7000/signUp" class="authButtons btnGreen" >
+                  signUp
+              </a>`;
+        }
+ </script>
 

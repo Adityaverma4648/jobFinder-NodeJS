@@ -7,6 +7,10 @@ const jobData = require('./data/JobData.json')
 const collegeList = require('./data/college.json');
 const generateToken = require("./config/Jwt");
 
+//  cookie
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+
 //  calling mongo models
 
 const User = require("./model/User");
@@ -20,6 +24,12 @@ const companyUser = require("./model/CompanyUser");
 const app = express();
 app.use(express.json()); // to accept json data
 app.use(express.urlencoded({extended:false}));
+
+
+// cookies and session 
+app.use(cookieParser())
+
+
 // DB connect 
 const connectDB = require("./config/connect");
 // PORT decision
@@ -42,6 +52,13 @@ const partials = path.join(__dirname,'./views/partials');
 hbs.registerPartials(partials);
 
 //  block ends here-----------------------------------------------------------------------------
+
+
+
+
+
+
+
 // https://www.youtube.com/shorts/VTw2cUVFl1c
 app.get("/",(req,res)=>{
     res.render('index.hbs')
@@ -54,6 +71,11 @@ app.get("/login",(req,res)=>{
 
 app.get("/signUp",(req,res)=>{
     res.render('signUp.hbs')
+})
+
+app.get("/userError",(req,res)=>{
+    res.render('UserError');
+    setInterval(res.redirect('index'),1000)
 })
 //  user controller - post data gathering-- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 app.post("/signUp", async (req,res)=>{
@@ -78,7 +100,8 @@ app.post("/signUp", async (req,res)=>{
       });
     
       if (user) {
-        res.status(201).redirect('login')
+        
+        res.status(201).redirect('login');
         //  redirected on login 
       } else {
         res.status(400);
@@ -123,7 +146,7 @@ app.post("/companySignUp", async (req,res)=>{
 
 
 
-//  LOGIN
+//  LOGIN  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 app.post("/login",(async (req, res) => {
   const { email, password } = req.body;
@@ -131,10 +154,13 @@ app.post("/login",(async (req, res) => {
   const user = await User.findOne({ email });
 
   if (user && (await user.matchPassword(password))) {
+    const token  = generateToken(user._id);
+    res.cookie("token",token);
+    res.cookie("UserEmail" , email);
+        //  requires cookies to be stored cookie will store jwt Token
     res.status(200).redirect('/');
   } else {
-    res.status(401);
-    throw new Error("Invalid Email or Password");
+    res.status(200).redirect('UserError')
   }
 }))
 
@@ -148,10 +174,29 @@ app.post("/companyLogin",async(req,res)=>{
     const company = await companyUser.findOne({email});
 
     if(company && (await company.matchPassword(password))){
+         const token = generateToken(company._id);
+         res.cookie("token",token);
+         res.cookie("companyEmail",email);
         res.status(200).redirect('/');
+    }else{
+       res.status(400);
+       throw new Error("Company couldn't login...");
     }
 })
 
+
+//  Logout--------------------------------------------------------------------------------------------------------------
+
+app.get('/logout', (req, res) => {
+  res.clearCookie('token');
+  res.clearCookie('UserEmail');
+  res.clearCookie('companyEmail');
+  return res.redirect('/');
+});
+
+//  Block ends here---------------------------------------------------------------------------------------------------------------
+
+//   View more Url-----------------------------------------------------------------------------------------------------------------
 jobData?.forEach((d) => { 
    var _id = d.id;
    app.get(`/viewMore:${_id}`,(req,res)=>{

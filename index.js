@@ -6,7 +6,7 @@ const path =  require('path');
 const apiRoutes = require('./routes/apiRoutes');
 const jobData = require('./data/JobData.json')
 const collegeList = require('./data/college.json');
-
+const generateToken = require("./config/Jwt");
 
 //  calling mongo models
 
@@ -19,6 +19,7 @@ const User = require("./model/User");
 // express instance
 const app = express();
 app.use(express.json()); // to accept json data
+app.use(express.urlencoded({extended:false}));
 // DB connect 
 const connectDB = require("./config/connect");
 // PORT decision
@@ -55,16 +56,36 @@ app.get("/signUp",(req,res)=>{
 })
 //  user controller - post data gathering-- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 app.post("/signUp", async (req,res)=>{
+    const {firstName, lastName, email, college, password} = req.body;
+
+    if(!firstName || !lastName || !email || !college || !password){
+        res.status(400);
+        throw new Error("Please Enter All Fields");
+    }
+    const userExists = await User.findOne({ email });
+
+    if (userExists) {
+      res.status(400);
+      throw new Error("User already exists");
+    }
     const user = await User.create({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        college: req.body.college,
-        password: req.body.password
+        firstName,
+        lastName,
+        email,
+        college,
+        password,
       });
-      
-      return res.status(200).json(user);
+    
+      if (user) {
+        res.status(201).redirect('login')
+        //  redirected on login 
+      } else {
+        res.status(400);
+        throw new Error("User not found");
+      }
+
 });
+
 
 
 jobData?.forEach((d) => { 

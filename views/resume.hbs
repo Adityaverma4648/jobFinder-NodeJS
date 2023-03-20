@@ -139,7 +139,21 @@
                         <div class="modal-body">
                           <form action="/education" method="POST" class="container-fluid d-flex flex-column justify-content-center align-items-center" >
                              <label for="course" class="container-fluid mb-1" >
-                                 <input type="text" name="course" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Course" >
+                                 <select name="course" class="border border-secondary border-opacity-50 container-fluid p-1" >
+                                    <option value="10th"> 10th </option>
+                                    <option value="12th"> 12th </option>
+                                    <option value="B.Tech"> B.Tech </option>
+                                    <option value="B.Science"> B.Science </option>
+                                    <option value="B.Arts"> B.Arts </option>
+                                    <option value="B.Commerce"> B.Commerce </option>
+                                    <option value="M.Tech"> B.Tech </option>
+                                    <option value="M.Science"> B.Science </option>
+                                    <option value="M.Arts"> B.Arts </option>
+                                    <option value="M.Commerce"> B.Commerce </option>
+                                    <option value="PHD.Science"> B.Science </option>
+                                    <option value="PHD.Arts"> B.Arts </option>
+                                    <option value="PHD.Commerce"> B.Commerce </option>
+                                 </select>
                              </label>
                               <label for="yearOfCompletion" class="container-fluid mb-1" >
                                  <input type="text" name="yearOfCompletion" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Year Of Completion" >
@@ -350,23 +364,37 @@
                    'Content-type': 'application/json; charset=UTF-8',
                   },
                   body: JSON.stringify({
-                   userEmail : "example@gmail.com",
-                      course : "10th",
-            yearOfCompletion : "2013",
-                  percentage : "100%",
+                         "_id": "6418828edfcb4e55ee7aac34",
+                         "userEmail": "example@gmail.com",
+                         "course": "5th",
+                         "yearOfCompletion": "2006",
+                         "percentage": "50%",
+                         "createdAt": "2023-03-20T15:58:06.238Z",
+                         "updatedAt": "2023-03-20T15:58:06.238Z",
+                         "__v": 0,
                    })
                   })
                  .then((response) => response.json())
                  .then((data)=>{
                         var educationForm = document.getElementById('educationForm');
-                        console.log(data);
+                        var userEmailEncr  = getCookie("UserEmail");
+                        var userEmail = decodeURIComponent(userEmailEncr);
+                        console.log(data)
+                        var array  = [{id : 1},{id : 2},{id : 3},{id : 4},{id : 5}];
                        data.map((d)=>{
-                            var content = `<div> ${d.userEmail} </div>`;
-                            educationForm.innerHTML = content;
-                       })
+                            {{!-- if(d.userEmail === userEmail){ --}}
+                              var content = `<div class="p-2 d-flex flex-column bg-danger" >
+                                                  <span> <strong class="mx-1" >Course : </strong> ${d.course}</span>
+                                                  <span> <strong class="mx-1" >Year Of Completion : </strong> ${d.yearOfCompletion}</span>
+                                                  <span> <strong class="mx-1" > Percentage : </strong> ${d.percentage}</span>
+                                             </div>`;
+                              educationForm.innerHTML = content;
+                            {{!-- } --}}
+                       });
+
                   });
           }
-
+           JobFetcher();
         {{!--  block ends --}}
      </script>
 </body>

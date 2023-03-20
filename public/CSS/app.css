@@ -38,7 +38,14 @@ body::-webkit-scrollbar{
 /*  Navbar styles Ends here------------------------------------------------------------- */
 
 
-
+.card{
+  width: 45vw;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 
 
@@ -138,26 +145,12 @@ body::-webkit-scrollbar{
  /* responsiveness--------------------------------------------------------------------------------------------------------- */
 
 
-/* 
- @media only screen and (max-width : 1400px){
-      .jobCard{
-           min-height: 60vh;
-      }
-      #resNav1{
-        display: none;
-      }
-      #resNav2{
-        display: none;
-      }
-      .toggleMenu{
-        display: block;
-      }
-      .jobDataContParent{
-        width: 100vw;
-      }
-      
-} */
-
+ @media only screen and (max-width : 1200px){
+  .jobCard{
+      min-height: 50vh;
+      overflow-y: scroll;
+  }
+}
 
  @media only screen and (max-width : 750px){
       #jobContainer{
@@ -168,8 +161,8 @@ body::-webkit-scrollbar{
         display: block;
       }
       .jobCard{
-        /* width: 85vw; */
-         min-height: 70vh;
+          min-height: 60vh;
+          overflow-y: scroll;
       }
       .jobDataContParent{
         min-width: 100%;

@@ -1,4 +1,3 @@
-
 <div class="container py-4 mt-5 d-flex justify-content-center align-items-center border-end border-top border-bottom border-secondary border-opacity-50" id="jobContainer" >
 {{!--  filterCont --}}
       <div class="filters d-flex flex-column justify-content-center align-items-center col-sm-3 bg-light border border-secondary border-opacity-50">
@@ -17,13 +16,14 @@
                           <span class="my-1" >
                              Category
                           </span>
-                          <input type="text" name="Category" class="px-2 border-opacity-50" placeholder="e.g.Marketing" onkeyup="filterJobName(e)" >
+                          <input type="text" name="Category" class="px-2 py-2 border border-secondary border-opacity-50" placeholder="e.g. Marketing" id="category">
+                          <ul id="mySearchUl" ></ul>
                        </label>
                         <label for="Location" class="py-2 d-flex flex-column">
                           <span class="my-1" >
                              Location
                           </span>
-                          <input type="text" name="Location" class="px-2 border-opacity-50" placeholder="e.g.Delhi" >
+                          <input type="text" name="Location" class="p-2 border border-secondary border-opacity-50" placeholder="e.g. Delhi" >
                        </label>
 
                         <div class="container-fluid d-flex flex-wrap justify-content-between align-items-center">
@@ -139,15 +139,10 @@
         .then((data)=>{
                 var myJobCont = document.getElementById('myJobCont');
                 myJobCont.innerHTML = "";
-
-                 const filterJobName = (e,data)=>{
-                     var filteredData = data.filter((d)=>{
-                          var textInput = e.target.value;
-                          {{!-- if() --}}
-                     })
-                 }
-
-                data?.slice((pageIndex-1)*50,(pageIndex-1)*50 +50).forEach((d)=>{
+               
+               {{!--  default rendered Data --}}
+                   function RenderedData(data){
+                        data?.slice((pageIndex-1)*50,(pageIndex-1)*50 +50).forEach((d)=>{
                         var content = `<div class="bg-light jobCard p-2" id=${d.id} >
                             <div class="container JobInfo d-flex justify-content-between align-items-center py-3">
                                   <div>
@@ -229,6 +224,39 @@
                           </div>`;
                         myJobCont.innerHTML += content;
                 })
+            }
+               {{!--  default Data Calling --}}
+                    RenderedData(data)
+
+            {{!--  Filtering  --}}
+                 category.addEventListener("keyup",(event)=>{
+                      var textInput = event.target.value;
+                      var mySearchUl = document.getElementById('mySearchUl')
+                      if(textInput === ""){
+                        mySearchUl.innerHTML = "";
+                      }else{
+                         var filteredData = data.slice(0,10).filter((d)=>{
+                              
+                              
+
+                               if(d.jobType.toUpperCase().match(textInput.toUpperCase())){
+                                  mySearchUl.innerHTML += `<li class="container-fluid py-2 border border-secondary border-opacity-50 searchList" >
+                                                               ${d.jobType}
+                                                           </li>`;
+                               }
+                         })
+                         RenderedData(filteredData);
+                        
+                      }
+
+
+
+                        
+                        
+                    {{!-- block ends here --}}
+                 })              
+
+                   
          }).catch((error)=>{
             console.error('Error Gathering Data',error);
          })

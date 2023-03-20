@@ -72,16 +72,29 @@
        var decodedDesignation = decodeURIComponent(userDesignation);
        var checkToken = checkCookie();
        var authButton = document.getElementById('authButton');
-        if(checkToken){
+        if(checkToken && decodedDesignation === "student" ){
                authButton.innerHTML = `<div class="dropdown" ><button class="flex authButtons btnGreen dropdown-toggle" data-bs-toggle="dropdown">
                 ${decodedValue[0].toUpperCase()}
                </button>
                 <ul class="dropdown-menu">
                    <li><a class="dropdown-item" href="http://localhost:7000/profile">Profile</a></li>
                    <li><a class="dropdown-item" href="http://localhost:7000/resume">Resume</a></li>
-                   <li><a class="dropdown-item" href="#">Link 2</a></li>
-                   <li><a class="dropdown-item" href="#">Link 2</a></li>
+                   <li><a class="dropdown-item" href="#">Messages</a></li>
+                   <li><a class="dropdown-item" href="#">Applied Company</a></li>
                    <li><a class="dropdown-item" href="#">Upgrade</a></li>
+                   <li><a href="http://localhost:7000/logout" class="dropdown-item">Logout</a></li>
+                 </ul>
+                </div>
+              </a>`;
+              }else if(checkToken && decodedDesignation === "company" ){
+                   authButton.innerHTML = `<div class="dropdown" ><button class="flex authButtons btnGreen dropdown-toggle" data-bs-toggle="dropdown">
+                ${decodedValue[0].toUpperCase()}
+               </button>
+                <ul class="dropdown-menu">
+                   <li><a class="dropdown-item" href="http://localhost:7000/profile">Profile</a></li>
+                   <li><a class="dropdown-item" href="#">Messages</a></li>
+                   <li><a class="dropdown-item" href="#">Add Jobs</a></li>
+                   <li><a class="dropdown-item" href="#">Add internships</a></li>
                    <li><a href="http://localhost:7000/logout" class="dropdown-item">Logout</a></li>
                  </ul>
                 </div>

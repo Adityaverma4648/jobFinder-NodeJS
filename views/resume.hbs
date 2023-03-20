@@ -15,10 +15,359 @@
     {{!--  block ends here --}}
     <link rel="stylesheet" href="CSS/app.css">
 </head>
-<body class="Login" >
+<body class="d-flex justify-content-center align-items-center" style="overflow-y:scroll; height : 100vh;width : 100vw;"  >
      {{>header}}
-     <div class="container bg-light">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque officia quaerat odit illo. Dignissimos commodi, veniam perferendis dolore iusto pariatur obcaecati et, accusamus ipsa quae reiciendis, vero odit vitae? Eos magni ducimus officiis voluptates placeat non quaerat, ex delectus vel quas sapiente repellendus nulla consectetur numquam minima distinctio pariatur tenetur, et quod culpa tempore nemo adipisci animi accusamus. Distinctio cumque laboriosam quod quia! Numquam, harum quibusdam dolor consequatur quae error esse dicta quia? Ea, inventore consequuntur blanditiis vel doloribus soluta ab obcaecati exercitationem iure cumque quis voluptatum accusantium explicabo.
+     <div class="container d-flex flex-column justify-content-center align-items-center bg-light mt-5">
+        <div class="container-fluid text-center h3">
+             RESUME
+        </div>
+        <div class="container-fluid d-flex flex-column justify-content-start  align-items-center py-2">
+            <h5 id="userName" class="container-fluid" ></h5>
+            <div class="text-secondary container-fluid" id="userEmail" >
+            </div>
+        </div>
+         <form action="" class="container-fluid" >
+             <div class="container-fluid d-flex flex-column justify-content-left align-items-center border border-secondary py-3 mb-2">
+                  <h5 class="d-flex container-fluid" >
+                    Phone Number
+                  </h5>
+                  <div class="container-fluid">
+                    <div class="d-flex flex-column my-2"  id="phoneNumber">
+                           <label for="phoneNumber" >
+                               <input type="number" name="phoneNumber"  class="container-fluid p-2 my-2 border border-secondary border-opacity-50" >  
+                           </label>
+                           <button class="col-sm-4 btn btn-outline-primary rounded-0" > Verify PhoneNo.</button>
+                    </div>
+               </div>
+            </div>
+              <div class="container-fluid d-flex flex-column justify-content-left align-items-center border border-secondary py-3 mb-2 ">
+                  <h5 class="d-flex container-fluid" >
+                    Education
+                  </h5>
+                  <div class="container-fluid">
+                    <div class="d-flex flex-column"  id="educationForm">
+                        
+                    </div>
+                  <button type="button" class="btn border-0 text-primary"  id="appendEducationFormButton" data-bs-toggle="modal" data-bs-target="#educationModal">
+                     <i class="fa fa-plus mx-1"></i>
+                      Add Education
+                  </button>
+                  </div>
+              </div>
+               <div class="container-fluid d-flex flex-column justify-content-center align-items-center border border-secondary py-3 mb-2 ">
+                  <h5 class="d-flex container-fluid">
+                      Jobs
+                  </h5>
+                  <div class="container-fluid">
+                    <div class="d-flex flex-column"  id="jobForm"></div>
+                  <button type="button" class="btn border-0 text-primary"  id="appendJobFormButton" data-bs-toggle="modal" data-bs-target="#jobModal" >
+                     <i class="fa fa-plus mx-1"></i>
+                      Add Job
+                  </button>
+                  </div>
+              </div>
+                <div class="container-fluid d-flex flex-column justify-content-center align-items-center border border-secondary py-3 mb-2 ">
+                  <h5 class="d-flex container-fluid">
+                      Internships
+                  </h5>
+                  <div class="container-fluid">
+                    <div class="d-flex flex-column"  id="jobForm"></div>
+                  <button type="button" class="btn border-0 text-primary"  data-bs-toggle="modal" data-bs-target="#internshipModal">
+                     <i class="fa fa-plus mx-1"></i>
+                      Add Internships
+                  </button>
+                  </div>
+              </div>
+
+               <div class="container-fluid d-flex flex-column justify-content-center align-items-center border border-secondary py-3 mb-2">
+                  <h5 class="d-flex container-fluid">
+                      Position of Responsibility
+                  </h5>
+                  <div class="container-fluid">
+                    <div class="d-flex flex-column"  id="jobForm"></div>
+                  <button type="button" class="btn border-0 text-primary"  id="appendResponsibilityButton" onclick="appendResponsibilityForm" data-bs-toggle="modal" data-bs-target="#responsibilityModal" >
+                     <i class="fa fa-plus mx-1"></i>
+                      Add Position of Responsibilites 
+                  </button>
+                  </div>
+              </div>
+
+               <div class="container-fluid d-flex flex-column justify-content-center align-items-center border border-secondary py-3 mb-2 ">
+                  <h5 class="d-flex container-fluid">
+                      Academic Projects
+                  </h5>
+                  <div class="container-fluid">
+                    <div class="d-flex flex-column"  id="jobForm"></div>
+                  <button type="button" class="btn border-0 text-primary"  id="appendProjectsButton" onclick="appendProjectsForm">
+                     <i class="fa fa-plus mx-1"></i>
+                      Add Academic Projects
+                  </button>
+                  </div>
+              </div>
+
+               <div class="container-fluid d-flex flex-column justify-content-center align-items-center border border-secondary py-3 mb-2 ">
+                  <h5 class="d-flex container-fluid">
+                      Portfolio/Work Samples
+                  </h5>
+                  <div class="container-fluid">
+                    <div class="d-flex flex-column"  id="jobForm"></div>
+                  <button type="button" class="btn border-0 text-primary"  id="appendPortfolioButton" onclick="appendPortfolioForm">
+                     <i class="fa fa-plus mx-1"></i>
+                      Add Portfolio/Work Samples
+                  </button>
+                  </div>
+              </div>
+               <div class="row">
+                  <input type="submit" class="col-sm-2 btn btn-outline-info py-2 rounded-0" value="Apply" >
+               </div>
+         </form>
+
+           <div class="modalContainer">
+
+                  {{!--  educationForm --------------------------------------------------------------------------------------------------------------------}}
+                  <div class="modal" id="educationModal">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+
+                      <!-- Modal Header -->
+                        <div class="modal-header">
+                          <h5 class="modal-title">Education</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                          <form action="/education" method="POST" class="container-fluid d-flex flex-column justify-content-center align-items-center" >
+                             <label for="course" class="container-fluid mb-1" >
+                                 <input type="text" name="course" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Course" >
+                             </label>
+                              <label for="yearOfCompletion" class="container-fluid mb-1" >
+                                 <input type="text" name="yearOfCompletion" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Year Of Completion" >
+                             </label>
+                             <label for="percentage" class=" container-fluid mb-1" >
+                                 <input type="text" name="percentage" class="container-fluid p-1 border border-secondary border-opacity-50" placeholder="Enter Your Percentage" >
+                             </label>
+                             <div class="container-fluid mb-1">
+                                 <input type="submit"  class="border border-secondary border-opacity-50 container p-1" >
+                             </div>
+                          </form>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  {{!-- model ends here --}}
+
+
+                   {{!-- JobForm --------------------------------------------------------------------------------------------------------------- --}}
+                    <div class="modal" id="jobModal">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+
+                      <!-- Modal Header -->
+                        <div class="modal-header">
+                          <h5 class="modal-title">Job</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                          <form action="/Jobs" method="POST" class="container-fluid d-flex flex-column justify-content-center align-items-center" >
+                             <label for="course" class="container-fluid mb-1" >
+                                 <input type="text" name="JobName" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Job Name" >
+                             </label>
+                              <label for="beginningYear" class="container-fluid mb-1" >
+                                 <input type="text" name="beginningYear" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Beginning Year of Job">
+                             </label>
+                             <label for="yearOfCompletion" class="container-fluid mb-1" >
+                                 <input type="text" name="yearOfCompletion" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your End Of Year Of Job">
+                             </label>
+                             <label for="Role" class="container-fluid mb-1" >
+                                <input type="text" name="Role" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Role" >
+                             </label>
+                             <div class="container-fluid mb-1">
+                                 <input type="submit"  class="border border-secondary border-opacity-50 container p-1" >
+                             </div>
+                          </form>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  {{!--  model ends here --}}
+
+
+                   {{!-INternship-----------------------------------------------------------------------------------------------------}}
+                  
+                      <div class="modal" id="internshipModal">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+
+                      <!-- Modal Header -->
+                        <div class="modal-header">
+                          <h5 class="modal-title">
+                             Internship 
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                          <form action="/internship" method="POST" class="container-fluid d-flex flex-column justify-content-center align-items-center" >
+                             <label for="internshipName" class="container-fluid mb-1" >
+                                 <input type="text" name="internshipName" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Internship Name" >
+                             </label>
+                              <label for="beginningMonth" class="container-fluid mb-1" >
+                                 <input type="text" name="beginningMonth" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Month Of Completion">
+                             </label>
+                             <label for="monthOfCompletion" class="container-fluid mb-1" >
+                                 <input type="text" name="monthOfCompletion" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Month Of Completion">
+                             </label>
+                              <label for="yearOfCompletion" class="container-fluid mb-1" >
+                                 <input type="text" name="yearOfCompletion" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Year Of Completion">
+                             </label>
+                             <label for="Role" class="container-fluid mb-1" >
+                                <input type="text" name="Role" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Role" >
+                             </label>
+                             <div class="container-fluid mb-1">
+                                 <input type="submit"  class="border border-secondary border-opacity-50 container p-1" >
+                             </div>
+                          </form>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                   {{!-- model ends here --}}
+
+                    {{!-----responsibility  -------------------------------------------------------------------------------------------------------------- --}}
+                  
+                  <div class="modal" id="responsibilityModal">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+
+                      <!-- Modal Header -->
+                        <div class="modal-header">
+                          <h5 class="modal-title">
+                             Responsibility
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                          <form action="/Jobs" method="POST" class="container-fluid d-flex flex-column justify-content-center align-items-center" >
+                             <label for="course" class="container-fluid mb-1" >
+                                 <input type="text" name="JobName" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Job Name" >
+                             </label>
+                              <label for="beginningYear" class="container-fluid mb-1" >
+                                 <input type="text" name="beginningYear" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Year Of Completion">
+                             </label>
+                             <label for="yearOfCompletion" class="container-fluid mb-1" >
+                                 <input type="text" name="yearOfCompletion" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Year Of Completion">
+                             </label>
+                             <label for="Role" class="container-fluid mb-1" >
+                                <input type="text" name="Role" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Role" >
+                             </label>
+                             <div class="container-fluid mb-1">
+                                 <input type="submit"  class="border border-secondary border-opacity-50 container p-1" >
+                             </div>
+                          </form>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                   {{!-- model ends here --}}
+           </div>
+
      </div>
+
+     <script>
+        {{!-- cookie getter fetcher --}}
+       function getCookie(cname) {
+           let name = cname + "=";
+           let ca = document.cookie.split(';');
+           for(let i = 0; i < ca.length; i++) {
+             let c = ca[i];
+             while (c.charAt(0) == ' ') {
+               c = c.substring(1);
+             }
+             if (c.indexOf(name) == 0) {
+               return c.substring(name.length, c.length);
+             }
+           }
+           return "";
+         }
+
+         function checkCookie() {
+           let token = getCookie("token");
+           if (token != "") {
+                return 1;
+           } else {
+                return 0;
+           }
+         }
+        {{!--  cookie rendering  --}}
+         var userNameEncr = getCookie("userName");
+         var userEmailEncr = getCookie("UserEmail");
+         var userName = decodeURIComponent(userNameEncr);
+         var userEmail = decodeURIComponent(userEmailEncr);
+         var userEmailDOM = document.getElementById('userEmail');
+         var userNameDOM = document.getElementById('userName');
+         
+              userNameDOM.innerHTML = userName;
+              userEmailDOM.innerHTML = userEmail;
+
+
+        {{!--  formFetcher --}}
+        
+          function JobFetcher(){
+                fetch('http://localhost:7000/allEducation', 
+                 { method: 'POST',headers: {
+                   'Content-type': 'application/json; charset=UTF-8',
+                  },
+                  body: JSON.stringify({
+                   userEmail : "example@gmail.com",
+                      course : "10th",
+            yearOfCompletion : "2013",
+                  percentage : "100%",
+                   })
+                  })
+                 .then((response) => response.json())
+                 .then((data)=>{
+                        var educationForm = document.getElementById('educationForm');
+                        console.log(data);
+                       data.map((d)=>{
+                            var content = `<div> ${d.userEmail} </div>`;
+                            educationForm.innerHTML = content;
+                       })
+                  });
+          }
+
+        {{!--  block ends --}}
+     </script>
 </body>
 </html>

@@ -15,7 +15,28 @@
     {{!--  block ends here --}}
     <link rel="stylesheet" href="CSS/app.css">
 </head>
-<body>
-    
+<body class="Login" >
+     {{>header}}
+     <div class="container d-flex flex-column justify-content-center align-items-center bg-light">
+           <form class="container-fluid bg-light border border-secondary p-2">
+                 <div class="container-fluid d-flex justify-content-center align-items-center" >
+                     <label for="profilePicture" class="col-sm-8 my-1 text-secondary" >
+                       <small>
+                         Enter Profile Pic Url
+                       </small>
+                       <input type="text" class="border border-secondary container-fluid p-2" placeholder="Enter URl" >
+                     </label>
+                     <div class="col-sm-4 d-flex justify-content-center align-items-center">
+                         <img src="#" alt="profileImage">
+                     </div>
+                 </div>
+                 <label for="profilePicture" class="container-fluid my-1 text-secondary">
+                    <small>
+                       Enter 
+                    </small>
+                    <input type="text" class="border border-secondary container-fluid p-2" placeholder="Enter URl" >
+                 </label>
+           </form>
+     </div>
 </body>
 </html>

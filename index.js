@@ -14,6 +14,8 @@ const session = require('express-session');
 //  calling mongo models
 
 const User = require("./model/User");
+const Education = require("./model/Education");
+const Jobs = require("./model/Jobs");
 
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
@@ -28,7 +30,13 @@ app.use(express.urlencoded({extended:false}));
 
 // cookies and session 
 app.use(cookieParser())
-
+// Session Setup
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  cookie : {  },
+}))
 
 // DB connect 
 const connectDB = require("./config/connect");
@@ -71,14 +79,74 @@ app.get("/signUp",(req,res)=>{
 app.get("/profile",(req,res)=>{
     res.render('profile.hbs')
 })
+
 app.get("/resume",(req,res)=>{
   res.render('resume.hbs')
 })
 
 app.get("/userError",(req,res)=>{
     res.render('UserError');
-    setInterval(res.redirect('index'),1000)
 })
+
+//  education --------------------------------------------------------------------------------------------------------------------
+app.post("/education", async (req,res) =>{
+   const { course , yearOfCompletion  , percentage  } = req.body;
+   const userEmail = req.session.userData[0].email;
+   if(!userEmail || !course || !yearOfCompletion || !percentage){
+    res.status(400);
+    throw new Error("Fill all the entries!");
+   }
+   const education = await Education.create({
+       userEmail,
+       course,
+       yearOfCompletion,
+       percentage
+   })
+   if(education){
+      res.status(200).redirect('resume');  
+   }else{
+      res.status(200).redirect('UserError');
+   }
+})
+//  end block ends here--------------------------------------------------------------------------------------------------------------
+
+
+app.post("/jobs", async (req,res) => {
+     const {jobName , beginningYear  , yearOfCompletion , Role }  = req.body;
+     const userEmail = req.session.userData[0].email;
+     if(!userEmail || !course || !yearOfCompletion || !percentage){
+          res.status(400);
+          throw new Error("Fill all the entries!");
+      }
+
+      const jobs = await Jobs.create({
+        userEmail,
+        jobName,
+        beginningYear,
+        yearOfCompletion,
+        Role
+      })
+      if(jobs){
+            res.status(200).redirect('resume');
+      }else{
+            res.status(200).redirect('UserError');
+      }
+
+})
+
+
+app.post('/allEducation', async (req,res)=>{
+  // const userEmail = req.session.userData[0].email;
+  const allEducation = await Education.find({ userEmail : "adityaverma4648@gmail.com" });
+  if(allEducation){
+       res.send(allEducation);
+  }else{
+      res.status(400)
+      throw new Error("nhi dunga bhai");
+  }
+})
+
+
 //  user controller - post data gathering-- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 app.post("/signUp", async (req,res)=>{
     const {userName, email, designation , password} = req.body;
@@ -111,20 +179,19 @@ app.post("/signUp", async (req,res)=>{
 });
 
 
-//  LOGIN  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  Login  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 app.post("/login",(async (req, res) => {
   const { email, password } = req.body;
-
   const user = await User.findOne({ email });
-
   if (user && (await user.matchPassword(password))) {
     const token  = generateToken(user._id);
     const userData  = await User.find({email});
+    req.session.userData = userData;
     res.cookie("userDesignation" ,userData[0].designation);
+    res.cookie("userName",userData[0].userName);
     res.cookie("token",token);
     res.cookie("UserEmail" , email);
-        //  requires cookies to be stored cookie will store jwt Token
     res.status(200).redirect('/');
   } else {
     res.status(200).redirect('UserError')
@@ -137,6 +204,7 @@ app.post("/login",(async (req, res) => {
 app.get('/logout', (req, res) => {
   res.clearCookie('token');
   res.clearCookie('UserEmail');
+  res.clearCookie('userName');
   res.clearCookie('companyEmail');
   return res.redirect('/');
 });

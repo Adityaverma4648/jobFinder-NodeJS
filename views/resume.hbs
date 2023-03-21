@@ -26,7 +26,7 @@
             <div class="text-secondary container-fluid" id="userEmail" >
             </div>
         </div>
-         <form action="" class="container-fluid" >
+         <form action="/verifyNumber" class="container-fluid" >
              <div class="container-fluid d-flex flex-column justify-content-left align-items-center border border-secondary py-3 mb-2">
                   <h5 class="d-flex container-fluid" >
                     Phone Number
@@ -98,7 +98,7 @@
                   </h5>
                   <div class="container-fluid">
                     <div class="d-flex flex-column"  ></div>
-                  <button type="button" class="btn border-0 text-primary"  id="appendProjectsButton" onclick="appendProjectsForm">
+                  <button type="button" class="btn border-0 text-primary"  data-bs-toggle="modal" data-bs-target="#projectModal" id="appendProjectsButton" onclick="appendProjectsForm">
                      <i class="fa fa-plus mx-1"></i>
                       Add Academic Projects
                   </button>
@@ -111,7 +111,7 @@
                   </h5>
                   <div class="container-fluid">
                     <div class="d-flex flex-column"></div>
-                  <button type="button" class="btn border-0 text-primary"  id="appendPortfolioButton" onclick="appendPortfolioForm">
+                  <button type="button" class="btn border-0 text-primary" data-bs-toggle="modal"  data-bs-target="#workModal" id="appendPortfolioButton" onclick="appendPortfolioForm">
                      <i class="fa fa-plus mx-1"></i>
                       Add Portfolio/Work Samples
                   </button>
@@ -337,6 +337,95 @@
                   </div>
 
                    {{!-- model ends here --}}
+                
+
+                      {{!-----projects -------------------------------------------------------------------------------------------------------------- --}}
+                  
+                  <div class="modal" id="projectModal">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+
+                      <!-- Modal Header -->
+                        <div class="modal-header">
+                          <h5 class="modal-title">
+                             Academic Projects
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                          <form action="/projects" method="POST" class="container-fluid d-flex flex-column justify-content-center align-items-center" >
+                             <label for="projectName" class="container-fluid mb-1" >
+                                 <input type="text" name="projectName" placeholder="Enter projectName" class="border border-secondary border-opacity-50 container-fluid p-1" >
+                             </label>
+                              <label for="projectDescription" class="container-fluid mb-1" >
+                                 <input type="text" name="projectDescription" placeholder="Enter Your Project Description" class="border border-secondary border-opacity-50 container-fluid p-1"  >
+                             </label>
+                             <label for="projectLink" class="container-fluid mb-1" >
+                                 <input type="text" name="projectLink" placeholder="Enter Your project Link" class="border border-secondary border-opacity-50 container-fluid p-1"  >
+                             </label>
+                             <div class="container-fluid mb-1">
+                                 <input type="submit"  class="border border-secondary border-opacity-50 container p-1" >
+                             </div>
+                          </form>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                   {{!-- model ends here --}}
+                  
+
+                       {{!-----work  -------------------------------------------------------------------------------------------------------------- --}}
+                  
+                  <div class="modal" id="workModal">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+
+                      <!-- Modal Header -->
+                        <div class="modal-header">
+                          <h5 class="modal-title">
+                             Work
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                          <form action="/work" method="POST" class="container-fluid d-flex flex-column justify-content-center align-items-center" >
+                             <label for="workName" class="container-fluid mb-1" >
+                                 <input type="text" name="workName" placeholder="Enter workName" class="border border-secondary border-opacity-50 container-fluid p-1" >
+                             </label>
+                              <label for="workDescription" class="container-fluid mb-1" >
+                                 <input type="text" name="workDescription" placeholder="Enter Your Work Description" class="border border-secondary border-opacity-50 container-fluid p-1"  >
+                             </label>
+                             <label for="workLink" class="container-fluid mb-1" >
+                                 <input type="text" name="workLink" placeholder="Enter Your Work Link" class="border border-secondary border-opacity-50 container-fluid p-1"  >
+                             </label>
+                             <div class="container-fluid mb-1">
+                                 <input type="submit"  class="border border-secondary border-opacity-50 container p-1" >
+                             </div>
+                          </form>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                   {{!-- model ends here --}}
+
            </div>
 
      </div>
@@ -491,6 +580,79 @@
 
         {{!-- block ends here --}}
        
+          
+           {{!--  projects  data fetcher function --}}
+             
+          function projectsFetcher(){
+                fetch('http://localhost:7000/allProjects', 
+                 { method: 'POST',headers: {
+                   'Content-type': 'application/json; charset=UTF-8',
+                  },
+                  body: JSON.stringify({
+                         "_id": "64188ee7aac34",
+                         "userEmail": "example@gmail.com",
+                         "course": "5th",
+                         "yearOfCompletion": "2006",
+                         "percentage": "50%",
+                         "createdAt": "2023-03-20T15:58:06.238Z",
+                         "updatedAt": "2023-03-20T15:58:06.238Z",
+                         "__v": 0,
+                   })
+                  })
+                 .then((response) => response.json())
+                 .then((data)=>{
+                        var projectsForm = document.getElementById('projectsForm');
+                       data?.forEach((d)=>{
+                             var content = `<div class="p-2 d-flex flex-column my-1" >
+                                                  <span> <strong class="mx-1" >Project Name : </strong> ${d.projectName}</span>
+                                                  <span> <strong class="mx-1" >Beginning Year : </strong> ${d.role}</span>
+                                             </div>`;
+                                projectsForm.innerHTML += content;
+                              
+                       })
+
+                  });
+          }
+           projectsFetcher();
+
+        {{!-- block ends here --}}
+
+          {{!--  projects  data fetcher function --}}
+             
+          function workFetcher(){
+                fetch('http://localhost:7000/allWorks', 
+                 { method: 'POST',headers: {
+                   'Content-type': 'application/json; charset=UTF-8',
+                  },
+                  body: JSON.stringify({
+                         "_id": "64188ee7aac34",
+                         "userEmail": "example@gmail.com",
+                         "course": "5th",
+                         "yearOfCompletion": "2006",
+                         "percentage": "50%",
+                         "createdAt": "2023-03-20T15:58:06.238Z",
+                         "updatedAt": "2023-03-20T15:58:06.238Z",
+                         "__v": 0,
+                   })
+                  })
+                 .then((response) => response.json())
+                 .then((data)=>{
+                        var workForm = document.getElementById('workForm');
+                       data?.forEach((d)=>{
+                             var content = `<div class="p-2 d-flex flex-column my-1" >
+                                                  <span> <strong class="mx-1" >Project Name : </strong> ${d.workName}</span>
+                                                  <span> <strong class="mx-1" >Beginning Year : </strong> ${d.role}</span>
+                                             </div>`;
+                                workForm.innerHTML += content;
+                              
+                       })
+
+                  });
+          }
+           workFetcher();
+
+        {{!-- block ends here --}}
+
 
      </script>
 </body>

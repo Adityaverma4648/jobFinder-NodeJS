@@ -18,7 +18,8 @@ const Education = require("./model/Education");
 const Jobs = require("./model/Jobs");
 const Internships = require("./model/Internships");
 const Responsibility = require("./model/Responsibility");
-
+const Projects = require("./model/Projects");
+const Works = require("./model/Works") 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -181,6 +182,48 @@ app.post("/responsibility", async (req,res) => {
 
 })
 
+app.post("/projects", async (req,res) => {
+  const { projectName , projectDescription , projectLink }  = req.body;
+  const userEmail = req.cookies.UserEmail;
+  if( !userEmail || !projectName || !projectDescription || !projectLink){
+       res.status(400);
+       throw new Error("Fill all the entries!");
+   }
+
+   const projects = await Projects.create({
+     userEmail,
+     projects,
+     role
+   })
+   if(projects){
+         res.status(200).redirect('resume');
+   }else{
+         res.status(200).redirect('UserError');
+   }
+
+})
+
+app.post("/works", async (req,res) => {
+  const { workName , workDescription , workLink }  = req.body;
+  const userEmail = req.cookies.UserEmail;
+  if( !userEmail || !workName || !workDescription || !workLink){
+       res.status(400);
+       throw new Error("Fill all the entries!");
+   }
+
+   const works = await Works.create({
+     userEmail,
+     workName,
+     workDescription,
+     workLink,
+   })
+   if(projects){
+         res.status(200).redirect('resume');
+   }else{
+         res.status(200).redirect('UserError');
+   }
+
+})
 
 app.post('/allEducation', async (req,res)=>{
   const userEmail = req.cookies.UserEmail;
@@ -215,6 +258,18 @@ app.post('/allResponsibility', async (req,res)=>{
   }
 })
 
+app.post('/allProjects', async (req,res)=>{
+  const userEmail = req.cookies.UserEmail;
+  const projects = await Projects.find({ userEmail});
+  if(projects){
+       res.send(projects);
+  }else{
+      res.status(400)
+      throw new Error("nhi dunga bhai");
+  }
+})
+
+
 app.post('/allJobs', async (req,res)=>{
   const userEmail = req.cookies.UserEmail;
   const allJobs = await Jobs.find({ userEmail});
@@ -225,6 +280,18 @@ app.post('/allJobs', async (req,res)=>{
       throw new Error("nhi dunga bhai");
   }
 })
+
+app.post('/allWorks', async (req,res)=>{
+  const userEmail = req.cookies.UserEmail;
+  const work = await Projects.find({ userEmail});
+  if(work){
+       res.send(work);
+  }else{
+      res.status(400)
+      throw new Error("nhi dunga bhai");
+  }
+})
+
 
 //  user controller - post data gathering-- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 app.post("/signUp", async (req,res)=>{

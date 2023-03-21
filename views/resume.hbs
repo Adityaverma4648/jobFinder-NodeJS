@@ -15,7 +15,7 @@
     {{!--  block ends here --}}
     <link rel="stylesheet" href="CSS/app.css">
 </head>
-<body class="d-flex justify-content-center align-items-center" style="overflow-y:scroll; height : 100vh;width : 100vw;"  >
+<body class="d-flex justify-content-start align-items-center" style="overflow-y:scroll; min-height : 150vh;width : 100vw;"  >
      {{>header}}
      <div class="container d-flex flex-column justify-content-center align-items-center bg-light mt-5">
         <div class="container-fluid text-center h3">
@@ -71,7 +71,7 @@
                       Internships
                   </h5>
                   <div class="container-fluid">
-                    <div class="d-flex flex-column"></div>
+                    <div class="d-flex flex-column" id="internshipForm" ></div>
                   <button type="button" class="btn border-0 text-primary"  data-bs-toggle="modal" data-bs-target="#internshipModal">
                      <i class="fa fa-plus mx-1"></i>
                       Add Internships
@@ -97,8 +97,8 @@
                       Academic Projects
                   </h5>
                   <div class="container-fluid">
-                    <div class="d-flex flex-column"  ></div>
-                  <button type="button" class="btn border-0 text-primary"  data-bs-toggle="modal" data-bs-target="#projectModal" id="appendProjectsButton" onclick="appendProjectsForm">
+                    <div class="d-flex flex-column" id="projectsForm" ></div>
+                  <button type="button" class="btn border-0 text-primary"  data-bs-toggle="modal" data-bs-target="#projectModal">
                      <i class="fa fa-plus mx-1"></i>
                       Add Academic Projects
                   </button>
@@ -110,16 +110,13 @@
                       Portfolio/Work Samples
                   </h5>
                   <div class="container-fluid">
-                    <div class="d-flex flex-column"></div>
-                  <button type="button" class="btn border-0 text-primary" data-bs-toggle="modal"  data-bs-target="#workModal" id="appendPortfolioButton" onclick="appendPortfolioForm">
+                    <div class="d-flex flex-column" id="workForm" ></div>
+                  <button type="button" class="btn border-0 text-primary" data-bs-toggle="modal"  data-bs-target="#workModal">
                      <i class="fa fa-plus mx-1"></i>
                       Add Portfolio/Work Samples
                   </button>
                   </div>
               </div>
-               <div class="row">
-                  <input type="submit" class="col-sm-2 btn btn-outline-info py-2 rounded-0" value="Apply" >
-               </div>
          </form>
 
            <div class="modalContainer">
@@ -237,7 +234,7 @@
 
                         <!-- Modal body -->
                         <div class="modal-body">
-                          <form action="/internship" method="POST" class="container-fluid d-flex flex-column justify-content-center align-items-center" >
+                          <form action="/internships" method="POST" class="container-fluid d-flex flex-column justify-content-center align-items-center" >
                              <label for="internshipName" class="container-fluid mb-1" >
                                  <input type="text" name="internshipName" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Internship Name" >
                              </label>
@@ -399,7 +396,7 @@
 
                         <!-- Modal body -->
                         <div class="modal-body">
-                          <form action="/work" method="POST" class="container-fluid d-flex flex-column justify-content-center align-items-center" >
+                          <form action="/works" method="POST" class="container-fluid d-flex flex-column justify-content-center align-items-center" >
                              <label for="workName" class="container-fluid mb-1" >
                                  <input type="text" name="workName" placeholder="Enter workName" class="border border-secondary border-opacity-50 container-fluid p-1" >
                              </label>
@@ -454,10 +451,20 @@
                         console.log(data)
                         var educationForm = document.getElementById('educationForm');
                        data?.forEach((d)=>{
-                             var content = `<div class="p-2 d-flex flex-column" >
-                                                  <span> <strong class="mx-1" >Course : </strong> ${d.course}</span>
+                             var content = `<div class="p-2 d-flex flex-row justify-content-between align-items-center" >
+                                                  <div class="d-flex flex-column" >
+                                                      <span> <strong class="mx-1" >Course : </strong> ${d.course}</span>
                                                   <span> <strong class="mx-1" >Year Of Completion : </strong> ${d.yearOfCompletion}</span>
                                                   <span> <strong class="mx-1" > Percentage : </strong> ${d.percentage}</span>
+                                                  </div>
+                                                  <div class="d-flex flex-column justify-content-evenly align-items-center">
+                                                          <a href="https://localhost:7000/education/edit" class="text-primary border-0 bg-transparent">
+                                                            <i class="fa fa-edit" ></i>
+                                                          </a>
+                                                          <a href="/education/delete?:${d._id}" class="text-danger border-0 bg-transparent">
+                                                            <i class="fa fa-trash" ></i>
+                                                          </a>
+                                                  </div>
                                              </div>`;
                                 console.log(content);
                                 educationForm.innerHTML += content;
@@ -525,15 +532,16 @@
                   })
                  .then((response) => response.json())
                  .then((data)=>{
-                        var jobForm = document.getElementById('jobForm');
+                        var internshipForm = document.getElementById('internshipForm');
                        data?.forEach((d)=>{
                              var content = `<div class="p-2 d-flex flex-column my-1" >
-                                                  <span> <strong class="mx-1" >Job Name : </strong> ${d.jobName}</span>
-                                                  <span> <strong class="mx-1" >Beginning Year : </strong> ${d.beginningYear}</span>
+                                                  <span> <strong class="mx-1" >Job Name : </strong> ${d.internshipName}</span>
+                                                  <span> <strong class="mx-1" >Beginning Year : </strong> ${d.beginningMonth}</span>
+                                                  <span> <strong class="mx-1" >Beginning Year : </strong> ${d.monthOfCompletion}</span>
                                                   <span> <strong class="mx-1" >Year Of Completion : </strong> ${d.yearOfCompletion}</span>
                                                   <span> <strong class="mx-1" > Role : </strong> ${d.role}</span>
                                              </div>`;
-                                jobForm.innerHTML += content;
+                                internshipForm.innerHTML += content;
                               
                        })
 
@@ -605,7 +613,8 @@
                        data?.forEach((d)=>{
                              var content = `<div class="p-2 d-flex flex-column my-1" >
                                                   <span> <strong class="mx-1" >Project Name : </strong> ${d.projectName}</span>
-                                                  <span> <strong class="mx-1" >Beginning Year : </strong> ${d.role}</span>
+                                                  <span> <strong class="mx-1" >Project Description : </strong> ${d.projectDescription}</span>
+                                                  <span> <strong class="mx-1"> Project Link : </strong> <a href="${d.projectLink}">${d.projectLink}</span>
                                              </div>`;
                                 projectsForm.innerHTML += content;
                               
@@ -640,8 +649,9 @@
                         var workForm = document.getElementById('workForm');
                        data?.forEach((d)=>{
                              var content = `<div class="p-2 d-flex flex-column my-1" >
-                                                  <span> <strong class="mx-1" >Project Name : </strong> ${d.workName}</span>
-                                                  <span> <strong class="mx-1" >Beginning Year : </strong> ${d.role}</span>
+                                                  <span> <strong class="mx-1"> Work Name : </strong> ${d.workName}</span>
+                                                  <span> <strong class="mx-1" > Work Description : </strong> ${d.workDescription}</span>
+                                                  <span> <strong class="mx-1"> Work Link : </strong> ${d.workLink}</span>
                                              </div>`;
                                 workForm.innerHTML += content;
                               

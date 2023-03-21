@@ -5,7 +5,7 @@ const internshipSchema = new mongoose.Schema({
         type : String,
         required : true,
     },
-    jobName : {
+    internshipName : {
         type : String,
         required : true,
     },

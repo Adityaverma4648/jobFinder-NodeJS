@@ -138,14 +138,14 @@ app.post("/jobs", async (req,res) => {
 
 
 app.post("/internships", async (req,res) => {
-  const {internshipName , beginningMonth  , monthOfCompletion , role }  = req.body;
+  const {internshipName , beginningMonth  , monthOfCompletion , yearOfCompletion , role }  = req.body;
   const userEmail = req.cookies.UserEmail;
   if( !userEmail || !internshipName || !beginningMonth || !monthOfCompletion  || !yearOfCompletion || !role){
        res.status(400);
        throw new Error("Fill all the entries!");
    }
 
-   const internship = await Internsships.create({
+   const internship = await Internships.create({
      userEmail,
      internshipName,
      beginningMonth,
@@ -192,8 +192,9 @@ app.post("/projects", async (req,res) => {
 
    const projects = await Projects.create({
      userEmail,
-     projects,
-     role
+     projectName,
+     projectDescription,
+     projectLink,
    })
    if(projects){
          res.status(200).redirect('resume');
@@ -217,7 +218,7 @@ app.post("/works", async (req,res) => {
      workDescription,
      workLink,
    })
-   if(projects){
+   if(works){
          res.status(200).redirect('resume');
    }else{
          res.status(200).redirect('UserError');
@@ -236,7 +237,7 @@ app.post('/allEducation', async (req,res)=>{
   }
 })
 
-app.post('/allInternship', async (req,res)=>{
+app.post('/allInternships', async (req,res)=>{
   const userEmail = req.cookies.UserEmail;
   const allInternship = await Internships.find({ userEmail});
   if(allInternship){
@@ -283,7 +284,7 @@ app.post('/allJobs', async (req,res)=>{
 
 app.post('/allWorks', async (req,res)=>{
   const userEmail = req.cookies.UserEmail;
-  const work = await Projects.find({ userEmail});
+  const work = await Works.find({ userEmail});
   if(work){
        res.send(work);
   }else{

@@ -59,7 +59,7 @@
                       Jobs
                   </h5>
                   <div class="container-fluid">
-                    <div class="d-flex flex-column"  id="jobForm"></div>
+                    <div class="d-flex flex-column" id="jobForm"></div>
                   <button type="button" class="btn border-0 text-primary"  id="appendJobFormButton" data-bs-toggle="modal" data-bs-target="#jobModal" >
                      <i class="fa fa-plus mx-1"></i>
                       Add Job
@@ -71,7 +71,7 @@
                       Internships
                   </h5>
                   <div class="container-fluid">
-                    <div class="d-flex flex-column"  id="jobForm"></div>
+                    <div class="d-flex flex-column"></div>
                   <button type="button" class="btn border-0 text-primary"  data-bs-toggle="modal" data-bs-target="#internshipModal">
                      <i class="fa fa-plus mx-1"></i>
                       Add Internships
@@ -84,11 +84,11 @@
                       Position of Responsibility
                   </h5>
                   <div class="container-fluid">
-                    <div class="d-flex flex-column"  id="jobForm"></div>
-                  <button type="button" class="btn border-0 text-primary"  id="appendResponsibilityButton" onclick="appendResponsibilityForm" data-bs-toggle="modal" data-bs-target="#responsibilityModal" >
-                     <i class="fa fa-plus mx-1"></i>
-                      Add Position of Responsibilites 
-                  </button>
+                    <div class="d-flex flex-column" id="responsibilityForm" ></div>
+                    <button type="button" class="btn border-0 text-primary"  id="appendResponsibilityButton" onclick="appendResponsibilityForm" data-bs-toggle="modal" data-bs-target="#responsibilityModal" >
+                         <i class="fa fa-plus mx-1"></i>
+                         Add Position of Responsibilites 
+                     </button>
                   </div>
               </div>
 
@@ -97,7 +97,7 @@
                       Academic Projects
                   </h5>
                   <div class="container-fluid">
-                    <div class="d-flex flex-column"  id="jobForm"></div>
+                    <div class="d-flex flex-column"  ></div>
                   <button type="button" class="btn border-0 text-primary"  id="appendProjectsButton" onclick="appendProjectsForm">
                      <i class="fa fa-plus mx-1"></i>
                       Add Academic Projects
@@ -110,7 +110,7 @@
                       Portfolio/Work Samples
                   </h5>
                   <div class="container-fluid">
-                    <div class="d-flex flex-column"  id="jobForm"></div>
+                    <div class="d-flex flex-column"></div>
                   <button type="button" class="btn border-0 text-primary"  id="appendPortfolioButton" onclick="appendPortfolioForm">
                      <i class="fa fa-plus mx-1"></i>
                       Add Portfolio/Work Samples
@@ -191,9 +191,9 @@
 
                         <!-- Modal body -->
                         <div class="modal-body">
-                          <form action="/Jobs" method="POST" class="container-fluid d-flex flex-column justify-content-center align-items-center" >
-                             <label for="course" class="container-fluid mb-1" >
-                                 <input type="text" name="JobName" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Job Name" >
+                          <form action="/jobs" method="POST" class="container-fluid d-flex flex-column justify-content-center align-items-center" >
+                             <label for="jobName" class="container-fluid mb-1" >
+                                 <input type="text" name="jobName" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Job Name" >
                              </label>
                               <label for="beginningYear" class="container-fluid mb-1" >
                                  <input type="text" name="beginningYear" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Beginning Year of Job">
@@ -201,8 +201,8 @@
                              <label for="yearOfCompletion" class="container-fluid mb-1" >
                                  <input type="text" name="yearOfCompletion" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your End Of Year Of Job">
                              </label>
-                             <label for="Role" class="container-fluid mb-1" >
-                                <input type="text" name="Role" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Role" >
+                             <label for="role" class="container-fluid mb-1" >
+                                <input type="text" name="role" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Role" >
                              </label>
                              <div class="container-fluid mb-1">
                                  <input type="submit"  class="border border-secondary border-opacity-50 container p-1" >
@@ -242,16 +242,44 @@
                                  <input type="text" name="internshipName" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Internship Name" >
                              </label>
                               <label for="beginningMonth" class="container-fluid mb-1" >
-                                 <input type="text" name="beginningMonth" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Month Of Completion">
+                                 <select name="beginningMonth" class="border border-secondary border-opacity-50 container-fluid p-1">
+                                  <option value="" class="text-seocndary" > Beginning Month of Internship</option>
+                                    <option value="January" > January </option>
+                                    <option value="Feburary" > Feburary </option>
+                                    <option value="March" > March </option>
+                                    <option value="April" > April </option>
+                                    <option value="May" > May </option>
+                                    <option value="June" > June </option>
+                                    <option value="July" > July </option>
+                                    <option value="August" > August </option>
+                                    <option value="September" > September </option>
+                                    <option value="October" > October </option>
+                                    <option value="November" > November </option>
+                                    <option value="December" > December </option>
+                                  </select>
                              </label>
                              <label for="monthOfCompletion" class="container-fluid mb-1" >
-                                 <input type="text" name="monthOfCompletion" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Month Of Completion">
+                                 <select name="monthOfCompletion" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Month Of COmpletion" >
+                                     <option value="" class="text-seocndary" > Enter month of Completion </option>
+                                     <option value="January" > January </option>
+                                    <option value="Feburary" > Feburary </option>
+                                    <option value="March" > March </option>
+                                    <option value="April" > April </option>
+                                    <option value="May" > May </option>
+                                    <option value="June" > June </option>
+                                    <option value="July" > July </option>
+                                    <option value="August" > August </option>
+                                    <option value="September" > September </option>
+                                    <option value="October" > October </option>
+                                    <option value="November" > November </option>
+                                    <option value="December" > December </option>
+                                  </select>
                              </label>
                               <label for="yearOfCompletion" class="container-fluid mb-1" >
                                  <input type="text" name="yearOfCompletion" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Year Of Completion">
                              </label>
-                             <label for="Role" class="container-fluid mb-1" >
-                                <input type="text" name="Role" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Role" >
+                             <label for="role" class="container-fluid mb-1" >
+                                <input type="text" name="role" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Role" >
                              </label>
                              <div class="container-fluid mb-1">
                                  <input type="submit"  class="border border-secondary border-opacity-50 container p-1" >
@@ -286,18 +314,12 @@
 
                         <!-- Modal body -->
                         <div class="modal-body">
-                          <form action="/Jobs" method="POST" class="container-fluid d-flex flex-column justify-content-center align-items-center" >
-                             <label for="course" class="container-fluid mb-1" >
-                                 <input type="text" name="JobName" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Job Name" >
+                          <form action="/responsibility" method="POST" class="container-fluid d-flex flex-column justify-content-center align-items-center" >
+                             <label for="responsibility" class="container-fluid mb-1" >
+                                 <input type="text" name="responsibility" placeholder="Enter your position of responsibility" class="border border-secondary border-opacity-50 container-fluid p-1" >
                              </label>
-                              <label for="beginningYear" class="container-fluid mb-1" >
-                                 <input type="text" name="beginningYear" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Year Of Completion">
-                             </label>
-                             <label for="yearOfCompletion" class="container-fluid mb-1" >
-                                 <input type="text" name="yearOfCompletion" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Year Of Completion">
-                             </label>
-                             <label for="Role" class="container-fluid mb-1" >
-                                <input type="text" name="Role" class="border border-secondary border-opacity-50 container-fluid p-1" placeholder="Enter Your Role" >
+                              <label for="role" class="container-fluid mb-1" >
+                                 <input type="text" name="role" placeholder="Enter your role" class="border border-secondary border-opacity-50 container-fluid p-1"  >
                              </label>
                              <div class="container-fluid mb-1">
                                  <input type="submit"  class="border border-secondary border-opacity-50 container p-1" >
@@ -320,51 +342,15 @@
      </div>
 
      <script>
-        {{!-- cookie getter fetcher --}}
-       function getCookie(cname) {
-           let name = cname + "=";
-           let ca = document.cookie.split(';');
-           for(let i = 0; i < ca.length; i++) {
-             let c = ca[i];
-             while (c.charAt(0) == ' ') {
-               c = c.substring(1);
-             }
-             if (c.indexOf(name) == 0) {
-               return c.substring(name.length, c.length);
-             }
-           }
-           return "";
-         }
-
-         function checkCookie() {
-           let token = getCookie("token");
-           if (token != "") {
-                return 1;
-           } else {
-                return 0;
-           }
-         }
-        {{!--  cookie rendering  --}}
-         var userNameEncr = getCookie("userName");
-         var userEmailEncr = getCookie("UserEmail");
-         var userName = decodeURIComponent(userNameEncr);
-         var userEmail = decodeURIComponent(userEmailEncr);
-         var userEmailDOM = document.getElementById('userEmail');
-         var userNameDOM = document.getElementById('userName');
-         
-              userNameDOM.innerHTML = userName;
-              userEmailDOM.innerHTML = userEmail;
-
-
         {{!--  formFetcher --}}
         
-          function JobFetcher(){
+          function EducationFetcher(){
                 fetch('http://localhost:7000/allEducation', 
                  { method: 'POST',headers: {
                    'Content-type': 'application/json; charset=UTF-8',
                   },
                   body: JSON.stringify({
-                         "_id": "6418828edfcb4e55ee7aac34",
+                         "_id": "64188ee7aac34",
                          "userEmail": "example@gmail.com",
                          "course": "5th",
                          "yearOfCompletion": "2006",
@@ -376,26 +362,136 @@
                   })
                  .then((response) => response.json())
                  .then((data)=>{
-                        var educationForm = document.getElementById('educationForm');
-                        var userEmailEncr  = getCookie("UserEmail");
-                        var userEmail = decodeURIComponent(userEmailEncr);
                         console.log(data)
-                        var array  = [{id : 1},{id : 2},{id : 3},{id : 4},{id : 5}];
-                       data.map((d)=>{
-                            {{!-- if(d.userEmail === userEmail){ --}}
-                              var content = `<div class="p-2 d-flex flex-column bg-danger" >
+                        var educationForm = document.getElementById('educationForm');
+                       data?.forEach((d)=>{
+                             var content = `<div class="p-2 d-flex flex-column" >
                                                   <span> <strong class="mx-1" >Course : </strong> ${d.course}</span>
                                                   <span> <strong class="mx-1" >Year Of Completion : </strong> ${d.yearOfCompletion}</span>
                                                   <span> <strong class="mx-1" > Percentage : </strong> ${d.percentage}</span>
                                              </div>`;
-                              educationForm.innerHTML = content;
-                            {{!-- } --}}
-                       });
+                                console.log(content);
+                                educationForm.innerHTML += content;
+                              
+                       })
 
                   });
           }
-           JobFetcher();
+           EducationFetcher();
+
         {{!--  block ends --}}
+
+          function jobFetcher(){
+                fetch('http://localhost:7000/allJobs', 
+                 { method: 'POST',headers: {
+                   'Content-type': 'application/json; charset=UTF-8',
+                  },
+                  body: JSON.stringify({
+                         "_id": "64188ee7aac34",
+                         "userEmail": "example@gmail.com",
+                         "course": "5th",
+                         "yearOfCompletion": "2006",
+                         "percentage": "50%",
+                         "createdAt": "2023-03-20T15:58:06.238Z",
+                         "updatedAt": "2023-03-20T15:58:06.238Z",
+                         "__v": 0,
+                   })
+                  })
+                 .then((response) => response.json())
+                 .then((data)=>{
+                        var jobForm = document.getElementById('jobForm');
+                       data?.forEach((d)=>{
+                             var content = `<div class="p-2 d-flex flex-column my-1" >
+                                                  <span> <strong class="mx-1" >Job Name : </strong> ${d.jobName}</span>
+                                                  <span> <strong class="mx-1" >Beginning Year : </strong> ${d.beginningYear}</span>
+                                                  <span> <strong class="mx-1" >Year Of Completion : </strong> ${d.yearOfCompletion}</span>
+                                                  <span> <strong class="mx-1" > Role : </strong> ${d.role}</span>
+                                             </div>`;
+                                jobForm.innerHTML += content;
+                              
+                       })
+
+                  });
+          }
+           jobFetcher();
+
+
+        {{!--  internship  data fetcher function --}}
+             
+          function internshipFetcher(){
+                fetch('http://localhost:7000/allInternships', 
+                 { method: 'POST',headers: {
+                   'Content-type': 'application/json; charset=UTF-8',
+                  },
+                  body: JSON.stringify({
+                         "_id": "64188ee7aac34",
+                         "userEmail": "example@gmail.com",
+                         "course": "5th",
+                         "yearOfCompletion": "2006",
+                         "percentage": "50%",
+                         "createdAt": "2023-03-20T15:58:06.238Z",
+                         "updatedAt": "2023-03-20T15:58:06.238Z",
+                         "__v": 0,
+                   })
+                  })
+                 .then((response) => response.json())
+                 .then((data)=>{
+                        var jobForm = document.getElementById('jobForm');
+                       data?.forEach((d)=>{
+                             var content = `<div class="p-2 d-flex flex-column my-1" >
+                                                  <span> <strong class="mx-1" >Job Name : </strong> ${d.jobName}</span>
+                                                  <span> <strong class="mx-1" >Beginning Year : </strong> ${d.beginningYear}</span>
+                                                  <span> <strong class="mx-1" >Year Of Completion : </strong> ${d.yearOfCompletion}</span>
+                                                  <span> <strong class="mx-1" > Role : </strong> ${d.role}</span>
+                                             </div>`;
+                                jobForm.innerHTML += content;
+                              
+                       })
+
+                  });
+          }
+           internshipFetcher();
+
+        {{!-- block ends here --}}
+
+
+        {{!--  responsibility  data fetcher function --}}
+             
+          function responsibilityFetcher(){
+                fetch('http://localhost:7000/allResponsibility', 
+                 { method: 'POST',headers: {
+                   'Content-type': 'application/json; charset=UTF-8',
+                  },
+                  body: JSON.stringify({
+                         "_id": "64188ee7aac34",
+                         "userEmail": "example@gmail.com",
+                         "course": "5th",
+                         "yearOfCompletion": "2006",
+                         "percentage": "50%",
+                         "createdAt": "2023-03-20T15:58:06.238Z",
+                         "updatedAt": "2023-03-20T15:58:06.238Z",
+                         "__v": 0,
+                   })
+                  })
+                 .then((response) => response.json())
+                 .then((data)=>{
+                        var responsibilityForm = document.getElementById('responsibilityForm');
+                       data?.forEach((d)=>{
+                             var content = `<div class="p-2 d-flex flex-column my-1" >
+                                                  <span> <strong class="mx-1" >Job Name : </strong> ${d.responsibility}</span>
+                                                  <span> <strong class="mx-1" >Beginning Year : </strong> ${d.role}</span>
+                                             </div>`;
+                                responsibilityForm.innerHTML += content;
+                              
+                       })
+
+                  });
+          }
+           responsibilityFetcher();
+
+        {{!-- block ends here --}}
+       
+
      </script>
 </body>
 </html>

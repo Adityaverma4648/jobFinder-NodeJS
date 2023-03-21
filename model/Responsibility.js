@@ -1,20 +1,12 @@
 const mongoose = require('mongoose');
-const jobSchema = new mongoose.Schema({
+const responsibilitySchema = new mongoose.Schema({
     userEmail : {
         type : String,
         required : true,
     },
-    jobName : {
+    responsibility : {
         type : String,
         required : true,
-    },
-    beginningYear : {
-        type : String,
-        required : true
-    },
-    yearOfCompletion : {
-        type : String,
-        required : true
     },
     role : {
         type : String,
@@ -26,4 +18,4 @@ const jobSchema = new mongoose.Schema({
 }
 )
 
-module.exports= mongoose.model("Jobs",jobSchema);
+module.exports= mongoose.model("Responsibility",responsibilitySchema);

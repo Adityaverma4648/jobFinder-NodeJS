@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const jobSchema = new mongoose.Schema({
+
+const internshipSchema = new mongoose.Schema({
     userEmail : {
         type : String,
         required : true,
@@ -8,7 +9,11 @@ const jobSchema = new mongoose.Schema({
         type : String,
         required : true,
     },
-    beginningYear : {
+    beginningMonth : {
+        type : String,
+        required : true
+    },
+    monthOfCompletion : {
         type : String,
         required : true
     },
@@ -26,4 +31,4 @@ const jobSchema = new mongoose.Schema({
 }
 )
 
-module.exports= mongoose.model("Jobs",jobSchema);
+module.exports= mongoose.model("Internships",internshipSchema);

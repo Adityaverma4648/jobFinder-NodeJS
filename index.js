@@ -16,7 +16,8 @@ const session = require('express-session');
 const User = require("./model/User");
 const Education = require("./model/Education");
 const Jobs = require("./model/Jobs");
-
+const Internships = require("./model/Internships");
+const Responsibility = require("./model/Responsibility");
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -91,7 +92,7 @@ app.get("/userError",(req,res)=>{
 //  education --------------------------------------------------------------------------------------------------------------------
 app.post("/education", async (req,res) =>{
    const { course , yearOfCompletion  , percentage  } = req.body;
-   const userEmail = req.session.userData[0].email;
+   const userEmail = req.cookies.UserEmail;
    if(!userEmail || !course || !yearOfCompletion || !percentage){
     res.status(400);
     throw new Error("Fill all the entries!");
@@ -112,9 +113,9 @@ app.post("/education", async (req,res) =>{
 
 
 app.post("/jobs", async (req,res) => {
-     const {jobName , beginningYear  , yearOfCompletion , Role }  = req.body;
-     const userEmail = req.session.userData[0].email;
-     if(!userEmail || !course || !yearOfCompletion || !percentage){
+     const {jobName , beginningYear  , yearOfCompletion , role }  = req.body;
+     const userEmail = req.cookies.UserEmail;
+     if( !userEmail || !jobName || !beginningYear || !yearOfCompletion || !role){
           res.status(400);
           throw new Error("Fill all the entries!");
       }
@@ -124,7 +125,7 @@ app.post("/jobs", async (req,res) => {
         jobName,
         beginningYear,
         yearOfCompletion,
-        Role
+        role
       })
       if(jobs){
             res.status(200).redirect('resume');
@@ -135,9 +136,55 @@ app.post("/jobs", async (req,res) => {
 })
 
 
+app.post("/internships", async (req,res) => {
+  const {internshipName , beginningMonth  , monthOfCompletion , role }  = req.body;
+  const userEmail = req.cookies.UserEmail;
+  if( !userEmail || !internshipName || !beginningMonth || !monthOfCompletion  || !yearOfCompletion || !role){
+       res.status(400);
+       throw new Error("Fill all the entries!");
+   }
+
+   const internship = await Internsships.create({
+     userEmail,
+     internshipName,
+     beginningMonth,
+     monthOfCompletion,
+     yearOfCompletion,
+     role
+   })
+   if(internship){
+         res.status(200).redirect('resume');
+   }else{
+         res.status(200).redirect('UserError');
+   }
+
+})
+
+app.post("/responsibility", async (req,res) => {
+  const { responsibility , role }  = req.body;
+  const userEmail = req.cookies.UserEmail;
+  if( !userEmail || !responsibility || !role){
+       res.status(400);
+       throw new Error("Fill all the entries!");
+   }
+
+   const myResponsibility = await Responsibility.create({
+     userEmail,
+     responsibility,
+     role
+   })
+   if(myResponsibility){
+         res.status(200).redirect('resume');
+   }else{
+         res.status(200).redirect('UserError');
+   }
+
+})
+
+
 app.post('/allEducation', async (req,res)=>{
-  // const userEmail = req.session.userData[0].email;
-  const allEducation = await Education.find({ userEmail : "adityaverma4648@gmail.com" });
+  const userEmail = req.cookies.UserEmail;
+  const allEducation = await Education.find({ userEmail});
   if(allEducation){
        res.send(allEducation);
   }else{
@@ -146,6 +193,38 @@ app.post('/allEducation', async (req,res)=>{
   }
 })
 
+app.post('/allInternship', async (req,res)=>{
+  const userEmail = req.cookies.UserEmail;
+  const allInternship = await Internships.find({ userEmail});
+  if(allInternship){
+       res.send(allInternship);
+  }else{
+      res.status(400)
+      throw new Error("nhi dunga bhai");
+  }
+})
+
+app.post('/allResponsibility', async (req,res)=>{
+  const userEmail = req.cookies.UserEmail;
+  const allResponsibility = await Responsibility.find({ userEmail});
+  if(allResponsibility){
+       res.send(allResponsibility);
+  }else{
+      res.status(400)
+      throw new Error("nhi dunga bhai");
+  }
+})
+
+app.post('/allJobs', async (req,res)=>{
+  const userEmail = req.cookies.UserEmail;
+  const allJobs = await Jobs.find({ userEmail});
+  if(allJobs){
+       res.send(allJobs);
+  }else{
+      res.status(400)
+      throw new Error("nhi dunga bhai");
+  }
+})
 
 //  user controller - post data gathering-- -- -- -- -- -- -- -- -- -- -- -- -- -- 
 app.post("/signUp", async (req,res)=>{

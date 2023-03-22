@@ -6,6 +6,12 @@ const apiRoutes = require('./routes/apiRoutes');
 const jobData = require('./data/JobData.json')
 const generateToken = require("./config/Jwt");
 const educationRoutes = require("./routes/educationRoutes");
+const jobRoutes = require("./routes/jobRoutes");
+const internshipRoutes = require("./routes/internshipRoutes");
+const responsibilityRoutes = require("./routes/responsibilityRoutes");
+const projectRoutes = require("./routes/projectRoutes");
+const worksRoutes = require("./routes/workRoutes");
+
 
 //  cookie
 const cookieParser = require('cookie-parser');
@@ -99,142 +105,28 @@ app.get("/userError",(req,res)=>{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // Resume------------------------------------------------------------------------------------------------------------------
 
 //  education --------------------------------------------------------------------------------------------------------------------
 app.use('/education',educationRoutes)
-
-
+//  end block ends here--------------------------------------------------------------------------------------------------------------
+//  Job --------------------------------------------------------------------------------------------------------------------
+app.use('/jobs',jobRoutes)
+//  end block ends here--------------------------------------------------------------------------------------------------------------
+//  Internship  --------------------------------------------------------------------------------------------------------------------
+app.use('/internships',internshipRoutes)
+//  end block ends here--------------------------------------------------------------------------------------------------------------
+//  Responsibility  --------------------------------------------------------------------------------------------------------------------
+app.use('/responsibility',responsibilityRoutes)
+//  end block ends here--------------------------------------------------------------------------------------------------------------
+//  Projects  --------------------------------------------------------------------------------------------------------------------
+app.use('/projects',projectRoutes)
+//  end block ends here--------------------------------------------------------------------------------------------------------------
+//  Projects  --------------------------------------------------------------------------------------------------------------------
+app.use('/workss',worksRoutes)
 //  end block ends here--------------------------------------------------------------------------------------------------------------
 
 
-
-app.post("/jobs", async (req,res) => {
-     const {jobName , beginningYear  , yearOfCompletion , role }  = req.body;
-     const userEmail = req.cookies.UserEmail;
-     if( !userEmail || !jobName || !beginningYear || !yearOfCompletion || !role){
-          res.status(400);
-          throw new Error("Fill all the entries!");
-      }
-
-      const jobs = await Jobs.create({
-        userEmail,
-        jobName,
-        beginningYear,
-        yearOfCompletion,
-        role
-      })
-      if(jobs){
-            res.status(200).redirect('resume');
-      }else{
-            res.status(200).redirect('UserError');
-      }
-
-})
-
-
-app.post("/internships", async (req,res) => {
-  const {internshipName , beginningMonth  , monthOfCompletion , yearOfCompletion , role }  = req.body;
-  const userEmail = req.cookies.UserEmail;
-  if( !userEmail || !internshipName || !beginningMonth || !monthOfCompletion  || !yearOfCompletion || !role){
-       res.status(400);
-       throw new Error("Fill all the entries!");
-   }
-
-   const internship = await Internships.create({
-     userEmail,
-     internshipName,
-     beginningMonth,
-     monthOfCompletion,
-     yearOfCompletion,
-     role
-   })
-   if(internship){
-         res.status(200).redirect('resume');
-   }else{
-         res.status(200).redirect('UserError');
-   }
-
-})
-
-app.post("/responsibility", async (req,res) => {
-  const { responsibility , role }  = req.body;
-  const userEmail = req.cookies.UserEmail;
-  if( !userEmail || !responsibility || !role){
-       res.status(400);
-       throw new Error("Fill all the entries!");
-   }
-
-   const myResponsibility = await Responsibility.create({
-     userEmail,
-     responsibility,
-     role
-   })
-   if(myResponsibility){
-         res.status(200).redirect('resume');
-   }else{
-         res.status(200).redirect('UserError');
-   }
-
-})
-
-app.post("/projects", async (req,res) => {
-  const { projectName , projectDescription , projectLink }  = req.body;
-  const userEmail = req.cookies.UserEmail;
-  if( !userEmail || !projectName || !projectDescription || !projectLink){
-       res.status(400);
-       throw new Error("Fill all the entries!");
-   }
-
-   const projects = await Projects.create({
-     userEmail,
-     projectName,
-     projectDescription,
-     projectLink,
-   })
-   if(projects){
-         res.status(200).redirect('resume');
-   }else{
-         res.status(200).redirect('UserError');
-   }
-
-})
-
-app.post("/works", async (req,res) => {
-  const { workName , workDescription , workLink }  = req.body;
-  const userEmail = req.cookies.UserEmail;
-  if( !userEmail || !workName || !workDescription || !workLink){
-       res.status(400);
-       throw new Error("Fill all the entries!");
-   }
-
-   const works = await Works.create({
-     userEmail,
-     workName,
-     workDescription,
-     workLink,
-   })
-   if(works){
-         res.status(200).redirect('resume');
-   }else{
-         res.status(200).redirect('UserError');
-   }
-
-})
 
 app.post('/allEducation', async (req,res)=>{
   const userEmail = req.cookies.UserEmail;
@@ -279,7 +171,6 @@ app.post('/allProjects', async (req,res)=>{
       throw new Error("nhi dunga bhai");
   }
 })
-
 
 app.post('/allJobs', async (req,res)=>{
   const userEmail = req.cookies.UserEmail;

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+d<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -26,18 +26,17 @@
             <div class="text-secondary container-fluid" id="userEmail" >
             </div>
         </div>
-         <form action="/verifyNumber" class="container-fluid" >
              <div class="container-fluid d-flex flex-column justify-content-left align-items-center border border-secondary py-3 mb-2">
                   <h5 class="d-flex container-fluid" >
                     Phone Number
                   </h5>
-                  <div class="container-fluid">
-                    <div class="d-flex flex-column my-2"  id="phoneNumber">
-                           <label for="phoneNumber" >
-                               <input type="number" name="phoneNumber"  class="container-fluid p-2 my-2 border border-secondary border-opacity-50" >  
-                           </label>
-                           <button class="col-sm-4 btn btn-outline-primary rounded-0" > Verify PhoneNo.</button>
-                    </div>
+                  <div class="container-fluid d-flex flex-column justify-content-left align-items-center py-3 mb-2 ">
+                              <form action="" class="container-fluid d-flex flex-column" >
+                                      <label for="phoneNumber">
+                                         <input type="number" name="phoneNumber"  class="container-fluid p-2 my-2 border border-secondary border-opacity-50" placeholder="Enter Your Phone Number" >  
+                                      </label>
+                                      <input type="submit" class="col-sm-4 btn btn-outline-primary rounded-0" > Verify PhoneNo.</input>
+                              </form>
                </div>
             </div>
               <div class="container-fluid d-flex flex-column justify-content-left align-items-center border border-secondary py-3 mb-2 ">
@@ -511,10 +510,7 @@
                                                   <span> <strong class="mx-1" > Percentage : </strong> ${d.percentage}</span>
                                                   </div>
                                                   <div class="d-flex flex-column justify-content-evenly align-items-center">
-                                                          <button type="button" class="text-primary border-0 bg-transparent" data-bs-target="#updateEducation" data-bs-toggle="modal" >
-                                                            <i class="fa fa-edit" ></i>
-                                                          </button>
-                                                          <a href="http://localhost:7000/education/delete/:${d._id}" class="text-danger border-0 bg-transparent"  >
+                                                          <a href="http://localhost:7000/education/delete/:${d._id}" class="my-2 text-danger border-0 bg-transparent"  >
                                                             <i class="fa fa-trash" ></i>
                                                           </a>
                                                   </div>
@@ -549,11 +545,18 @@
                  .then((data)=>{
                         var jobForm = document.getElementById('jobForm');
                        data?.forEach((d)=>{
-                             var content = `<div class="p-2 d-flex flex-column my-1" >
-                                                  <span> <strong class="mx-1" >Job Name : </strong> ${d.jobName}</span>
+                             var content = `<div class="p-2 d-flex flex-row justify-content-between align-items-center my-1" >
+                                                 <div class="d-flex flex-column" > 
+                                                     <span> <strong class="mx-1" >Job Name : </strong> ${d.jobName}</span>
                                                   <span> <strong class="mx-1" >Beginning Year : </strong> ${d.beginningYear}</span>
                                                   <span> <strong class="mx-1" >Year Of Completion : </strong> ${d.yearOfCompletion}</span>
                                                   <span> <strong class="mx-1" > Role : </strong> ${d.role}</span>
+                                                 </div>
+                                                    <div class="d-flex flex-column justify-content-evenly align-items-center">
+                                                          <a href="http://localhost:7000/jobs/delete/:${d._id}" class="my-2 text-danger border-0 bg-transparent"  >
+                                                            <i class="fa fa-trash" ></i>
+                                                          </a>
+                                                  </div>
                                              </div>`;
                                 jobForm.innerHTML += content;
                               
@@ -586,12 +589,20 @@
                  .then((data)=>{
                         var internshipForm = document.getElementById('internshipForm');
                        data?.forEach((d)=>{
-                             var content = `<div class="p-2 d-flex flex-column my-1" >
-                                                  <span> <strong class="mx-1" >Job Name : </strong> ${d.internshipName}</span>
-                                                  <span> <strong class="mx-1" >Beginning Year : </strong> ${d.beginningMonth}</span>
-                                                  <span> <strong class="mx-1" >Beginning Year : </strong> ${d.monthOfCompletion}</span>
-                                                  <span> <strong class="mx-1" >Year Of Completion : </strong> ${d.yearOfCompletion}</span>
-                                                  <span> <strong class="mx-1" > Role : </strong> ${d.role}</span>
+                             var content = `<div class="p-2 d-flex flex-row justify-content-between align-items-center my-1" >
+                                                      <div class="d-flex flex-column" >
+                                                          <span> <strong class="mx-1" >Job Name : </strong> ${d.internshipName}</span>
+                                                          <span> <strong class="mx-1" >Beginning Year : </strong> ${d.beginningMonth}</span>
+                                                          <span> <strong class="mx-1" >Beginning Year : </strong> ${d.monthOfCompletion}</span>
+                                                          <span> <strong class="mx-1" >Year Of Completion : </strong> ${d.yearOfCompletion}</span>
+                                                          <span> <strong class="mx-1" > Role : </strong> ${d.role}</span>
+                                                      </div>
+                                                          <div class="d-flex flex-column justify-content-evenly align-items-center">
+                                                          <a href="http://localhost:7000/internships/delete/:${d._id}" class="my-2 text-danger border-0 bg-transparent"  >
+                                                            <i class="fa fa-trash" ></i>
+                                                          </a>
+                                                   </div>
+                                                  </div>
                                              </div>`;
                                 internshipForm.innerHTML += content;
                               
@@ -626,9 +637,17 @@
                  .then((data)=>{
                         var responsibilityForm = document.getElementById('responsibilityForm');
                        data?.forEach((d)=>{
-                             var content = `<div class="p-2 d-flex flex-column my-1" >
-                                                  <span> <strong class="mx-1" >Job Name : </strong> ${d.responsibility}</span>
+                             var content = `<div class="p-2 d-flex flex-row justify-content-between align-items-center my-1" >
+                                                  <div class="d-flex flex-column" >
+                                                     <span> <strong class="mx-1" >Job Name : </strong> ${d.responsibility}</span>
                                                   <span> <strong class="mx-1" >Beginning Year : </strong> ${d.role}</span>
+                                                  </div>
+
+                                                   <div>
+                                                      <a href="http://localhost:7000/responsibility/delete/:${d._id}" class="my-2 text-danger border-0 bg-transparent"  >
+                                                            <i class="fa fa-trash" ></i>
+                                                          </a>
+                                                  </div>
                                              </div>`;
                                 responsibilityForm.innerHTML += content;
                               
@@ -663,10 +682,17 @@
                  .then((data)=>{
                         var projectsForm = document.getElementById('projectsForm');
                        data?.forEach((d)=>{
-                             var content = `<div class="p-2 d-flex flex-column my-1" >
-                                                  <span> <strong class="mx-1" >Project Name : </strong> ${d.projectName}</span>
-                                                  <span> <strong class="mx-1" >Project Description : </strong> ${d.projectDescription}</span>
-                                                  <span> <strong class="mx-1"> Project Link : </strong> <a href="${d.projectLink}">${d.projectLink}</span>
+                             var content = `<div class="p-2 d-flex flex-row justify-content-between align-items-center my-1" >
+                                                  <div class="d-flex flex-column" >
+                                                      <span> <strong class="mx-1" >Project Name : </strong> ${d.projectName}</span>
+                                                      <span> <strong class="mx-1" >Project Description : </strong> ${d.projectDescription}</span>
+                                                      <span> <strong class="mx-1"> Project Link : </strong> <a href="${d.projectLink}" target="blank" >${d.projectLink}</span>
+                                                  </div>
+                                                  <div class="d-flex flex-column">
+                                                      <a href="http://localhost:7000/projects/delete/:${d._id}" class="my-2 text-danger border-0 bg-transparent"  >
+                                                            <i class="fa fa-trash" ></i>
+                                                          </a>
+                                                  </div>
                                              </div>`;
                                 projectsForm.innerHTML += content;
                               
@@ -700,10 +726,17 @@
                  .then((data)=>{
                         var workForm = document.getElementById('workForm');
                        data?.forEach((d)=>{
-                             var content = `<div class="p-2 d-flex flex-column my-1" >
+                             var content = `<div class="p-2 d-flex flex-row justify-content-between align-items-center my-1" >
+                                                  <div class="d-flex flex-column" >
                                                   <span> <strong class="mx-1"> Work Name : </strong> ${d.workName}</span>
                                                   <span> <strong class="mx-1" > Work Description : </strong> ${d.workDescription}</span>
                                                   <span> <strong class="mx-1"> Work Link : </strong> ${d.workLink}</span>
+                                                  </div>
+                                                  <div class="d-flex flex-column">
+                                                      <a href="http://localhost:7000/projects/delete/:${d._id}" class="my-2 text-danger border-0 bg-transparent"  >
+                                                            <i class="fa fa-trash" ></i>
+                                                          </a>
+                                                  </div>
                                              </div>`;
                                 workForm.innerHTML += content;
                               

@@ -5,29 +5,33 @@ const opportunitySchema = new mongoose.Schema({
         type : String,
         required : true,
     },
+    companyAddress : {
+        type: String,
+        required:true,
+    },
     role : {
         type : String,
-        required : [true,"role must be mentioned*"]
+        required : true
     } ,
     stipend : {
         type : Number,
-        required : [true,"stipend must be mentioned*"]
+        required : true
     },
     skillsRequired : {
          type : String,
-         required : [true,"skills Required must be mentioned*"]
+         required : true
     },
     dailyRoles : {
         type :String,
         required : false,
     },
-    createdDate : {
-        type :Date,
-        default : Date.now(),
-    },
     roleDuration : {
         type :String,
         default : "1Month",
+    },
+    roleType : {
+          type : String,
+          required : true,
     }
                    
 })

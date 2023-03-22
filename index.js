@@ -4,8 +4,8 @@ const hbs = require('hbs');
 const path =  require('path');
 const apiRoutes = require('./routes/apiRoutes');
 const jobData = require('./data/JobData.json')
-const collegeList = require('./data/college.json');
 const generateToken = require("./config/Jwt");
+const educationRoutes = require("./routes/educationRoutes");
 
 //  cookie
 const cookieParser = require('cookie-parser');
@@ -90,27 +90,37 @@ app.get("/userError",(req,res)=>{
     res.render('UserError');
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // Resume------------------------------------------------------------------------------------------------------------------
+
 //  education --------------------------------------------------------------------------------------------------------------------
-app.post("/education", async (req,res) =>{
-   const { course , yearOfCompletion  , percentage  } = req.body;
-   const userEmail = req.cookies.UserEmail;
-   if(!userEmail || !course || !yearOfCompletion || !percentage){
-    res.status(400);
-    throw new Error("Fill all the entries!");
-   }
-   const education = await Education.create({
-       userEmail,
-       course,
-       yearOfCompletion,
-       percentage
-   })
-   if(education){
-      res.status(200).redirect('resume');  
-   }else{
-      res.status(200).redirect('UserError');
-   }
-})
+app.use('/education',educationRoutes)
+
+
 //  end block ends here--------------------------------------------------------------------------------------------------------------
+
 
 
 app.post("/jobs", async (req,res) => {
@@ -292,6 +302,37 @@ app.post('/allWorks', async (req,res)=>{
       throw new Error("nhi dunga bhai");
   }
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //  user controller - post data gathering-- -- -- -- -- -- -- -- -- -- -- -- -- -- 

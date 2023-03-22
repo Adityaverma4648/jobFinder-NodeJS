@@ -4,6 +4,7 @@ const Jobs = require('../model/Jobs');
 const router  = express.Router();
 const jobData = require('../data/jobData.json');
 const collegeList = require('../data/college.json');
+const educationRoutes = require('../routes/educationRoutes');
 
 router.get('/collegeList',(req,res)=>{
     res.send(collegeList);

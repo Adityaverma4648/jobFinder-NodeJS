@@ -123,21 +123,9 @@ app.use('/responsibility',responsibilityRoutes)
 app.use('/projects',projectRoutes)
 //  end block ends here--------------------------------------------------------------------------------------------------------------
 //  Projects  --------------------------------------------------------------------------------------------------------------------
-app.use('/workss',worksRoutes)
+app.use('/works',worksRoutes)
 //  end block ends here--------------------------------------------------------------------------------------------------------------
 
-
-
-app.post('/allEducation', async (req,res)=>{
-  const userEmail = req.cookies.UserEmail;
-  const allEducation = await Education.find({ userEmail});
-  if(allEducation){
-       res.send(allEducation);
-  }else{
-      res.status(400)
-      throw new Error("nhi dunga bhai");
-  }
-})
 
 app.post('/allInternships', async (req,res)=>{
   const userEmail = req.cookies.UserEmail;

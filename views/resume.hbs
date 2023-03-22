@@ -484,7 +484,7 @@ d<!DOCTYPE html>
         {{!--  formFetcher --}}
         
           function EducationFetcher(){
-                fetch('http://localhost:7000/allEducation', 
+                fetch('http://localhost:7000/education/fetchAll', 
                  { method: 'POST',headers: {
                    'Content-type': 'application/json; charset=UTF-8',
                   },
@@ -526,7 +526,7 @@ d<!DOCTYPE html>
         {{!--  block ends --}}
 
           function jobFetcher(){
-                fetch('http://localhost:7000/allJobs', 
+                fetch('http://localhost:7000/jobs/fetchAll', 
                  { method: 'POST',headers: {
                    'Content-type': 'application/json; charset=UTF-8',
                   },
@@ -570,7 +570,7 @@ d<!DOCTYPE html>
         {{!--  internship  data fetcher function --}}
              
           function internshipFetcher(){
-                fetch('http://localhost:7000/allInternships', 
+                fetch('http://localhost:7000/internships/fetchAll', 
                  { method: 'POST',headers: {
                    'Content-type': 'application/json; charset=UTF-8',
                   },
@@ -618,7 +618,7 @@ d<!DOCTYPE html>
         {{!--  responsibility  data fetcher function --}}
              
           function responsibilityFetcher(){
-                fetch('http://localhost:7000/allResponsibility', 
+                fetch('http://localhost:7000/responsibility/fetchAll', 
                  { method: 'POST',headers: {
                    'Content-type': 'application/json; charset=UTF-8',
                   },

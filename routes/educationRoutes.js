@@ -1,5 +1,4 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const router  = express.Router();
 const Education = require('../model/Education');
 
@@ -34,6 +33,17 @@ router.get(`/delete/:id`, async(req,res)=>{
     }else{
       res.status(200).redirect('http://localhost:7000/UserError');
     }
+})
+
+router.post(`/fetchAll`,async (req,res)=>{
+  const userEmail = req.cookies.UserEmail;
+  const allEducation = await Education.find({ userEmail});
+  if(allEducation){
+       res.send(allEducation);
+  }else{
+      res.status(400)
+      throw new Error("CouldNot Fetch From DB");
+  }
 })
 
 

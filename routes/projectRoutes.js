@@ -38,5 +38,15 @@ router.post("/", async (req,res) => {
       }
   })
   
+router.post(`/fetchAll`,async (req,res)=>{
+  const userEmail = req.cookies.UserEmail;
+  const projects = await Projects.find({ userEmail});
+  if(projects){
+       res.send(projects);
+  }else{
+      res.status(400)
+      throw new Error("CouldNot Fetch From DB");
+  }
+})
 
   module.exports = router;

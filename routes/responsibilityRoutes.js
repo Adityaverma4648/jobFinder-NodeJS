@@ -37,4 +37,16 @@ router.get(`/delete/:id`, async(req,res)=>{
 })
 
 
+router.post(`/fetchAll`,async (req,res)=>{
+  const userEmail = req.cookies.UserEmail;
+  const responsibility = await Responsibility.find({ userEmail});
+  if(responsibility){
+       res.send(responsibility);
+  }else{
+      res.status(400)
+      throw new Error("CouldNot Fetch From DB");
+  }
+})
+
+
 module.exports = router;

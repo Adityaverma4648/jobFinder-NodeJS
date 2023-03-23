@@ -48,6 +48,15 @@ body::-webkit-scrollbar{
 }
 
 
+#opportunityCard{
+   height: 60vh;
+   width: 50vw;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
 
 
 /*  JObDataFetcher hbs Styles---------------------------------------------------------------------------------------------------------------------- */
@@ -208,4 +217,9 @@ body::-webkit-scrollbar{
          align-items: center;
          box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
        }
+       
+    #opportunityCard{
+           height: 60vh;
+            width: 80vw;
+          }
  }

@@ -11,7 +11,7 @@ const internshipRoutes = require("./routes/internshipRoutes");
 const responsibilityRoutes = require("./routes/responsibilityRoutes");
 const projectRoutes = require("./routes/projectRoutes");
 const worksRoutes = require("./routes/workRoutes");
-
+const opportunityRoutes = require("./routes/opportunityRoutes")
 
 //  cookie
 const cookieParser = require('cookie-parser');
@@ -96,6 +96,9 @@ app.get("/upgrade",(req,res)=>{
   res.render('upgrade.hbs')
 })
 
+app.get("/opportunity",(req,res)=>{
+  res.render('addOpportunity.hbs')
+})
 
 app.get("/userError",(req,res)=>{
     res.render('UserError');
@@ -127,8 +130,11 @@ app.use('/responsibility',responsibilityRoutes)
 //  Projects  --------------------------------------------------------------------------------------------------------------------
 app.use('/projects',projectRoutes)
 //  end block ends here--------------------------------------------------------------------------------------------------------------
-//  Projects  --------------------------------------------------------------------------------------------------------------------
+//  works  --------------------------------------------------------------------------------------------------------------------
 app.use('/works',worksRoutes)
+//  end block ends here--------------------------------------------------------------------------------------------------------------
+//  opportunity  --------------------------------------------------------------------------------------------------------------------
+app.use('/opportunity',opportunityRoutes)
 //  end block ends here--------------------------------------------------------------------------------------------------------------
 
 

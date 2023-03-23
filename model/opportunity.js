@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
 const opportunitySchema = new mongoose.Schema({
-    company : {
+    companyName : {
         type : String,
         required : true,
     },

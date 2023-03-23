@@ -92,6 +92,11 @@ app.get("/resume",(req,res)=>{
   res.render('resume.hbs')
 })
 
+app.get("/upgrade",(req,res)=>{
+  res.render('upgrade.hbs')
+})
+
+
 app.get("/userError",(req,res)=>{
     res.render('UserError');
 })

@@ -54,7 +54,7 @@
                   console.log(singleData.email)
                   var singleCompany = document.getElementById('singleCompany');
                   singleCompany.innerHTML = '';
-                  var content = `<div class="container border border-secondary border-opacity-50" style="height:60vh">
+                  var content = `<div class="container border border-secondary border-opacity-50" style="min-height:60vh">
                                        <div class="container d-flex justify-content-center align-items-center my-1 px-2 py-2">
                                             <span class="h4 font-weight-bold" >
                                                  ${data.jobType}
@@ -146,9 +146,9 @@
                                        </div>
 
                                        <div class="container d-flex justify-content-center align-items-center my-1">
-                                            <a href="http://localhost:7000/resume" class="col-sm-3 btn btn-primary rounded-0 text-decoration-none text-white">
-                                                 Apply
-                                            </a>
+                                                <a href="http://localhost:7000/resume" class="col-sm-3 btn btn-primary rounded-0 text-decoration-none text-white">
+                                                     Apply
+                                                </a>
                                        </div>
                                  <div>`
                   singleCompany.innerHTML = content;

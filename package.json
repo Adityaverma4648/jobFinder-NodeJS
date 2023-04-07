@@ -19,7 +19,6 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
-    "express-handlebars": "^7.0.1",
     "express-session": "^1.17.3",
     "handlebars": "^4.7.7",
     "hbs": "^4.2.0",
@@ -30,8 +29,7 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^8.0.0",
-    "pug": "^3.0.2",
-    "request-promise": "^4.2.6"
+    "pug": "^3.0.2"
   },
   "devDependencies": {
     "tailwindcss": "^3.2.7"

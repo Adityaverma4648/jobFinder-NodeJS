@@ -2,8 +2,8 @@ require("dotenv").config();
 const express = require('express');
 const hbs = require('hbs');
 const path =  require('path');
+const jobData = require("./data/JobData.json");
 const apiRoutes = require('./routes/apiRoutes');
-const jobData = require('./data/JobData.json')
 const generateToken = require("./config/Jwt");
 const educationRoutes = require("./routes/educationRoutes");
 const jobRoutes = require("./routes/jobRoutes");
@@ -11,7 +11,8 @@ const internshipRoutes = require("./routes/internshipRoutes");
 const responsibilityRoutes = require("./routes/responsibilityRoutes");
 const projectRoutes = require("./routes/projectRoutes");
 const worksRoutes = require("./routes/workRoutes");
-const opportunityRoutes = require("./routes/opportunityRoutes")
+const opportunityRoutes = require("./routes/opportunityRoutes");
+
 
 //  cookie
 const cookieParser = require('cookie-parser');
@@ -49,7 +50,7 @@ app.use(session({
 // DB connect 
 const connectDB = require("./config/connect");
 // PORT decision
-const PORT = process.env.PORT||5000;
+const PORT = process.env.PORT||7000;
 
 //  path to static directory-----------------------------------------------------------------------------------------------------------------------------------------
 const staticPath  = path.join(__dirname, './public');
@@ -85,7 +86,7 @@ app.get("/signUp",(req,res)=>{
 })
 
 app.get("/profile",(req,res)=>{
-    res.render('profile.hbs')
+    res.render('profile.hbs');
 })
 
 app.get("/resume",(req,res)=>{
@@ -100,13 +101,18 @@ app.get("/opportunity",(req,res)=>{
   res.render('addOpportunity.hbs')
 })
 
+
+app.get("/messages",(req,res)=>{
+  res.render('messages.hbs')
+})
+
 app.get("/userError",(req,res)=>{
     res.render('UserError');
 })
 
-
-
-
+app.get("/applied",(req,res)=>{
+    res.render("applied");
+})
 
 
 
@@ -136,64 +142,6 @@ app.use('/works',worksRoutes)
 //  opportunity  --------------------------------------------------------------------------------------------------------------------
 app.use('/opportunity',opportunityRoutes)
 //  end block ends here--------------------------------------------------------------------------------------------------------------
-
-
-app.post('/allInternships', async (req,res)=>{
-  const userEmail = req.cookies.UserEmail;
-  const allInternship = await Internships.find({ userEmail});
-  if(allInternship){
-       res.send(allInternship);
-  }else{
-      res.status(400)
-      throw new Error("nhi dunga bhai");
-  }
-})
-
-app.post('/allResponsibility', async (req,res)=>{
-  const userEmail = req.cookies.UserEmail;
-  const allResponsibility = await Responsibility.find({ userEmail});
-  if(allResponsibility){
-       res.send(allResponsibility);
-  }else{
-      res.status(400)
-      throw new Error("nhi dunga bhai");
-  }
-})
-
-app.post('/allProjects', async (req,res)=>{
-  const userEmail = req.cookies.UserEmail;
-  const projects = await Projects.find({ userEmail});
-  if(projects){
-       res.send(projects);
-  }else{
-      res.status(400)
-      throw new Error("nhi dunga bhai");
-  }
-})
-
-app.post('/allJobs', async (req,res)=>{
-  const userEmail = req.cookies.UserEmail;
-  const allJobs = await Jobs.find({ userEmail});
-  if(allJobs){
-       res.send(allJobs);
-  }else{
-      res.status(400)
-      throw new Error("nhi dunga bhai");
-  }
-})
-
-app.post('/allWorks', async (req,res)=>{
-  const userEmail = req.cookies.UserEmail;
-  const work = await Works.find({ userEmail});
-  if(work){
-       res.send(work);
-  }else{
-      res.status(400)
-      throw new Error("nhi dunga bhai");
-  }
-})
-
-
 
 
 
@@ -236,8 +184,7 @@ app.post("/signUp", async (req,res)=>{
     const userExists = await User.findOne({ email });
 
     if (userExists) {
-      res.status(400);
-      throw new Error("User already exists");
+      res.status(200).redirect('userError');
     }
     const user = await User.create({
         userName,
@@ -295,6 +242,10 @@ jobData?.forEach((d) => {
    app.get(`/viewMore:${_id}`,(req,res)=>{
         res.render('viewMore.hbs')
     })
+
+    app.get(`/apply:${_id}`,(req,res)=>{
+      res.render('Apply');
+  })
 });
   
 //  App api Route-----------------------------------------------------------------------------------------------

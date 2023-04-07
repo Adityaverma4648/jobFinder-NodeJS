@@ -1,7 +1,34 @@
-<div class="bg-danger container-fluid" >
-     welcome
+<div class="container-fluid" id="welcome" >
+     <div class="container bg-warning">
+           <div class="col-sm-6 d-flex flex-column align-items-center justify-content-center">
+               Illustration
+           </div>
+           <div class="col-sm-6 d-flex flex-column align-items-center justify-content-center">
+               Features : 
+                 <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                 </ul>
+           </div>
+
+     </div>
 </div>
 
 <script>
-    
+      function getCookie(cname) {
+           let name = cname + "=";
+           let ca = document.cookie.split(';');
+           for(let i = 0; i < ca.length; i++) {
+             let c = ca[i];
+             while (c.charAt(0) == ' ') {
+               c = c.substring(1);
+             }
+             if (c.indexOf(name) == 0) {
+               return c.substring(name.length, c.length);
+             }
+           }
+           return "";
+         }
+         var userDesignation = getCookie("userDesignation");
 </script>

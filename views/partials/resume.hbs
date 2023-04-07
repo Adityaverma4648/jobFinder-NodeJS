@@ -1,30 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume</title>
-     <link href="dist/output.css" rel="stylesheet">
-     {{!-- bootstrap  --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-
-     {{!--  fontAwesome cdn Import --}}
-       <script src="https://kit.fontawesome.com/8dc03a4776.js" crossorigin="anonymous"></script>
-    {{!--  block ends here --}}
-    <link rel="stylesheet" href="CSS/app.css">
-</head>
-<body class="d-flex justify-content-start align-items-center" style="overflow-y:scroll; min-height : 150vh;width : 100vw;"  >
-     {{>header}}
-     <div class="container d-flex flex-column justify-content-center align-items-center bg-light mt-5">
-        <div class="container-fluid text-center h3">
-             RESUME
+<div class="container d-flex flex-column justify-content-center align-items-center bg-light mt-5 py-5">
+        <div class="container-fluid flex flex-column justify-content-center align-items-center text-center">
+                  <div class="text-center h3" >
+                   Please Update And Finalize Your Resume Before Applying                
+                  </div>
+                  <div class="text-center text-secondary" >
+                        This is the resume the employer will see.Please complete your resume for better chnace of selection.
+                  </div>
         </div>
-        <div class="container-fluid d-flex flex-column justify-content-start  align-items-center py-2">
-            <h5 id="userName" class="container-fluid" ></h5>
-            <div class="text-secondary container-fluid" id="userEmail" >
-            </div>
+        <div class="container-fluid d-flex flex-column justify-content-start  align-items-center py-2 mb-2 border border-secondary">
+            <div id="userName" class="container-fluid h5" ></div>
+            <div class="text-secondary container-fluid" id="userEmail"></div>
         </div>
              <div class="container-fluid d-flex flex-column justify-content-left align-items-center border border-secondary py-3 mb-2">
                   <h5 class="d-flex container-fluid" >
@@ -640,7 +625,7 @@
                              var content = `<div class="p-2 d-flex flex-row justify-content-between align-items-center my-1" >
                                                   <div class="d-flex flex-column" >
                                                      <span> <strong class="mx-1" >Job Name : </strong> ${d.responsibility}</span>
-                                                  <span> <strong class="mx-1" >Beginning Year : </strong> ${d.role}</span>
+                                                  <span> <strong class="mx-1" >Role : </strong> ${d.role}</span>
                                                   </div>
 
                                                    <div>
@@ -748,7 +733,27 @@
 
         {{!-- block ends here --}}
 
+           function getCookie(cname) {
+           let name = cname + "=";
+           let ca = document.cookie.split(';');
+           for(let i = 0; i < ca.length; i++) {
+             let c = ca[i];
+             while (c.charAt(0) == ' ') {
+               c = c.substring(1);
+             }
+             if (c.indexOf(name) == 0) {
+               return c.substring(name.length, c.length);
+             }
+           }
+           return "";
+         }
+          const userName =  decodeURIComponent(getCookie("userName"));
+          const userEmail = decodeURIComponent(getCookie("UserEmail"));
+
+          var userNameDOM = document.getElementById("userName");
+          var userEmailDOM = document.getElementById("userEmail");
+          userNameDOM.innerHTML = userName;
+          userEmailDOM.innerHTML = userEmail;
+
 
      </script>
-</body>
-</html>

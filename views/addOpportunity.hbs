@@ -18,31 +18,31 @@
 <body class="Login" >
     {{>header}}
      <form action="/opportunity" class="d-flex flex-column justify-content-center align-items-center" method="post" id="opportunityCard" >
-     <div class="container-fluid d-flex justify-content-center align-items-center h5">
+     <div class="container-fluid d-flex justify-content-center align-items-center h5 my-4">
         Add Opportunity
      </div>
           <label for="companyAddress" class="container-fluid my-1">
-              <input type="text" class="p-2 container-fluid border border-secondary border-opacity-50" name="companyAddress" placeholder="Enter our Company Address" >
+              <input type="text" class="p-2 container-fluid border border-secondary border-opacity-50" name="companyAddress" placeholder="Enter our Company Address"  required>
           </label>
           <label for="role" class="container-fluid my-1">
-              <input type="text" class="p-2 container-fluid border border-secondary border-opacity-50" name="role" placeholder="Eg : SDE,Engineer,Accountant,etc" >
+              <input type="text" class="p-2 container-fluid border border-secondary border-opacity-50" name="role" placeholder="Eg : SDE,Engineer,Accountant,etc"  required>
           </label>
           <label for="roleType" class="container-fluid my-1">
-              <input type="text" class="p-2 container-fluid border border-secondary border-opacity-50" name="roleType" placeholder="Eg : Intern , Job , etc" >
+              <input type="text" class="p-2 container-fluid border border-secondary border-opacity-50" name="roleType" placeholder="Eg : Intern , Job , etc"  required>
           </label>
           <label for="dailyRoles" class="container-fluid my-1">
-              <input type="text" class="p-2 container-fluid border border-secondary border-opacity-50" name="dailyRoles" placeholder="Enter Our Daily Role" >
+              <input type="text" class="p-2 container-fluid border border-secondary border-opacity-50" name="dailyRoles" placeholder="Enter Daily Role" required >
           </label>
            <label for="stipend" class="container-fluid my-1">
-              <input type="text" class="p-2 container-fluid border border-secondary border-opacity-50" name="stipend" placeholder="Enter Stipend" >
+              <input type="text" class="p-2 container-fluid border border-secondary border-opacity-50" name="stipend" placeholder="Enter Stipend" required >
           </label>
            <label for="roleDuration" class="container-fluid my-1">
-              <input type="text" class="p-2 container-fluid border border-secondary border-opacity-50" name="roleDuration" placeholder="Enter Role Duration" >
+              <input type="text" class="p-2 container-fluid border border-secondary border-opacity-50" name="roleDuration" placeholder="Enter Role Duration" required >
           </label>
              <label for="skillsRequired" class="container-fluid my-1">
-              <input type="text" class="p-2 container-fluid border border-secondary border-opacity-50" name="skillsRequired" placeholder="Enter Skills Required" >
+              <input type="text" class="p-2 container-fluid border border-secondary border-opacity-50" name="skillsRequired" placeholder="Enter Skills Required"  required>
           </label>
-          <input type="submit" value="Add Opportunity" class="btn btn-primary rounded-0 my-1"   >
+          <input type="submit" value="Add Opportunity" class="btn btn-outline-primary rounded-0 my-1"   >
      </form>
 </body>
 </html>

@@ -30,7 +30,6 @@
          console.log(strippedUrl.replace(/[^\d.-]/g, ''));
          const curr_id = strippedUrl.replace(/[^\d.-]/g, '');
          var URL = `http://localhost:7000/api/:${curr_id}`; 
-         console.log(URL)
           fetch(URL, 
           { method: 'POST',headers: {
             'Content-type': 'application/json; charset=UTF-8',
@@ -50,11 +49,9 @@
         })
         .then((response) => response.json())
         .then((data)=>{
-                  var singleData = data;
-                  console.log(singleData.email)
                   var singleCompany = document.getElementById('singleCompany');
                   singleCompany.innerHTML = '';
-                  var content = `<div class="container border border-secondary border-opacity-50" style="min-height:60vh">
+                  var content = `<div class="container border border-secondary border-opacity-50 bg-light" style="min-height:60vh;box-shadow: 5px 5px 20px solid rgba(0,0,0,0.2)">
                                        <div class="container d-flex justify-content-center align-items-center my-1 px-2 py-2">
                                             <span class="h4 font-weight-bold" >
                                                  ${data.jobType}
@@ -132,8 +129,8 @@
                                        </div>
                                        </div>
 
-                                        <div class="container d-flex flex-column my-1 px-2 py-2 justify-content-start align-items-center border-bottom border-secondary border-opacity-50">
-                                           <div class="d-flex flex-column">
+                                        <div class="container d-flex flex-row my-1 px-2 py-2 justify-content-start align-items-center">
+                                           <div class="col-sm-6 d-flex flex-column">
                                               <span class="h5 font-weight-bold text-primary" >
                                                  Company Info : 
                                               </span>
@@ -142,14 +139,15 @@
                                                  Seats
                                               </span>
                                            </div>
-                                           
-                                       </div>
-
-                                       <div class="container d-flex justify-content-center align-items-center my-1">
-                                                <a href="http://localhost:7000/resume" class="col-sm-3 btn btn-primary rounded-0 text-decoration-none text-white">
+                                           <div class="col-sm-6 d-flex justify-content-end align-items-center my-1">
+                                                <a href="http://localhost:7000/apply:${curr_id}" class="col-sm-6 btn btn-primary rounded-0 text-decoration-none text-white">
                                                      Apply
                                                 </a>
                                        </div>
+                                           
+                                       </div>
+
+                                       
                                  <div>`
                   singleCompany.innerHTML = content;
                 })

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const passportLocalMongoose = require('passport-local-mongoose');
 const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema({
@@ -41,8 +40,5 @@ userSchema.pre("save", async function (next) {
     this.password = await bcrypt.hash(this.password, salt);
   });
   
-
-
-userSchema.plugin(passportLocalMongoose);
 
 module.exports= mongoose.model("User",userSchema);

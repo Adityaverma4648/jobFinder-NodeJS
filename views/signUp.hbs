@@ -13,28 +13,30 @@
        <script src="https://kit.fontawesome.com/8dc03a4776.js" crossorigin="anonymous"></script>
     {{!--  block ends here --}}
 </head>
-<body class="SignUp">
+<body>
+          
           {{>header}}
 
-          <div class="d-flex flex-column justify-content-center align-items-center py-2" id="formContainer">
-                <form action="/signUp" class="container-fluid bg-light d-flex flex-column justify-content-center align-items-center border border-secondary border-opacity-50 py-5 shadow-lg shadow-slate-500"  method="POST" id="studentFormSignUp" >
+          <div class="w-100 d-flex justify-content-center align-items-center " style="height: 100vh;">
+            <div class="d-flex flex-column justify-content-center align-items-center py-2" id="formContainer">
+                <form action="/signUp" class="container-fluid bg-white d-flex flex-column justify-content-center align-items-center border border-secondary border-opacity-50 py-5 shadow-lg shadow-slate-500"  method="POST" id="studentFormSignUp" >
               <h5>
                   SignUp 
                   <i class="fa fa-sign-in" ></i>
               </h5>
-              <label for="userName" class="container-fluid d-flex flex-column" >
+              <label for="userName" class="fw-semibold container-fluid d-flex flex-column" >
                    <span>
                       user Name : 
                    </span>
                   <input type="text" name="userName" placeholder="Enter your user Name" class="container-fluid py-1 px-2 my-1">
               </label>
-              <label for="email" class="container-fluid d-flex flex-column" >
+              <label for="email" class="fw-semibold container-fluid d-flex flex-column" >
                    <span>
                       Email : 
                    </span>
                   <input type="email" name="email" placeholder="Enter your Email" class="container-fluid py-1 px-2 my-1">
               </label>
-              <label for="designation" class="container-fluid d-flex flex-column" >
+              <label for="designation" class="fw-semibold container-fluid d-flex flex-column" >
                    <span>
                       Select Designation : 
                    </span>
@@ -43,14 +45,22 @@
                       <option value="company">Company</option>
                   </select>
               </label>
-              <label for="password" class="container-fluid d-flex flex-column" >
+              <label for="password" class="fw-semibold container-fluid d-flex flex-column" >
                    <span>
                       Password : 
                    </span>
                   <input type="password" name="password" placeholder="Enter your Password" class="container-fluid py-1 px-2 my-1">
               </label>
-              <input type="submit" value="signUp" class="col-sm-5 py-1 my-1">
+               <div class="container-fluid d-flex justify-content-start justify-content-md-center align-items-center my-4" >
+                <input type="submit" value="signUp" class="col-md-5 container py-1 my-1">
+              </div>
+              <div class="my-2 text-center">
+                <a href="http://localhost:7000/login">
+                   Already have an account?
+                </a>
+              </div>
           </form>
+          </div>
           </div>
 
 

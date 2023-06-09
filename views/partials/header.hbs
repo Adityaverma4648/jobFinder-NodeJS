@@ -1,23 +1,23 @@
-<nav class="Navbar top-0 position-fixed Navbar container-fluid d-flex justify-content-center align-items-center bg-white  py-2">
+<nav class="Navbar shadow top-0 position-fixed Navbar container-fluid d-flex justify-content-center align-items-center bg-white py-2">
     <div class="container d-flex justify-content-between align-items-center ">
          <div class=" h5 d-flex justify-content-start align-items-center font-weight-bold text-primary">
             Jobfinder
           </div>
          <div class="nav-links d-flex justify-content-end align-items-center px-1 col-sm-8" >
 {{!--  navigation link begins --}}
-            <div class="d-flex justify-content-end align-items-center" id="Navlinks" >
+            <div class="d-none d-lg-flex justify-content-end align-items-center d-sm-none" id="navLinks">
               <ul class="d-flex flex-wrap justify-content-center align-items-center" >
-                   <li class="nav-lists mx-2 px-1" style="list-style-none text-black " >
-                 <a href="http://localhost:7000" class="link text-decoration-none text-dark font-weight-bold" style="font-weight: 700;">
+                   <li class="nav-lists mx-2 px resNavLink-1" style="list-style-none text-black " >
+                 <a href="http://localhost:7000/" class="link text-decoration-none text-dark font-weight-bold" style="font-weight: 700;">
                   INTERNSHIPS
                  </a>
                </li>
-               <li class="nav-lists mx-2 px-1" style="list-style-none text-black" >
+               <li class="nav-lists mx-2 px resNavLink-1" style="list-style-none text-black" >
                  <a href="#" class="link text-decoration-none text-dark font-weight-bold" style="font-weight: 700;">
                   JOBS
                  </a>
               </li>
-               <li class="nav-lists mx-2 px-1" style="list-style-none text-black" >
+               <li class="nav-lists mx-2 px resNavLink-1" style="list-style-none text-black" >
                  <a href="#" class="link text-decoration-none text-dark font-weight-bold" style="font-weight: 700;">
                   COURSES
                  </a>
@@ -26,20 +26,76 @@
             </div>
     
             {{!--  auth button group --}}
-             <div class="button-group d-flex flex-wrap justify-content-end align-items-center mx-1" id="authButton"> 
+             <div class="button-group d-lg-flex d-none flex-wrap justify-content-end align-items-center mx-1" id="authButton"> 
              
              </div>
               {{!--  responsive navbar --}}
-             <div class="p-1 toggleMenu text-dark block md:hidden" style="cursor:pointer" >
-                  <i class="fa fa-bars" style="font-size:23px" ></i>
-             </div>
+             <button type="button" class="btn text-dark d-block d-lg-none cursor-pointer" onclick="resNav()" >
+                  <i class="fa fa-bars text-primary" style="font-size:23px" ></i>
+             </button>
         </div>
    </div>
 </nav>
+{{!--  ResNav --}}
+<div class="col-md-5 d-xxl-none d-none container position-fixed left-0 d-flex justify-content-center align-items-center text-white" id="resNav">
+   <div class="w-100 p-3 d-flex flex-column justify-content-between align-items-start" style="min-height : 90%">
+          <div class="container-fluid d-flex flex-column justify-content-center align-items-center">
+            <div class="container-fluid h5 d-flex justify-content-start align-items-center font-weight-bold text-primary border-bottom">
+                Jobfinder
+            </div>
+
+             <ul class="container-fluid d-flex flex-column justify-content-center align-items-center" style="list-style : none" >
+                <li class="container mx-2 p-3 resNavLink" style="list-style-none text-black " >
+                 <a href="http://localhost:7000/" class="link text-decoration-none text-dark font-weight-bold" style="font-weight: 700;">
+                  INTERNSHIPS
+                 </a>
+               </li>
+               <li class="container mx-2 p-3 resNavLink" style="list-style-none text-black" >
+                 <a href="#" class="link text-decoration-none text-dark font-weight-bold" style="font-weight: 700;">
+                  JOBS
+                 </a>
+              </li>
+               <li class="container mx-2 p-3 resNavLink" style="list-style-none text-black" >
+                 <a href="#" class="link text-decoration-none text-dark font-weight-bold" style="font-weight: 700;">
+                  COURSES
+                 </a>
+              </li>
+              <li class="d-flex justify-content-start align-items-center container mx-2 p-3 resNavLink" style="list-style-none text-black" >
+                     <a href="http://localhost:7000/login" class="text-decoration-none container text-dark link-black" >
+                        Login
+                   </a>
+              </li>
+
+               <li class="d-flex justify-content-start align-items-center container mx-2 p-3 resNavLink" style="list-style-none text-black" >
+                      <a href="http://localhost:7000/signUp" class="text-decoration-none container text-dark link-black">
+                        SignUp
+                   </a>
+               </li>
+             </ul>
+          </div>
+
+          <div>
+             {{!--  Illustration --}}
+          </div>
+   </div>
+</div>
+
 <script>
        function resNav(){
            {{!--  offcanvas --}}
-       }
+           var resNav = document.getElementById('resNav');
+
+           var x = resNav.classList.contains("d-none");
+           var y = resNav.classList.contains("d-block");
+           if(x){
+               resNav.classList.remove("d-none");
+               resNav.classList.add("d-block");
+           }else if(y) {
+               resNav.classList.remove("d-block");
+               resNav.classList.add("d-none");
+           }
+
+           {{!-- if(resNav.classList.contains === "d-block") --}}
        
        const cookie = document.cookie;
 
@@ -73,16 +129,16 @@
        var checkToken = checkCookie();
        var authButton = document.getElementById('authButton');
         if(checkToken && decodedDesignation === "student" ){
-               authButton.innerHTML = `<div class="dropdown" ><button class="flex authButtons btnGreen dropdown-toggle" data-bs-toggle="dropdown">
+               authButton.innerHTML = `<div class="dropdown" ><button class="flex p-2 mx-2 btn btn-outline-light link-dark fw-semibold rounded-full dropdown-toggle" data-bs-toggle="dropdown">
                 ${decodedValue[0].toUpperCase()}
                </button>
                 <ul class="dropdown-menu">
-                   <li><a class="dropdown-item" href="http://localhost:7000/profile">Profile</a></li>
-                   <li><a class="dropdown-item" href="http://localhost:7000/resume">Resume</a></li>
-                   <li><a class="dropdown-item" href="http://localhost:7000/messages">Messages</a></li>
-                   <li><a class="dropdown-item" href="#">Applied Company</a></li>
-                   <li><a class="dropdown-item" href="http://localhost:7000/upgrade">Upgrade</a></li>
-                   <li><a href="http://localhost:7000/logout" class="dropdown-item">Logout</a></li>
+                   <li><dark class="dropdown-item" resNavLink href="http://localhost:7000/profile">Profile</dark></li>
+                   <li><dark class="dropdown-item" resNavLink href="http://localhost:7000/resume">Resume</dark></li>
+                   <li><dark class="dropdown-item" resNavLink href="http://localhost:7000/messages">Messages</dark></li>
+                   <li><dark class="dropdown-item" resNavLink href="#">Applied Company</dark></li>
+                   <li><dark class="dropdown-item" resNavLink href="http://localhost:7000/upgrade">Upgrade</dark></li>
+                   <li><a href="http://localhost resNavLink:7000/logout" class="dropdown-item">Logout</a></li>
                  </ul>
                 </div>
               </a>`;
@@ -91,21 +147,22 @@
                 ${decodedValue[0].toUpperCase()}
                </button>
                 <ul class="dropdown-menu">
-                   <li><a class="dropdown-item" href="http://localhost:7000/profile">Profile</a></li>
-                   <li><a class="dropdown-item" href="#">Messages</a></li>
-                   <li><a class="dropdown-item" href="http://localhost:7000/opportunity">Add Opportunity</a></li>
-                   <li><a href="http://localhost:7000/logout" class="dropdown-item">Logout</a></li>
+                   <li><dark class="dropdown-item" resNavLink href="http://localhost:7000/profile">Profile</dark></li>
+                   <li><dark class="dropdown-item" resNavLink href="#">Messages</dark></li>
+                   <li><dark class="dropdown-item" resNavLink href="http://localhost:7000/opportunity">Add Opportunity</dark></li>
+                   <li><a href="http://localhost resNavLink:7000/logout" class="dropdown-item">Logout</a></li>
                  </ul>
                 </div>
               </a>`;
               }
         else{
-              authButton.innerHTML = `<a href="http://localhost:7000/login" class="authButtons">
+              authButton.innerHTML = `<a href="http://localhost:7000/login" class="bg-white rounded-2 border border-2 border-success link-success text-black fw-semibold mx-1 text-decoration-none text-center d-flex justify-content-center align-items-center "style="width : 5rem; height:3rem">
                   Login
               </a>
-              <a href="http://localhost:7000/signUp" class="authButtons btnGreen" >
+              <a href="http://localhost:7000/signUp" class="bg-white rounded-2 border border-2 border-danger link-danger text-black fw-semibold mx-1 text-decoration-none text-center d-flex justify-content-center align-items-center " style="width : 5rem; height:3rem">
                   signUp
               </a>`;
         }
+       }
  </script>
 

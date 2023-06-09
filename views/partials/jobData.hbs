@@ -23,8 +23,19 @@
                           <span class="my-1" >
                              Location
                           </span>
-                          <input type="text" name="Location" class="p-2 border border-secondary border-opacity-50" placeholder="e.g. Delhi" >
+                          <select name="Location" id="location" class="p-2 border border-secondary border-opacity-50" placeholder="e.g. Delhi">
+
+                          </select>
                        </label>
+                        <label for="subLocation" class="py-2 d-flex flex-column">
+                          <span class="my-1" >
+                             State
+                          </span>
+                          <select name="subLocation" id="subLocation" class="p-2 border border-secondary border-opacity-50" placeholder="e.g. Districts">
+
+                          </select>
+                       </label>
+
 
                         <div class="container-fluid d-flex flex-wrap justify-content-between align-items-center">
                          <label for="workFromHome" class="py-2">
@@ -107,6 +118,29 @@
    </div>
 
 <script>
+     
+     {{!-- render public location --}}
+
+    async function location(){
+         var location = document.getElementById('location');
+
+         fetch("http://localhost:7000/location")
+         .then((res)=>{
+                return res.json()
+         }).then((data)=>{
+             data.states.map((d)=>{
+                  console.log(d);
+             })
+         })
+
+         {{!-- var content = `<option value=${}>${}</option>`; --}}
+
+         {{!-- location.innerHTML += content; --}}
+    }
+    {{!--  render location by default call --}}
+    location();
+
+
       {{!-- paginationLogic and index getter--}}
       var paginationCont = document.getElementById('paginationCont');
       var pageIndex = 1;

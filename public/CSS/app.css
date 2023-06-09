@@ -60,7 +60,9 @@ body::-webkit-scrollbar{
    align-items: center;
 }
 
-
+#welcomeContainer{
+   background: linear-gradient(to right , rgba(255,255,255,1) , rgb(0, 170, 255));
+}
 
 /*  JObDataFetcher hbs Styles---------------------------------------------------------------------------------------------------------------------- */
 .jobDataContParent{

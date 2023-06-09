@@ -12,7 +12,7 @@ const responsibilityRoutes = require("./routes/responsibilityRoutes");
 const projectRoutes = require("./routes/projectRoutes");
 const worksRoutes = require("./routes/workRoutes");
 const opportunityRoutes = require("./routes/opportunityRoutes");
-
+const location = require('./data/Location.json');
 
 //  cookie
 const cookieParser = require('cookie-parser');
@@ -57,7 +57,7 @@ const staticPath  = path.join(__dirname, './public');
 //  using css in my files - css import
 
 app.use(express.static(staticPath));
-
+app.use(express.static('images'))
 // --------------------------------------------------------------------------
 
 //  handle bars template engine - dynamic sites are served.............................. --------------------------------------------------------------------------------
@@ -70,6 +70,9 @@ hbs.registerPartials(partials);
 
 //  block ends here-----------------------------------------------------------------------------
 
+app.get("/location",(req,res)=>{
+  res.send(location);
+})
 
 // https://www.youtube.com/shorts/VTw2cUVFl1c
 app.get("/",(req,res)=>{

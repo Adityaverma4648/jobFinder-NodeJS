@@ -38,9 +38,9 @@
 </nav>
 {{!--  ResNav --}}
 <div class="col-md-5 d-xxl-none d-none container position-fixed left-0 d-flex justify-content-center align-items-center text-white" id="resNav">
-   <div class="w-100 p-3 d-flex flex-column justify-content-between align-items-start" style="min-height : 90%">
+   <div class="w-100 px-2 d-flex flex-column justify-content-between align-items-start" style="min-height : 100%">
           <div class="container-fluid d-flex flex-column justify-content-center align-items-center">
-            <div class="container-fluid h5 d-flex justify-content-start align-items-center font-weight-bold text-primary border-bottom">
+            <div class="container-fluid h5 d-flex justify-content-start align-items-center font-weight-bold text-primary border-bottom" style="height:80px;">
                 Jobfinder
             </div>
 
@@ -60,15 +60,15 @@
                   COURSES
                  </a>
               </li>
-              <li class="d-flex justify-content-start align-items-center container mx-2 p-3 resNavLink" style="list-style-none text-black" >
-                     <a href="http://localhost:7000/login" class="text-decoration-none container text-dark link-black" >
-                        Login
+              <li class="container-fluid mx-2 py-3 resNavLink list-style-none text-black d-flex justify-content-start align-items-center" >
+                     <a href="http://localhost:7000/login" class="text-decoration-none text-start container-fluid text-dark  link text-decoration-none text-dark fw-bold" >
+                        LOGIN
                    </a>
               </li>
 
-               <li class="d-flex justify-content-start align-items-center container mx-2 p-3 resNavLink" style="list-style-none text-black" >
-                      <a href="http://localhost:7000/signUp" class="text-decoration-none container text-dark link-black">
-                        SignUp
+               <li  class="container-fluid mx-2 py-3 resNavLink list-style-none text-black d-flex justify-content-start align-items-center" >
+                      <a href="http://localhost:7000/signUp" class="text-decoration-none text-start container-fluid text-dark link text-decoration-none text-dark fw-bold">
+                        SIGNUP
                    </a>
                </li>
              </ul>
@@ -143,13 +143,13 @@
                 </div>
               </a>`;
               }else if(checkToken && decodedDesignation === "company" ){
-                   authButton.innerHTML = `<div class="dropdown" ><button class="flex authButtons btnGreen dropdown-toggle" data-bs-toggle="dropdown">
+                   authButton.innerHTML = `<div class="dropdown" ><button class="d-flex justify-content-center align-items-center dropdown-toggle bg-info text-white rounded-full p-2 mx-3" data-bs-toggle="dropdown">
                 ${decodedValue[0].toUpperCase()}
                </button>
                 <ul class="dropdown-menu">
-                   <li><dark class="dropdown-item" resNavLink href="http://localhost:7000/profile">Profile</dark></li>
-                   <li><dark class="dropdown-item" resNavLink href="#">Messages</dark></li>
-                   <li><dark class="dropdown-item" resNavLink href="http://localhost:7000/opportunity">Add Opportunity</dark></li>
+                   <li class="border-bottom border-secondary"><div class="dropdown-item" resNavLink href="http://localhost:7000/profile">Profile</div></li>
+                   <li class="border-bottom border-secondary"><div class="dropdown-item" resNavLink href="#">Messages</div></li>
+                   <li class="border-bottom border-secondary"><div class="dropdown-item" resNavLink href="http://localhost:7000/opportunity">Add Opportunity</div></li>
                    <li><a href="http://localhost resNavLink:7000/logout" class="dropdown-item">Logout</a></li>
                  </ul>
                 </div>

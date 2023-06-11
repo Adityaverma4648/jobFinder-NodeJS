@@ -16,26 +16,17 @@
                           <span class="my-1" >
                              Category
                           </span>
-                          <input type="text" name="Category" class="px-2 py-2 border border-secondary border-opacity-50" placeholder="e.g. Marketing" id="category">
+                          <input type="text" name="Category" class="px-2 py-2 border border-secondary border-opacity-50 text-black" value="Marketing" placeholder="e.g. Marketing" id="category">
                           <ul id="mySearchUl" ></ul>
                        </label>
                         <label for="Location" class="py-2 d-flex flex-column">
                           <span class="my-1" >
                              Location
                           </span>
-                          <select name="Location" id="location" class="p-2 border border-secondary border-opacity-50" placeholder="e.g. Delhi">
+                          <select name="Location" id="location" class="p-2 border border-secondary border-opacity-50 text-dark">
 
                           </select>
                        </label>
-                        <label for="subLocation" class="py-2 d-flex flex-column">
-                          <span class="my-1" >
-                             State
-                          </span>
-                          <select name="subLocation" id="subLocation" class="p-2 border border-secondary border-opacity-50" placeholder="e.g. Districts">
-
-                          </select>
-                       </label>
-
 
                         <div class="container-fluid d-flex flex-wrap justify-content-between align-items-center">
                          <label for="workFromHome" class="py-2">
@@ -121,37 +112,57 @@
      
      {{!-- render public location --}}
 
-    async function location(){
+    function getLocation(){
          var location = document.getElementById('location');
+
+
 
          fetch("http://localhost:7000/location")
          .then((res)=>{
                 return res.json()
          }).then((data)=>{
+
              data.states.map((d)=>{
-                  console.log(d);
+          
+                  var content = `<option class="text-dark" value=${d.state}>${d.state}</option>`;
+                   location.innerHTML += content;
              })
+
+            {{!--  to be removed  --}}
+
+
+            {{!-- function getDistrict(state){
+                 data.states.map((d)=>{
+                 console.log(state , d.state);
+                 if(state === d.state){
+                     var content = d.districts;
+                     return content;
+                     console.log(content , d.state , d.districts);
+                 }
+             })
+            }
+            var currentState = getDistrict(location.value); --}}
+             {{!-- console.log(currentState); --}}
+
          })
 
-         {{!-- var content = `<option value=${}>${}</option>`; --}}
-
-         {{!-- location.innerHTML += content; --}}
+         
     }
     {{!--  render location by default call --}}
-    location();
+    getLocation();
 
 
       {{!-- paginationLogic and index getter--}}
-      var paginationCont = document.getElementById('paginationCont');
-      var pageIndex = 1;
-      paginationCont.addEventListener("click",(e)=>{
+        var paginationCont = document.getElementById('paginationCont');
+        var pageIndex = 1;
+        paginationCont.addEventListener("click",(e)=>{
       if(e.target.tagName === 'SPAN'){
          this.pageIndex =  e.target.innerHTML;
       }
       getter(pageIndex);
     })
-    {{!--  myJobDataFetcher --}}
-    async function getter(pageIndex){
+      {{!--  myJobDataFetcher --}}
+        async function getter(pageIndex){
         fetch('http://localhost:7000/api', 
           { method: 'POST',headers: {
             'Content-type': 'application/json; charset=UTF-8',
@@ -271,7 +282,7 @@
                       }else{
                          var filteredData = data.slice(0,5).filter((d)=>{
                                if(d.jobType.toUpperCase().match(textInput.toUpperCase())){
-                                  mySearchUl.innerHTML += `<li class="container-fluid py-2 border border-secondary border-opacity-50 searchList cursor-pointer " onclick="setCategory('${d.jobType}')" >
+                                  mySearchUl.innerHTML += `<li class="bg-white text-black container-fluid py-2 border border-secondary border-opacity-50 searchList" style="cursor:pointer;" onclick="setCategory('${d.jobType}')" >
                                                                ${d.jobType}
                                                            </li>`;
                                }
@@ -279,95 +290,6 @@
                          })
                     {{!-- block ends here --}}
                       }             
-
-                function setCategory(variable){
-                              var myJobCont = document.getElementById('myJobCont')
-                              data.forEach((d)=>{
-                                    if(d.jobType.toUpperCase() == variable.toUpperCase()){
-                                        var content = `<div class="bg-light jobCard p-2" id=${d.id} >
-                            <div class="container JobInfo d-flex justify-content-between align-items-center py-3">
-                                  <div>
-                                    <h5>
-                                      Intern Required for :
-                                      <strong class="text-info" >
-                                         ${d.jobType} 
-                                      </strong>
-                                      's Role 
-                                    <h5>
-                                  </div>
-                                  <div>
-                                    helperICons
-                                  </div>
-                            </div>
-
-                             <div class="container border-bottom border-top border-secondary border-opacity-50 py-2 px-3 d-flex flex-row justify-content-between align-items-center text-secondary" >
-                                   <div class="text-start">
-                                    <span>
-                                       An offer by :
-                                    </span>
-                                    <h5 class="text-info" >
-                                      ${d.companyName}
-                                    </h5>
-                                   </div>
-                                   <div class="text-end">
-                                        <span>
-                                           To Contact :
-                                        </span>
-                                       <h5 class="text-info">
-                                        ${d.email}
-                                       </h5>
-                                   </div>
-                            </div>
-
-                            <div class="container py-2 px-3 d-flex flex-column justify-content-center align-items-center" >
-                                 <span class="text-start h5 container-fluid">
-                                    Internship Description
-                                 </span>
-                                 <div>
-                                  <small>
-                                      ${d.description}
-                                  </small>
-                                 </div>
-                            </div>
-                            <div class="px-2 container d-flex  justify-content-between align-items-center text-dark border-bottom border-top border-secondary py-2">
-                                <div class="d-flex flex-column">
-                                   <span class="text-dark" >
-                                     Visit us on following address :
-                                </span>
-                                <strong class="text-secondary">
-                                   ${d.address}
-                                </strong>
-                                </div>
-                              <div class="dflex flex-column text-end">
-                                  <div>
-                                     Job Type : 
-                                  </div>
-                                   <div>
-                                       <strong class="text-secondary">
-                                         ${d.jobCategory}
-                                       </strong>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="px-3 container d-flex justify-content-between align-items-center text-dark py-2">
-                                <div class="text-dark">
-                                  Seats Available :
-                                  <strong>
-                                    ${d.seats}
-                                  </strong>
-                                </div>
-                                <div>
-                                  <a href="http://localhost:7000/viewMore:${d.id}"class="text-decoration-none btn btn-outline-primary">
-                                    View Details
-                                </a>
-                                </div>
-                            </div>
-                          </div>`;
-                        myJobCont.innerHTML += content;
-                                    }
-                              })
-                         }
-                         
                         
         })
          }).catch((error)=>{
@@ -375,13 +297,37 @@
          })
     }
 
-    {{!--  default render --}}
-      getter(1);
+      {{!--  default render --}}
+        getter(1);
   
      {{!--  rendering stipend --}}
-           function renderValue(event){
+        function renderValue(event){
               var renderStipend = document.getElementById('renderStipend') 
               renderStipend.innerHTML = `${event.target.value} K`;
            }
      {{!-- block ends here --}}
+
+
+
+
+
+
+       {{!-- selecting categories --}}
+
+            function setCategory(variable){
+                      console.log(variable);
+                      var category = document.getElementById('category')
+                       category.value = variable;       
+            } 
+
+
+
+
+
+
+
+
+
+
+
 </script>

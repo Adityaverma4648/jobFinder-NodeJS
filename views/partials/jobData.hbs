@@ -1,7 +1,39 @@
-<div class="container py-4 mt-5 d-flex flex-sm-row flex-column justify-content-center align-items-center bg-white border-end border-top border-bottom border-secondary border-opacity-50">
+<style>
+#JobData{
+  max-height : 70vh; 
+  overflow: hidden;
+}
+
+#jobCardContainer{
+  min-height: 70vh;
+}
+
+#filter{
+  min-height: 70vh;
+}
+
+#jobFetchedInto{
+  min-height:70vh;
+  overflow: scroll;
+}
+
+.paginationButton{
+  background-color: white;
+  border: 1px solid black;
+  margin: 2px;
+  padding: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+</style>
+
+<div class="container md-container-fluid mt-5 d-flex flex-sm-row flex-column justify-content-center align-items-center bg-white border border-secondary border-opacity-50" id="JobData" >
 {{!--  filterCont --}}
-      <div class="d-flex filters flex-column justify-content-center align-items-center col-sm-3 bg-info border border-secondary border-opacity-50 text-white">
-            <div class="col-md-10 container d-flex justify-content-between align-items-center h5 my-2">
+      <div class="d-flex flex-column justify-content-center align-items-center col-sm-3 text-white bg-info" id="filter" >
+           
+
+            <div class="col-md-10 container d-flex justify-content-between align-items-center h5">
                 <span class="h5 text-white">
                      Filter
                      <i class="fa fa-filter"></i>
@@ -10,6 +42,7 @@
                    <i class="fa fa-close"></i>
                </button>
             </div>
+
             <div class="container d-flex justify-content-center align-items-center">
                   <form action="" class="container">
                        <label for="Category" class="py-2 d-flex flex-column">
@@ -45,14 +78,14 @@
                         <div class="container-fluid py-2 border border-white" >
                                <div class="container-fluid d-flex align-items-center justify-content-between px-1" >
                                      <span>
-                                       5K
+                                       0k
                                      </span>
                                      <span>
                                       45K
                                      </span>
                                </div>
                              <label for="stipend" class="container-fluid" >
-                                <input type="range" min = "5000" and max = "45000" value="25000"  id="StipendRange" class="container-fluid" onchange="renderValue(event)" >
+                                <input type="range" min = "0" and max = "45000" value="25000"  id="StipendRange" class="container-fluid" onchange="renderValue(event)" >
                                 <div class="container-fluid px-1" id="renderStipend">
                                      
                                 </div>
@@ -67,45 +100,25 @@
       </div>
 
 {{!-- jobCont --}}
-      <div class="col-sm-9 jobDataContParent" >
-
-        {{!--  static ad cont --}}
-        <div class="col-sm-12 d-flex justify-content-center align-items-center my-2 text-danger">
-                     <div class="col-sm-10 px-2 text-center">
-                         <span class="h5 font-weight-bold" >
-                            Get 100% Guaranteed Internship At Something You Love !
-                         </span>
-                        <ul class="d-flex justify-content-evenly">
-                          <li>
-                            Learn New Skills
-                          </li>
-                          <li>
-                            Experience the real world 
-                          </li>
-                        </ul>
-                         <span class="h5 flashy">
-                               Around 500 Jobs Availlable
-                         </span>
-                     </div>
-        </div>
+      <div class="col-sm-9 h-100 jobDataContParent bg-danger d-flex flex-column justify-content-start align-items-start position-relative overflow-auto" id="jobCardContainer" >
 
         {{!--  job fetcher Cont --}}
-        <div id="myJobCont" class="col-sm-12 mt-1"></div>
+        <div class="col-sm-12 d-flex flex-column justify-content-start align-items-start" id="jobFetchedInto" ></div>
       </div>
 </div>
     
 {{!--  pagination --}}
-   <div id="paginationCont" class="container d-flex justify-content-center align-items-center border border-secondary border-opacity-50 mt-2 py-2 px-1">
-       <span class="paginationButton" id="1" >1</span>
-       <span class="paginationButton" id="2" >2</span>
-       <span class="paginationButton" id="3" >3</span>
-       <span class="paginationButton" id="4" >4</span>
-       <span class="paginationButton" id="5" >5</span>
-       <span class="paginationButton" id="6" >6</span>
-       <span class="paginationButton" id="7" >7</span>
-       <span class="paginationButton" id="8" >8</span>
-       <span class="paginationButton" id="9" >9</span>
-       <span class="paginationButton" id="10" >10</span>
+   <div id="paginationCont" class="container-fluid d-flex justify-content-center align-items-center border border-secondary border-opacity-50 p-2">
+       <button type="button" class="btn border border-dark mx-1" id="1" >1</button>
+       <button type="button" class="btn border border-dark mx-1" id="2" >2</button>
+       <button type="button" class="btn border border-dark mx-1" id="3" >3</button>
+       <button type="button" class="btn border border-dark mx-1" id="4" >4</button>
+       <button type="button" class="btn border border-dark mx-1" id="5" >5</button>
+       <button type="button" class="btn border border-dark mx-1" id="6" >6</button>
+       <button type="button" class="btn border border-dark mx-1" id="7" >7</button>
+       <button type="button" class="btn border border-dark mx-1" id="8" >8</button>
+       <button type="button" class="btn border border-dark mx-1" id="9" >9</button>
+       <button type="button" class="btn border border-dark mx-1" id="10" >10</button>
    </div>
 
 <script>
@@ -114,8 +127,6 @@
 
     function getLocation(){
          var location = document.getElementById('location');
-
-
 
          fetch("http://localhost:7000/location")
          .then((res)=>{
@@ -156,7 +167,7 @@
         var paginationCont = document.getElementById('paginationCont');
         var pageIndex = 1;
         paginationCont.addEventListener("click",(e)=>{
-      if(e.target.tagName === 'SPAN'){
+      if(e.target.tagName === 'BUTTON'){
          this.pageIndex =  e.target.innerHTML;
       }
       getter(pageIndex);
@@ -182,13 +193,13 @@
         })
         .then((response) => response.json())
         .then((data)=>{
-                var myJobCont = document.getElementById('myJobCont');
+                var myJobCont = document.getElementById('jobFetchedInto');
                 myJobCont.innerHTML = "";
                
                {{!--  default rendered Data --}}
                    function RenderedData(data){
                         data?.slice((pageIndex-1)*50,(pageIndex-1)*50 +50).forEach((d)=>{
-                        var content = `<div class="bg-white jobCard p-2" id=${d.id} >
+                        var content = `<div class="bg-white jobCard p-2 shadow m-2" id=${d.id} >
                             <div class="container JobInfo d-flex justify-content-between align-items-center py-3">
                                   <div>
                                     <h5>

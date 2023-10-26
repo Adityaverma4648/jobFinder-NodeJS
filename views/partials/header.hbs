@@ -1,168 +1,211 @@
-<nav class="Navbar shadow top-0 position-fixed Navbar container-fluid d-flex justify-content-center align-items-center bg-white py-2">
-    <div class="container d-flex justify-content-between align-items-center ">
-         <div class=" h5 d-flex justify-content-start align-items-center font-weight-bold text-primary">
-            Jobfinder
-          </div>
-         <div class="nav-links d-flex justify-content-end align-items-center px-1 col-sm-8" >
-{{!--  navigation link begins --}}
-            <div class="d-none d-lg-flex justify-content-end align-items-center d-sm-none" id="navLinks">
-              <ul class="d-flex flex-wrap justify-content-center align-items-center" >
-                   <li class="nav-lists mx-2 px resNavLink-1" style="list-style-none text-black " >
-                 <a href="http://localhost:7000/" class="link text-decoration-none text-dark font-weight-bold" style="font-weight: 700;">
-                  INTERNSHIPS
-                 </a>
-               </li>
-               <li class="nav-lists mx-2 px resNavLink-1" style="list-style-none text-black" >
-                 <a href="#" class="link text-decoration-none text-dark font-weight-bold" style="font-weight: 700;">
-                  JOBS
-                 </a>
-              </li>
-               <li class="nav-lists mx-2 px resNavLink-1" style="list-style-none text-black" >
-                 <a href="#" class="link text-decoration-none text-dark font-weight-bold" style="font-weight: 700;">
-                  COURSES
-                 </a>
-              </li>
-              </ul>
-            </div>
-    
-            {{!--  auth button group --}}
-             <div class="button-group d-lg-flex d-none flex-wrap justify-content-end align-items-center mx-1" id="authButton"> 
-             
-             </div>
-              {{!--  responsive navbar --}}
-             <button type="button" class="btn text-dark d-block d-lg-none cursor-pointer" onclick="resNav()" >
-                  <i class="fa fa-bars text-primary" style="font-size:23px" ></i>
-             </button>
-        </div>
-   </div>
+<nav
+  class="top-0 position-fixed container-fluid d-flex justify-content-center align-items-center py-2 text-white"
+  id="resNav"
+  style=" height: 80px; z-index: 1000;"
+>
+  <div
+    class="h-100 d-flex justify-content-between align-items-center p-2"
+    style="width : 90%"
+  >
+    <div
+      class="h5 d-flex justify-content-start align-items-center text-primary"
+    >
+      <a
+        href="http://localhost:7000/"
+        class="cursor-pointer text-decoration-none"
+      >
+        Jobfinder
+      </a>
+    </div>
+    <div
+      class="h-100 d-flex justify-content-end align-items-center px-1 col-sm-8"
+    >
+      {{! navigation link begins }}
+      <div
+        class="h-100 d-none d-lg-flex justify-content-end align-items-center d-sm-none"
+      >
+        <ul
+          class="h-100 d-flex flex-wrap justify-content-center align-items-center list-unstyled"
+        >
+
+          <li class="nav-lists mx-3" style="list-style-none ">
+            <a
+              href="http://localhost:7000/"
+              class="link text-decoration-none fw-normal"
+            >
+              About
+            </a>
+          </li>
+
+          <li class="nav-lists mx-3" style="list-style-none ">
+            <a
+              href="http://localhost:7000/internships"
+              class="link text-decoration-none fw-normal"
+            >
+              Interships
+            </a>
+          </li>
+          <li class="nav-lists mx-3" style="list-style-none">
+            <a href="#" class="link text-decoration-none fw-normal">
+              Jobs
+            </a>
+          </li>
+          <li class="nav-lists mx-3" style="list-style-none">
+            <a href="#" class="link text-decoration-none fw-normal">
+              Courses
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      {{! auth button group }}
+      <div
+        class="button-group d-lg-flex d-none flex-wrap justify-content-end align-items-center mx-1"
+        id="authButton"
+      >
+
+        {{! <script>
+          var authButton = document.getElementById("authButtton"); 
+          var user_data
+          = localStorage.getItem("user_data"); 
+          var token =
+          localStorage.getItem("token"); 
+
+
+          if(user_data && token){
+          authButton.innerHTML = `<a herf="http://localhost:7000/logout"
+          >logout</a>`}
+          else{ 
+            authButton.innerHTML = `<a
+          href="http://localhost:7000/register" class="border border-primary
+          rounded-1"> SignUp </a> <a href="http://localhost:7000/login"
+          class="border border-primary rounded-1"> Login </a>` }
+
+        </script> }}
+
+      </div>
+      {{! responsive navbar }}
+      <button
+        type="button"
+        class="btn d-block d-lg-none cursor-pointer"
+        onclick="resNav()"
+      >
+        <i class="fa fa-bars text-primary" style="font-size:23px"></i>
+      </button>
+    </div>
+  </div>
 </nav>
-{{!--  ResNav --}}
-<div class="col-md-5 d-xxl-none d-none container position-fixed left-0 d-flex justify-content-center align-items-center text-white" id="resNav">
-   <div class="w-100 px-2 d-flex flex-column justify-content-between align-items-start" style="min-height : 100%">
-          <div class="container-fluid d-flex flex-column justify-content-center align-items-center">
-            <div class="container-fluid h5 d-flex justify-content-start align-items-center font-weight-bold text-primary border-bottom" style="height:80px;">
-                Jobfinder
-            </div>
+{{! ResNav }}
+{{!-- <div
+  class="col-md-5 d-xxl-none d-none container position-fixed left-0 d-flex justify-content-center align-items-center text-white"
+  id="resNav"
+>
+  <div
+    class="w-100 px-2 d-flex flex-column justify-content-between align-items-start"
+    style="min-height : 100%"
+  >
+    <div
+      class="container-fluid d-flex flex-column justify-content-center align-items-center"
+    >
+      <div
+        class="container-fluid h5 d-flex justify-content-start align-items-center text-primary border-bottom bg-warning"
+        style="height:80px;"
+      >
+        <a href="http://localhost:7000/" class="cursor-pointer">
+           Jobfinder
+        </a>
+      </div>
 
-             <ul class="container-fluid d-flex flex-column justify-content-center align-items-center" style="list-style : none" >
-                <li class="container mx-2 p-3 resNavLink" style="list-style-none text-black " >
-                 <a href="http://localhost:7000/" class="link text-decoration-none text-dark font-weight-bold" style="font-weight: 700;">
-                  INTERNSHIPS
-                 </a>
-               </li>
-               <li class="container mx-2 p-3 resNavLink" style="list-style-none text-black" >
-                 <a href="#" class="link text-decoration-none text-dark font-weight-bold" style="font-weight: 700;">
-                  JOBS
-                 </a>
-              </li>
-               <li class="container mx-2 p-3 resNavLink" style="list-style-none text-black" >
-                 <a href="#" class="link text-decoration-none text-dark font-weight-bold" style="font-weight: 700;">
-                  COURSES
-                 </a>
-              </li>
-              <li class="container-fluid mx-2 py-3 resNavLink list-style-none text-black d-flex justify-content-start align-items-center" >
-                     <a href="http://localhost:7000/login" class="text-decoration-none text-start container-fluid text-dark  link text-decoration-none text-dark fw-bold" >
-                        LOGIN
-                   </a>
-              </li>
+      <ul
+        class="container-fluid d-flex flex-column justify-content-center align-items-center bg-danger"
+        style="list-style : none"
+      >
+        <li
+          class="container mx-3 p-3 resNavLink"
+          style="list-style-none "
+        >
+          <a
+            href="http://localhost:7000/internships"
+            class="link text-decoration-none fw-normal"
+            
+          >
+            Internships
+          </a>
+        </li>
+        <li
+          class="container mx-3 p-3 resNavLink"
+          style="list-style-none"
+        >
+          <a
+            href="#"
+            class="link text-decoration-none fw-normal"
+            
+          >
+            Jobs
+          </a>
+        </li>
+        <li
+          class="container mx-3 p-3 resNavLink"
+          style="list-style-none"
+        >
+          <a
+            href="#"
+            class="link text-decoration-none fw-normal"
+            
+          >
+            Courses
+          </a>
+        </li>
+        <li
+          class="container-fluid mx-3 py-3 resNavLink list-style-none d-flex justify-content-start align-items-center"
+        >
+          <a
+            href="http://localhost:7000/login"
+            class="text-decoration-none fw-normal text-start container-fluid link text-decoration-none fw-normal fw-bold"
+          >
+            Login
+          </a>
+        </li>
 
-               <li  class="container-fluid mx-2 py-3 resNavLink list-style-none text-black d-flex justify-content-start align-items-center" >
-                      <a href="http://localhost:7000/signUp" class="text-decoration-none text-start container-fluid text-dark link text-decoration-none text-dark fw-bold">
-                        SIGNUP
-                   </a>
-               </li>
-             </ul>
-          </div>
+        <li
+          class="container-fluid mx-3 py-3 resNavLink list-style-none d-flex justify-content-start align-items-center"
+        >
+          <a
+            href="http://localhost:7000/signUp"
+            class="text-decoration-none fw-normal text-start container-fluid link text-decoration-none fw-normal fw-bold"
+          >
+            SignUp
+          </a>
+        </li>
+      </ul>
+    </div>
 
-          <div>
-             {{!--  Illustration --}}
-          </div>
-   </div>
-</div>
+    <div>
+      {{! Illustration }}
+    </div>
+  </div>
+</div> --}}
 
 <script>
-       function resNav(){
-           {{!--  offcanvas --}}
-           var resNav = document.getElementById('resNav');
+  {{! const resNav = () => {  
+    var resNav =  document.getElementById('resNav');
+     var x =  resNav.classList.contains("d-none");
+     var y =  resNav.classList.contains("d-block");
+     if (x) {
+            resNav.classList.remove("d-none");
+            resNav.classList.add("d-block"); 
+     }else if(y){
+            resNav.classList.remove("d-block"); 
+            resNav.classList.add("d-none"); 
+    }
+  }
+    }}
+  let visible = false; let PrevScrollPos = 0; const handleScroll = () => { const
+  currentScrollPos = window.pageYOffset;const resNav =
+  document.getElementById('resNav'); if (currentScrollPos !== 0) { visible =
+  true; resNav.classList.add("bg-white","shadow-sm","text-black") } else {
+  visible = false; resNav.classList.remove("bg-white","shadow-sm", "text-black")
+  } currentScrollPos; console.log(PrevScrollPos , currentScrollPos , visible) };
+  window.addEventListener("scroll", handleScroll);
 
-           var x = resNav.classList.contains("d-none");
-           var y = resNav.classList.contains("d-block");
-           if(x){
-               resNav.classList.remove("d-none");
-               resNav.classList.add("d-block");
-           }else if(y) {
-               resNav.classList.remove("d-block");
-               resNav.classList.add("d-none");
-           }
-
-           {{!-- if(resNav.classList.contains === "d-block") --}}
-       
-       const cookie = document.cookie;
-
-       function getCookie(cname) {
-           let name = cname + "=";
-           let ca = document.cookie.split(';');
-           for(let i = 0; i < ca.length; i++) {
-             let c = ca[i];
-             while (c.charAt(0) == ' ') {
-               c = c.substring(1);
-             }
-             if (c.indexOf(name) == 0) {
-               return c.substring(name.length, c.length);
-             }
-           }
-           return "";
-         }
-
-         function checkCookie() {
-           let token = getCookie("token");
-           if (token != "") {
-                return 1;
-           } else {
-                return 0;
-           }
-         }
-       var UserEmail = getCookie("UserEmail")
-       var userDesignation = getCookie("userDesignation");
-       var decodedValue = decodeURIComponent(UserEmail);
-       var decodedDesignation = decodeURIComponent(userDesignation);
-       var checkToken = checkCookie();
-       var authButton = document.getElementById('authButton');
-        if(checkToken && decodedDesignation === "student" ){
-               authButton.innerHTML = `<div class="dropdown" ><button class="flex p-2 mx-2 btn btn-outline-light link-dark fw-semibold rounded-full dropdown-toggle" data-bs-toggle="dropdown">
-                ${decodedValue[0].toUpperCase()}
-               </button>
-                <ul class="dropdown-menu">
-                   <li><dark class="dropdown-item" resNavLink href="http://localhost:7000/profile">Profile</dark></li>
-                   <li><dark class="dropdown-item" resNavLink href="http://localhost:7000/resume">Resume</dark></li>
-                   <li><dark class="dropdown-item" resNavLink href="http://localhost:7000/messages">Messages</dark></li>
-                   <li><dark class="dropdown-item" resNavLink href="#">Applied Company</dark></li>
-                   <li><dark class="dropdown-item" resNavLink href="http://localhost:7000/upgrade">Upgrade</dark></li>
-                   <li><a href="http://localhost resNavLink:7000/logout" class="dropdown-item">Logout</a></li>
-                 </ul>
-                </div>
-              </a>`;
-              }else if(checkToken && decodedDesignation === "company" ){
-                   authButton.innerHTML = `<div class="dropdown" ><button class="d-flex justify-content-center align-items-center dropdown-toggle bg-info text-white rounded-full p-2 mx-3" data-bs-toggle="dropdown">
-                ${decodedValue[0].toUpperCase()}
-               </button>
-                <ul class="dropdown-menu">
-                   <li class="border-bottom border-secondary"><div class="dropdown-item" resNavLink href="http://localhost:7000/profile">Profile</div></li>
-                   <li class="border-bottom border-secondary"><div class="dropdown-item" resNavLink href="#">Messages</div></li>
-                   <li class="border-bottom border-secondary"><div class="dropdown-item" resNavLink href="http://localhost:7000/opportunity">Add Opportunity</div></li>
-                   <li><a href="http://localhost resNavLink:7000/logout" class="dropdown-item">Logout</a></li>
-                 </ul>
-                </div>
-              </a>`;
-              }
-        else{
-              authButton.innerHTML = `<a href="http://localhost:7000/login" class="bg-white rounded-2 border border-2 border-success link-success text-black fw-semibold mx-1 text-decoration-none text-center d-flex justify-content-center align-items-center "style="width : 5rem; height:3rem">
-                  Login
-              </a>
-              <a href="http://localhost:7000/signUp" class="bg-white rounded-2 border border-2 border-danger link-danger text-black fw-semibold mx-1 text-decoration-none text-center d-flex justify-content-center align-items-center " style="width : 5rem; height:3rem">
-                  signUp
-              </a>`;
-        }
-       }
- </script>
-
+</script>

@@ -1,6 +1,6 @@
 const chance = require('chance')
 const obj  = new chance();
-const apiRoutes = require('../routes/apiRoutes')
+const fs = require('fs');
 
 var dataLength = 500;
 
@@ -34,4 +34,15 @@ return array;
 
 const data = dataGenerator(dataLength);
 
-module.exports = data;
+console.log(data);
+
+// Convert the data object to JSON format
+const jsonData = JSON.stringify(data, null, 2);
+
+// Define the path to the external JSON file
+const filePath = 'D:/jobFinder-NodeJS/data/jobData.json';
+
+// Write the JSON data to the external file
+fs.writeFileSync(filePath, jsonData);
+
+// module.exports = data;

@@ -86,6 +86,10 @@ app.get("/login",(req,res)=>{
 
 app.get("/signUp",(req,res)=>{
     res.render('signUp.hbs')
+});
+
+app.get("/internships",(req,res)=>{
+  res.render('internships.hbs')
 })
 
 app.get("/profile",(req,res)=>{
@@ -181,13 +185,12 @@ app.post("/signUp", async (req,res)=>{
     const {userName, email, designation , password} = req.body;
 
     if(!userName || !email || !designation || !password){
-        res.status(400);
-        throw new Error("Fill all the entries!");
+        res.status(400).json({message : "Fill all the entries!"});
     }
     const userExists = await User.findOne({ email });
 
     if (userExists) {
-      res.status(200).redirect('userError');
+      res.status(200).json({message : "User Already Exists"});
     }
     const user = await User.create({
         userName,
@@ -197,11 +200,9 @@ app.post("/signUp", async (req,res)=>{
       });
     
       if (user) {
-        res.status(201).redirect('login');
-        //  redirected on login 
+        res.status(201).json({message : "Successfully Signed Up!"});
       } else {
-        res.status(400);
-        throw new Error("User not found");
+        res.status(400).json({message : "User not found"});
       }
 
 });
@@ -215,14 +216,9 @@ app.post("/login",(async (req, res) => {
   if (user && (await user.matchPassword(password))) {
     const token  = generateToken(user._id);
     const userData  = await User.find({email});
-    req.session.userData = userData;
-    res.cookie("userDesignation" ,userData[0].designation);
-    res.cookie("userName",userData[0].userName);
-    res.cookie("token",token);
-    res.cookie("UserEmail" , email);
-    res.status(200).redirect('/');
+    res.status(200).json({message : "Successfully Logged In!", data : userData, token : token});
   } else {
-    res.status(200).redirect('UserError')
+    res.status(200).json({message : "Login Failed!"})
   }
 }))
 
@@ -230,11 +226,7 @@ app.post("/login",(async (req, res) => {
 //  Logout--------------------------------------------------------------------------------------------------------------
 
 app.get('/logout', (req, res) => {
-  res.clearCookie('token');
-  res.clearCookie('UserEmail');
-  res.clearCookie('userName');
-  res.clearCookie('companyEmail');
-  return res.redirect('/');
+  return res.status(200).json({message : "Successfully Logged Out!"});
 });
 
 //  Block ends here---------------------------------------------------------------------------------------------------------------

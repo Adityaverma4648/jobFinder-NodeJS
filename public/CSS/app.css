@@ -1,46 +1,24 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 *{
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; 
 }
+
+
 body::-webkit-scrollbar{
       display: none;
 }
 
-/*  Navbar styles begins------------------------------------------------------------ */
-.Navbar li {
-    list-style: none;
-}
-.Navbar{
-     height: 80px;
-     z-index: 2;
-     position: absolute;
-     top : 0;
+#welcome{
+  background: #12c2e9;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f64f59, #c471ed, #12c2e9);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
 }
 
-.toggleMenu{
-    display: none;
-}
-
-#resNav{
-  height : 100vh;
-  z-index : 2;
-  background : linear-gradient(45deg, rgba(98, 181, 230, 0.8),rgba(255, 255, 255, 1));
-  backdrop-filter: blur(0.4rem);
-}
-.resNavLink{
-  background: linear-gradient(to right , rgba(255,255,255,0.1) , rgba(255,255,255,0.8) , rgba(255,255,255,0.1));
-  margin-bottom: 10px;
-
-}
-
-/*  Navbar styles Ends here------------------------------------------------------------- */
-
-
+/* 
 .card{
   width: 45vw;
   height: 60vh;
@@ -62,10 +40,10 @@ body::-webkit-scrollbar{
 
 #welcomeContainer{
    background: linear-gradient(to right , rgba(255,255,255,1) , rgb(0, 170, 255));
-}
+} */
 
 /*  JObDataFetcher hbs Styles---------------------------------------------------------------------------------------------------------------------- */
-.jobDataContParent{
+/* .jobDataContParent{
     display: flex;
     flex-direction :column;
     justify-content: start;
@@ -84,13 +62,13 @@ body::-webkit-scrollbar{
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-}
+} */
 
 /* #myJobCont::-webkit-scrollbar{
      display: none;
 } */
 
-#myJobCont{
+/* #myJobCont{
     height:65vh;
     overflow-y: scroll;
     display: flex;
@@ -111,14 +89,14 @@ body::-webkit-scrollbar{
     border: 1px solid rgba(63, 63, 63,0.5);
     cursor: pointer;
     user-select: none;
-}
+} */
 
 
 /* block ends here ------------------------------------------------------------------------------------------------------------------------- */
 /*  login ---------------------------------------------------------------------------------------------------*/
  
  
- .Login{
+ /* .Login{
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -126,13 +104,13 @@ body::-webkit-scrollbar{
   justify-content: center;
   align-items: center;
  }
-
+ */
 
 /*  Block ends here ---------------------------------------------------------------------------------------------------*/
 
 /* signUp---------------------------------------------------------------------------------------------------------------------------------------- */
 
-.SignUp{
+/* .SignUp{
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -143,16 +121,16 @@ body::-webkit-scrollbar{
 
 #formContainer{
   width: 50vw;
-}
+} */
 
 
 
 /* -------------block ends----------------------------------------------------------------------------------------------------------------------------------------- */
 
 
-.Footer{
+/* .Footer{
   height: 30vh;
-}
+} */
 
 
 
@@ -161,14 +139,14 @@ body::-webkit-scrollbar{
  /* responsiveness--------------------------------------------------------------------------------------------------------- */
 
 
- @media only screen and (max-width : 1200px){
+ /* @media only screen and (max-width : 1200px){
   .jobCard{
       min-height: 50vh;
       overflow-y: scroll;
   }
-}
+} */
 
- @media only screen and (max-width : 750px){
+ /* @media only screen and (max-width : 750px){
       #jobContainer{
         display: flex;
         flex-direction: column;
@@ -224,4 +202,8 @@ body::-webkit-scrollbar{
            height: 60vh;
             width: 80vw;
           }
+ } */
+
+ .bgWhite{
+  background-color: white;
  }
